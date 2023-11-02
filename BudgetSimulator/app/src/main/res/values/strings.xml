@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">Budget Simulator</string>
     <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
+    <string name="title_financial_plans">My Plan</string>
+    <string name="title_weekly_reports">Reports</string>
+    <string name="title_trophies">Trophies</string>
 </resources>
