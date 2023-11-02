@@ -14,17 +14,17 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.uiuc.budgetsimulator.R;
 
-public class NotificationsFragment extends Fragment {
+public class ReportsFragment extends Fragment {
 
-    private NotificationsViewModel notificationsViewModel;
+    private ReportsViewModel reportsViewModel;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        notificationsViewModel =
-                new ViewModelProvider(this).get(NotificationsViewModel.class);
-        View root = inflater.inflate(R.layout.fragment_notifications, container, false);
+        reportsViewModel =
+                new ViewModelProvider(this).get(ReportsViewModel.class);
+        View root = inflater.inflate(R.layout.fragment_reports, container, false);
         final TextView textView = root.findViewById(R.id.text_notifications);
-        notificationsViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
+        reportsViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {
                 textView.setText(s);

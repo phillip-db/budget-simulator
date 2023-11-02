@@ -1,16 +1,16 @@
-package com.uiuc.budgetsimulator.ui.dashboard;
+package com.uiuc.budgetsimulator.ui.notifications;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-public class DashboardViewModel extends ViewModel {
+public class ReportsViewModel extends ViewModel {
 
     private MutableLiveData<String> mText;
 
-    public DashboardViewModel() {
+    public ReportsViewModel() {
         mText = new MutableLiveData<>();
-        mText.setValue("This is dashboard fragment");
+        mText.setValue("This is notifications fragment");
     }
 
     public LiveData<String> getText() {

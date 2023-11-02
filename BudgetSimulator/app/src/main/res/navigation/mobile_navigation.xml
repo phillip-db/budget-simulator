@@ -13,13 +13,13 @@
 
     <fragment
         android:id="@+id/navigation_financial_plans"
-        android:name="com.uiuc.budgetsimulator.ui.dashboard.DashboardFragment"
+        android:name="com.uiuc.budgetsimulator.ui.dashboard.FinancialPlanFragment"
         android:label="@string/title_financial_plans"
-        tools:layout="@layout/fragment_dashboard" />
+        tools:layout="@layout/fragment_financial_plan" />
 
     <fragment
         android:id="@+id/navigation_weekly_reports"
-        android:name="com.uiuc.budgetsimulator.ui.notifications.NotificationsFragment"
+        android:name="com.uiuc.budgetsimulator.ui.notifications.ReportsFragment"
         android:label="@string/title_weekly_reports"
-        tools:layout="@layout/fragment_notifications" />
+        tools:layout="@layout/fragment_reports" />
 </navigation>

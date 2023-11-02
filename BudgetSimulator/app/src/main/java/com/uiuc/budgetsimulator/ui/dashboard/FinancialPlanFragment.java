@@ -14,17 +14,17 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.uiuc.budgetsimulator.R;
 
-public class DashboardFragment extends Fragment {
+public class FinancialPlanFragment extends Fragment {
 
-    private DashboardViewModel dashboardViewModel;
+    private FinancialPlanViewModel financialPlanViewModel;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        dashboardViewModel =
-                new ViewModelProvider(this).get(DashboardViewModel.class);
-        View root = inflater.inflate(R.layout.fragment_dashboard, container, false);
+        financialPlanViewModel =
+                new ViewModelProvider(this).get(FinancialPlanViewModel.class);
+        View root = inflater.inflate(R.layout.fragment_financial_plan, container, false);
         final TextView textView = root.findViewById(R.id.text_dashboard);
-        dashboardViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
+        financialPlanViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {
                 textView.setText(s);
