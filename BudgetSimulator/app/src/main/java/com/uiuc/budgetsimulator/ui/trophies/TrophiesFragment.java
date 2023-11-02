@@ -1,4 +1,4 @@
-package com.uiuc.budgetsimulator.ui.dashboard;
+package com.uiuc.budgetsimulator.ui.trophies;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -14,17 +14,17 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.uiuc.budgetsimulator.R;
 
-public class FinancialPlanFragment extends Fragment {
+public class TrophiesFragment extends Fragment {
 
-    private FinancialPlanViewModel financialPlanViewModel;
+    private TrophiesViewModel trophiesViewModel;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        financialPlanViewModel =
-                new ViewModelProvider(this).get(FinancialPlanViewModel.class);
-        View root = inflater.inflate(R.layout.fragment_financial_plan, container, false);
-        final TextView textView = root.findViewById(R.id.text_dashboard);
-        financialPlanViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
+        trophiesViewModel =
+                new ViewModelProvider(this).get(TrophiesViewModel.class);
+        View root = inflater.inflate(R.layout.fragment_trophies, container, false);
+        final TextView textView = root.findViewById(R.id.text_trophies);
+        trophiesViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {
                 textView.setText(s);

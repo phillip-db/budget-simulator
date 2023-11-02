@@ -1,4 +1,4 @@
-package com.uiuc.budgetsimulator.ui.notifications;
+package com.uiuc.budgetsimulator.ui.reports;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -23,7 +23,7 @@ public class ReportsFragment extends Fragment {
         reportsViewModel =
                 new ViewModelProvider(this).get(ReportsViewModel.class);
         View root = inflater.inflate(R.layout.fragment_reports, container, false);
-        final TextView textView = root.findViewById(R.id.text_notifications);
+        final TextView textView = root.findViewById(R.id.text_reports);
         reportsViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {

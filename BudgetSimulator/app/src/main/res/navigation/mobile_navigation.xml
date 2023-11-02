@@ -13,13 +13,25 @@
 
     <fragment
         android:id="@+id/navigation_financial_plans"
-        android:name="com.uiuc.budgetsimulator.ui.dashboard.FinancialPlanFragment"
+        android:name="com.uiuc.budgetsimulator.ui.financial_plan.FinancialPlanFragment"
         android:label="@string/title_financial_plans"
         tools:layout="@layout/fragment_financial_plan" />
 
     <fragment
         android:id="@+id/navigation_weekly_reports"
-        android:name="com.uiuc.budgetsimulator.ui.notifications.ReportsFragment"
+        android:name="com.uiuc.budgetsimulator.ui.reports.ReportsFragment"
         android:label="@string/title_weekly_reports"
         tools:layout="@layout/fragment_reports" />
+
+    <fragment
+        android:id="@+id/navigation_trophies"
+        android:name="com.uiuc.budgetsimulator.ui.trophies.TrophiesFragment"
+        android:label="@string/title_trophies"
+        tools:layout="@layout/fragment_trophies" />
+
+    <fragment
+        android:id="@+id/navigation_help"
+        android:name="com.uiuc.budgetsimulator.ui.help.HelpFragment"
+        android:label="@string/title_help"
+        tools:layout="@layout/fragment_help" />
 </navigation>

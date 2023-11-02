@@ -1,16 +1,16 @@
-package com.uiuc.budgetsimulator.ui.dashboard;
+package com.uiuc.budgetsimulator.ui.help;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-public class FinancialPlanViewModel extends ViewModel {
+public class HelpViewModel extends ViewModel {
 
     private MutableLiveData<String> mText;
 
-    public FinancialPlanViewModel() {
+    public HelpViewModel() {
         mText = new MutableLiveData<>();
-        mText.setValue("This is dashboard fragment");
+        mText.setValue("This is help fragment");
     }
 
     public LiveData<String> getText() {

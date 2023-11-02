@@ -1,4 +1,4 @@
-package com.uiuc.budgetsimulator.ui.notifications;
+package com.uiuc.budgetsimulator.ui.reports;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
@@ -10,7 +10,7 @@ public class ReportsViewModel extends ViewModel {
 
     public ReportsViewModel() {
         mText = new MutableLiveData<>();
-        mText.setValue("This is notifications fragment");
+        mText.setValue("This is reports fragment");
     }
 
     public LiveData<String> getText() {

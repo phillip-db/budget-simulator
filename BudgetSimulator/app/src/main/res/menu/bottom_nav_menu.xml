@@ -2,6 +2,17 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 <!--TODO: CHANGE ICONS TO FIT TASK FOR NAV BAR-->
 
+
+    <item
+        android:id="@+id/navigation_trophies"
+        android:icon="@drawable/ic_trophy"
+        android:title="@string/title_trophies" />
+
+    <item
+        android:id="@+id/navigation_financial_plans"
+        android:icon="@drawable/ic_financial_plan"
+        android:title="@string/title_financial_plans" />
+
     <item
         android:id="@+id/navigation_home"
         android:icon="@drawable/ic_home_black_24dp"
@@ -9,18 +20,13 @@
         />
 
     <item
-        android:id="@+id/navigation_financial_plans"
-        android:icon="@drawable/ic_dashboard_black_24dp"
-        android:title="@string/title_financial_plans" />
-
-    <item
         android:id="@+id/navigation_weekly_reports"
-        android:icon="@drawable/ic_notifications_black_24dp"
+        android:icon="@drawable/ic_report"
         android:title="@string/title_weekly_reports" />
 
     <item
-        android:id="@+id/navigation_trophies"
-        android:icon="@drawable/ic_notifications_black_24dp"
-        android:title="@string/title_trophies" />
+        android:id="@+id/navigation_help"
+        android:icon="@drawable/ic_help_circle"
+        android:title="@string/title_help" />
 
 </menu>
