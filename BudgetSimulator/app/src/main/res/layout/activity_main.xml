@@ -1,96 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/container"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+android:id="@+id/container"
+android:layout_width="match_parent"
+android:layout_height="match_parent">
+
+
+<com.google.android.material.bottomnavigation.BottomNavigationView
+    android:id="@+id/nav_view"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="0dp"
+    android:layout_marginEnd="0dp"
+    android:background="?android:attr/windowBackground"
+    app:labelVisibilityMode="labeled"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintLeft_toLeftOf="parent"
+    app:layout_constraintRight_toRightOf="parent"
+    app:menu="@menu/bottom_nav_menu" />
+
+<fragment
+    android:id="@+id/nav_host_fragment"
+    android:name="androidx.navigation.fragment.NavHostFragment"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:paddingTop="?attr/actionBarSize">
+    android:layout_height="wrap_content"
+    app:defaultNavHost="true"
+    app:layout_constraintBottom_toTopOf="@id/nav_view"
+    app:layout_constraintLeft_toLeftOf="parent"
+    app:layout_constraintRight_toRightOf="parent"
+    app:layout_constraintTop_toBottomOf="@id/status_bar"
+    app:navGraph="@navigation/mobile_navigation" />
 
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/nav_view"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="0dp"
-        android:layout_marginEnd="0dp"
-        android:background="?android:attr/windowBackground"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:labelVisibilityMode="labeled"
-        app:menu="@menu/bottom_nav_menu" />
+<LinearLayout
+    android:id="@+id/status_bar"
+    android:layout_width="match_parent"
+    android:layout_height="50dp"
+    android:layout_alignParentTop="true"
+    android:background="@color/black"
+    android:orientation="horizontal"
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintLeft_toLeftOf="parent"
+    app:layout_constraintRight_toRightOf="parent">
 
-    <fragment
-        android:id="@+id/nav_host_fragment"
-        android:name="androidx.navigation.fragment.NavHostFragment"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:defaultNavHost="true"
-        app:layout_constraintBottom_toTopOf="@id/nav_view"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:navGraph="@navigation/mobile_navigation" />
+    <TextView
+        android:id="@+id/day_of_week"
+        android:text="Monday"
+        style="@style/status_component" />
 
-    <View
-        android:id="@+id/rectangle_at_the_top"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_alignParentTop="true"
-        android:background="#000000"
-        android:visibility="visible"
-        app:layout_constraintTop_toTopOf="parent"
-        />
+    <TextView
+        android:id="@+id/health"
+        android:text="100%"
+        style="@style/status_component"/>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_alignParentTop="true"
-        android:orientation="horizontal"
-        app:layout_constraintTop_toTopOf="parent">
+    <TextView
+        android:id="@+id/grades"
+        android:text="100%"
+        style="@style/status_component" />
 
-        <TextView
-            android:id="@+id/day_of_week"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="Monday"
-            android:textSize="20dp"
-            android:textColor="#ffffff"
-            android:layout_gravity="center"
-            android:layout_weight="1"
-            />
-
-        <TextView
-            android:id="@+id/health"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="100%"
-            android:textSize="20dp"
-            android:textColor="#ffffff"
-            android:layout_gravity="center"
-            android:layout_weight="1"
-            />
-
-        <TextView
-            android:id="@+id/grades"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="100%"
-            android:textSize="20dp"
-            android:textColor="#ffffff"
-            android:layout_gravity="center"
-            android:layout_weight="1"
-            />
-
-        <TextView
-            android:id="@+id/money"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="$1000"
-            android:textSize="20dp"
-            android:textColor="#ffffff"
-            android:layout_gravity="center"
-            android:layout_weight="1"/>
-
-    </LinearLayout>
+    <TextView
+        android:id="@+id/money"
+        android:text="$100"
+        style="@style/status_component" />
+</LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
