@@ -44,7 +44,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:gravity="center|bottom">
+    android:gravity="center|bottom"
+    app:layout_constraintBottom_toBottomOf="parent">
 
     <Button
         android:id="@+id/start_day_id"
