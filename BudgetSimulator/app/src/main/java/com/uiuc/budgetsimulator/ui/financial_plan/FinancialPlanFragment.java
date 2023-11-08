@@ -11,25 +11,33 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
-
+import android.widget.EditText;
+import android.widget.TextView;
 import com.uiuc.budgetsimulator.R;
+
 
 public class FinancialPlanFragment extends Fragment {
 
-    private FinancialPlanViewModel financialPlanViewModel;
-
+    @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        financialPlanViewModel =
-                new ViewModelProvider(this).get(FinancialPlanViewModel.class);
         View root = inflater.inflate(R.layout.fragment_financial_plan, container, false);
-        final TextView textView = root.findViewById(R.id.text_financial_plan);
-        financialPlanViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
-            @Override
-            public void onChanged(@Nullable String s) {
-                textView.setText(s);
-            }
-        });
+
+        // Find the views by their IDs
+        TextView textFinancialPlan = root.findViewById(R.id.text_financial_plan);
+        EditText editText1 = root.findViewById(R.id.editText1);
+        EditText editText2 = root.findViewById(R.id.editText2);
+//        EditText editText3 = root.findViewById(R.id.editText3);
+//        EditText editText4 = root.findViewById(R.id.editText4);
+//        EditText editText5 = root.findViewById(R.id.editText5);
+
+        // Set pre-filled values (if needed)
+        editText1.setText("123.45");
+        editText2.setText("678.90");
+//        editText3.setText("45.67");
+//        editText4.setText("890.12");
+//        editText5.setText("123.45");
+
         return root;
     }
 }
