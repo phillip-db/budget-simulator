@@ -13,4 +13,10 @@
     <string name="friday">Friday</string>
     <string name="saturday">Saturday</string>
 
+    <string name="pop_ups">SingleChoiceDialog</string>
+    <string-array name="choice_items">
+        <item>Buy a gift   health+3 money-20</item>
+        <item>Bake a cake  health+3 money-5</item>
+    </string-array>
+
 </resources>
