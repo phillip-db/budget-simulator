@@ -24,12 +24,12 @@ public class TrophiesFragment extends Fragment {
                 new ViewModelProvider(this).get(TrophiesViewModel.class);
         View root = inflater.inflate(R.layout.fragment_trophies, container, false);
         final TextView textView = root.findViewById(R.id.text_trophies);
-        trophiesViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
-            @Override
-            public void onChanged(@Nullable String s) {
-                textView.setText(s);
-            }
-        });
+//        trophiesViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
+//            @Override
+//            public void onChanged(@Nullable String s) {
+//                textView.setText(s);
+//            }
+//        });
         return root;
     }
 }
