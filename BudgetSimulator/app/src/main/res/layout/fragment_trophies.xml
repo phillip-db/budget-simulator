@@ -47,14 +47,23 @@
                 android:padding="10dp" >
 
                 <Button
+                    android:id="@+id/trophy_7DayStreak"
                     android:layout_width="0dp"
                     android:layout_height="200dp"
-                    android:layout_weight="1"/>
+                    android:layout_weight="1"
+                    android:drawableTop="@drawable/trophy_image_transparent"
+                    android:text="7 day streak"
+                    android:textSize="16dp"
+                    android:layout_marginRight="7dp" />
 
                 <Button
+                    android:id="@+id/trophy_AmazingSaver"
                     android:layout_width="0dp"
                     android:layout_height="200dp"
-                    android:layout_weight="1" />
+                    android:layout_weight="1"
+                    android:drawableTop="@drawable/trophy_image_transparent"
+                    android:text="Amazing Saver"
+                    android:textSize="16dp" />
 
             </LinearLayout>
 
@@ -65,14 +74,23 @@
                 android:padding="10dp" >
 
                 <Button
+                    android:id="@+id/trophy_ScrapingBy"
                     android:layout_width="0dp"
                     android:layout_height="200dp"
-                    android:layout_weight="1" />
+                    android:layout_weight="1"
+                    android:drawableTop="@drawable/trophy_image_transparent"
+                    android:text="Scraping By"
+                    android:textSize="16dp"
+                    android:layout_marginRight="7dp" />
 
                 <Button
+                    android:id="@+id/trophy_HowStudious"
                     android:layout_width="0dp"
                     android:layout_height="200dp"
-                    android:layout_weight="1" />
+                    android:layout_weight="1"
+                    android:drawableTop="@drawable/trophy_image_transparent"
+                    android:text="How Studious"
+                    android:textSize="16dp" />
 
             </LinearLayout>
 
@@ -83,14 +101,23 @@
                 android:padding="10dp" >
 
                 <Button
+                    android:id="@+id/trophy_HappyHealthy"
                     android:layout_width="0dp"
                     android:layout_height="200dp"
-                    android:layout_weight="1" />
+                    android:layout_weight="1"
+                    android:drawableTop="@drawable/trophy_image_transparent"
+                    android:text="Happy &amp; Healthy"
+                    android:textSize="15dp"
+                    android:layout_marginRight="7dp"/>
 
                 <Button
+                    android:id="@+id/trophy_FinancialPlan"
                     android:layout_width="0dp"
                     android:layout_height="200dp"
-                    android:layout_weight="1" />
+                    android:layout_weight="1"
+                    android:drawableTop="@drawable/trophy_image_transparent"
+                    android:text="Financial Plan"
+                    android:textSize="16dp" />
 
             </LinearLayout>
 
