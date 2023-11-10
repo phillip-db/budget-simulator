@@ -30,18 +30,11 @@ public class HomeFragment extends Fragment implements SingleChoiceDialogFragment
         final TextView textView = root.findViewById(R.id.text_home);
 
         final Button button = root.findViewById(R.id.start_day_id);
-//        button.setOnClickListener(new View.OnClickListener() {
-//            public void onClick(View v) {
-//                // Code here executes on main thread after user presses button
-//                button.setVisibility(View.GONE);
-//            }
-//        });
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                DialogFragment singleChoiceDialog = new SingleChoiceDialogFragment();
-                singleChoiceDialog.setCancelable(false);
-                singleChoiceDialog.show(getFragmentManager(), "single choice dialog");
+                button.setVisibility(View.GONE);
+                openDialog();
             }
         });
 
@@ -57,5 +50,10 @@ public class HomeFragment extends Fragment implements SingleChoiceDialogFragment
     @Override
     public void onPositiveButtonClicked(String[] list, int position) {
 
+    }
+
+    public void openDialog() {
+        DialogFragment popupDialog = new PopUpDialog();
+        popupDialog.show(getActivity().getSupportFragmentManager(), "PopUpDialog");
     }
 }
