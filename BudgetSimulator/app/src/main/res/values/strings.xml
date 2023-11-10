@@ -19,4 +19,8 @@
         <item>Bake a cake  health+3 money-5</item>
     </string-array>
 
+
+    <string name="seven_day_streak">7 Day Streak</string>
+
+
 </resources>
