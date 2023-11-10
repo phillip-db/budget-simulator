@@ -12,35 +12,36 @@
     android:padding="10dp">
 
     <!--TextView for displaying Name -->
-    <androidx.cardview.widget.CardView
+<!--    <androidx.cardview.widget.CardView-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginStart="8dp"-->
+<!--        android:layout_marginEnd="8dp"-->
+<!--        android:background="@color/white"-->
+<!--        app:cardCornerRadius="0dp"-->
+<!--        app:cardElevation="0dp"-->
+<!--        app:cardUseCompatPadding="true">-->
+
+<!--        &lt;!&ndash;LinearLayout orientation Vertical &ndash;&gt;-->
+
+
+<!--    </androidx.cardview.widget.CardView>-->
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:background="@color/white"
-        android:foreground="?attr/selectableItemBackground"
-        app:cardCornerRadius="3dp"
-        app:cardElevation="3dp"
-        app:cardUseCompatPadding="true">
+        android:orientation="vertical">
 
-        <!--LinearLayout orientation Vertical -->
-        <LinearLayout
+        <!--TextView for displaying Name -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/weekText"
+            android:textAllCaps="false"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="15dp"
-            android:orientation="vertical">
-
-            <!--TextView for displaying Name -->
-            <TextView
-                android:id="@+id/weekText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@android:color/black"
-                android:textSize="20sp"
-                tools:text="Week#" />
-        </LinearLayout>
-
-    </androidx.cardview.widget.CardView>
+            android:layout_height="90dp"
+            android:textColor="@color/white"
+            android:textSize="30sp"
+            tools:text="Week #_"
+            app:cornerRadius="10dp" />
+    </LinearLayout>
 
 </LinearLayout>
 
