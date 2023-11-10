@@ -6,10 +6,9 @@ public class ReportsConstants {
     public static ArrayList<ReportData> getReportData()
     {
         ArrayList<ReportData> reportsList = new ArrayList<ReportData>();
-        ReportData testWeek1 = new ReportData(1);
-        reportsList.add(testWeek1);
-        ReportData testWeek2 = new ReportData(2);
-        reportsList.add(testWeek2);
+        for (int i = 1; i <= 18; i++){
+            reportsList.add(new ReportData(i));
+        }
 
         return reportsList;
     }
