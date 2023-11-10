@@ -17,6 +17,7 @@ import androidx.lifecycle.ViewModelProvider;
 import com.uiuc.budgetsimulator.R;
 import com.uiuc.budgetsimulator.SingleChoiceDialogFragment;
 
+import java.util.Random;
 
 public class HomeFragment extends Fragment implements SingleChoiceDialogFragment.SingleChoiceListener {
 
@@ -34,7 +35,10 @@ public class HomeFragment extends Fragment implements SingleChoiceDialogFragment
             @Override
             public void onClick(View view) {
                 button.setVisibility(View.GONE);
-                openDialog();
+                startScenarios();
+                //move day forward? INDICATE IT
+                //
+                //button.setVisibility(View.VISIBLE);
             }
         });
 
@@ -52,8 +56,16 @@ public class HomeFragment extends Fragment implements SingleChoiceDialogFragment
 
     }
 
-    public void openDialog() {
+    public void startScenarios() {
+        Random random = new Random();
+        //do random number of scenarios from 3 to 5
+        int randomNumber = random.nextInt(3) + 3;
+        for (int i = 0; i < randomNumber; i++) {
+            openDialog("d");
+        }
+    }
+    public void openDialog(String tag) {
         DialogFragment popupDialog = new PopUpDialog();
-        popupDialog.show(getActivity().getSupportFragmentManager(), "PopUpDialog");
+        popupDialog.show(getActivity().getSupportFragmentManager(), tag);
     }
 }

@@ -14,6 +14,7 @@ public class PopUpDialog extends DialogFragment {
     @NonNull
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
+
         String[] choices = {"Choice", "choice2", "chocie 3"};
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setTitle("Choose!")
