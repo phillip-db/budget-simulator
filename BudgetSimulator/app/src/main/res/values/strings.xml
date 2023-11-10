@@ -31,6 +31,19 @@
     <string name="trophy_happy_healthy">Happy &amp; Healthy</string>
     <string name="trophy_happy_healthy_description">End with health >= 90%</string>
     <string name="trophy_financial_plan">Financial Plan</string>
-    <string name="trophy_financial_plan_description">Create your first financial plan!</string>
+    <string name="trophy_financial_plan_description">Created your first financial plan!</string>
+
+
+    <string name="help_1">Welcome to the tutorial!</string>
+    <string name="help_2">At the top are all your stats.</string>
+    <string name="help_3">From left to right, we have day of the week, health, grades, and money.</string>
+    <string name="help_4">To start a day and play through scenarios, click the the START DAY button!</string>
+    <string name="help_5">The choices you make in scenarios will affect your stats!</string>
+    <string name="help_6">At the bottom, we have the navigation bar.</string>
+    <string name="help_7">See your achievements in the "Trophies" page!</string>
+    <string name="help_8">Go to "My Plan" to set goals and create a financial plan!</string>
+    <string name="help_9">Go to "Home" to start or continue your day!</string>
+    <string name="help_10">"Reports" will show your weekly reports and financial progress!</string>
+    <string name="help_11">And return to "Help" to re-start this tutorial!</string>
 
 </resources>

@@ -30,13 +30,6 @@ public class TrophiesFragment extends Fragment {
         trophiesViewModel =
                 new ViewModelProvider(this).get(TrophiesViewModel.class);
         root = inflater.inflate(R.layout.fragment_trophies, container, false);
-//        final TextView textView = root.findViewById(R.id.text_trophies);
-//        trophiesViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
-//            @Override
-//            public void onChanged(@Nullable String s) {
-//                textView.setText(s);
-//            }
-//        });
 
 
         Button streak_button = root.findViewById(R.id.trophy_7_day_streak);
@@ -113,7 +106,5 @@ public class TrophiesFragment extends Fragment {
                 return true;
             }
         });
-
-
     }
 }
