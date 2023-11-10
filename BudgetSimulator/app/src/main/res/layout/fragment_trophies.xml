@@ -6,127 +6,131 @@
     android:layout_height="match_parent"
     tools:context=".ui.trophies.TrophiesFragment">
 
-    <RelativeLayout
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
-            android:id="@+id/text_trophies"
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:textAlignment="center"
-            android:text="TROPHIES"
-            android:textStyle="bold"
-            android:textSize="40sp"
-            android:textColor="#000000" />
+            app:layout_constraintTop_toTopOf="parent">
 
-        <View
-            android:id="@+id/text_line"
-            android:layout_width="0dp"
-            android:layout_height="4dp"
-            android:layout_alignLeft="@+id/text_trophies"
-            android:layout_alignRight="@+id/text_trophies"
-            android:background="@android:color/black"
-            android:layout_below="@+id/text_trophies"
-            android:layout_marginBottom="10dp"/>
+            <TextView
+                android:id="@+id/text_trophies"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:textAlignment="center"
+                android:text="TROPHIES"
+                android:textStyle="bold"
+                android:textSize="40sp"
+                android:textColor="#000000" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/text_line"
-            android:orientation="vertical" >
+            <View
+                android:id="@+id/text_line"
+                android:layout_width="0dp"
+                android:layout_height="4dp"
+                android:layout_alignLeft="@+id/text_trophies"
+                android:layout_alignRight="@+id/text_trophies"
+                android:background="@android:color/black"
+                android:layout_below="@+id/text_trophies"
+                android:layout_marginBottom="10dp"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:padding="10dp" >
+                android:layout_below="@+id/text_line"
+                android:orientation="vertical" >
 
-                <Button
-                    android:id="@+id/trophy_7_day_streak"
-                    android:layout_width="0dp"
-                    android:layout_height="200dp"
-                    android:layout_weight="1"
-                    android:drawableTop="@drawable/trophy_image_transparent"
-                    android:text="7 day streak"
-                    android:textSize="16dp"
-                    android:layout_marginRight="7dp" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="10dp" >
 
-                <Button
-                    android:id="@+id/trophy_amazing_saver"
-                    android:layout_width="0dp"
-                    android:layout_height="200dp"
-                    android:layout_weight="1"
-                    android:drawableTop="@drawable/trophy_image_transparent"
-                    android:text="Amazing Saver"
-                    android:textSize="16dp" />
+                    <Button
+                        android:id="@+id/trophy_7_day_streak"
+                        android:layout_width="0dp"
+                        android:layout_height="200dp"
+                        android:layout_weight="1"
+                        android:drawableTop="@drawable/trophy_image_transparent"
+                        android:text="7 day streak"
+                        android:textSize="16dp"
+                        android:layout_marginRight="7dp" />
+
+                    <Button
+                        android:id="@+id/trophy_amazing_saver"
+                        android:layout_width="0dp"
+                        android:layout_height="200dp"
+                        android:layout_weight="1"
+                        android:drawableTop="@drawable/trophy_image_transparent"
+                        android:text="Amazing Saver"
+                        android:textSize="16dp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="10dp" >
+
+                    <Button
+                        android:id="@+id/trophy_scraping_by"
+                        android:layout_width="0dp"
+                        android:layout_height="200dp"
+                        android:layout_weight="1"
+                        android:drawableTop="@drawable/trophy_image_transparent"
+                        android:text="Scraping By"
+                        android:textSize="16dp"
+                        android:layout_marginRight="7dp" />
+
+                    <Button
+                        android:id="@+id/trophy_how_studious"
+                        android:layout_width="0dp"
+                        android:layout_height="200dp"
+                        android:layout_weight="1"
+                        android:drawableTop="@drawable/trophy_image_transparent"
+                        android:text="How Studious"
+                        android:textSize="16dp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="10dp" >
+
+                    <Button
+                        android:id="@+id/trophy_happy_healthy"
+                        android:layout_width="0dp"
+                        android:layout_height="200dp"
+                        android:layout_weight="1"
+                        android:drawableTop="@drawable/trophy_image_transparent"
+                        android:text="Happy &amp; Healthy"
+                        android:textSize="15dp"
+                        android:layout_marginRight="7dp"/>
+
+                    <Button
+                        android:id="@+id/trophy_financial_plan"
+                        android:layout_width="0dp"
+                        android:layout_height="200dp"
+                        android:layout_weight="1"
+                        android:drawableTop="@drawable/trophy_image_transparent"
+                        android:text="Financial Plan"
+                        android:textSize="16dp" />
+
+                </LinearLayout>
 
             </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:padding="10dp" >
 
-                <Button
-                    android:id="@+id/trophy_scraping_by"
-                    android:layout_width="0dp"
-                    android:layout_height="200dp"
-                    android:layout_weight="1"
-                    android:drawableTop="@drawable/trophy_image_transparent"
-                    android:text="Scraping By"
-                    android:textSize="16dp"
-                    android:layout_marginRight="7dp" />
+        </RelativeLayout>
 
-                <Button
-                    android:id="@+id/trophy_how_studious"
-                    android:layout_width="0dp"
-                    android:layout_height="200dp"
-                    android:layout_weight="1"
-                    android:drawableTop="@drawable/trophy_image_transparent"
-                    android:text="How Studious"
-                    android:textSize="16dp" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:padding="10dp" >
-
-                <Button
-                    android:id="@+id/trophy_happy_healthy"
-                    android:layout_width="0dp"
-                    android:layout_height="200dp"
-                    android:layout_weight="1"
-                    android:drawableTop="@drawable/trophy_image_transparent"
-                    android:text="Happy &amp; Healthy"
-                    android:textSize="15dp"
-                    android:layout_marginRight="7dp"/>
-
-                <Button
-                    android:id="@+id/trophy_financial_plan"
-                    android:layout_width="0dp"
-                    android:layout_height="200dp"
-                    android:layout_weight="1"
-                    android:drawableTop="@drawable/trophy_image_transparent"
-                    android:text="Financial Plan"
-                    android:textSize="16dp" />
-
-            </LinearLayout>
-
-        </LinearLayout>
-
-
-    </RelativeLayout>
-
-
-
+    </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
