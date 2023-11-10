@@ -20,7 +20,12 @@
     </string-array>
 
 
-    <string name="seven_day_streak">7 Day Streak</string>
+    <string name="trophy_seven_day_streak">7 Day Streak</string>
+    <string name="trophy_amazing_saver">Amazing Saver</string>
+    <string name="trophy_scraping_by">7 Day Streak</string>
+    <string name="trophy_how_studious">7 Day Streak</string>
+    <string name="trophy_happy_healthy">Happy &amp; Healthy</string>
+    <string name="trophy_financial_plan">Financial Plan</string>
 
 
 </resources>
