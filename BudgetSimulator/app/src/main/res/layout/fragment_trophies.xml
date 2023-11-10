@@ -47,7 +47,7 @@
                 android:padding="10dp" >
 
                 <Button
-                    android:id="@+id/trophy_7DayStreak"
+                    android:id="@+id/trophy_7_day_streak"
                     android:layout_width="0dp"
                     android:layout_height="200dp"
                     android:layout_weight="1"
@@ -57,7 +57,7 @@
                     android:layout_marginRight="7dp" />
 
                 <Button
-                    android:id="@+id/trophy_AmazingSaver"
+                    android:id="@+id/trophy_amazing_saver"
                     android:layout_width="0dp"
                     android:layout_height="200dp"
                     android:layout_weight="1"
@@ -74,7 +74,7 @@
                 android:padding="10dp" >
 
                 <Button
-                    android:id="@+id/trophy_ScrapingBy"
+                    android:id="@+id/trophy_scraping_by"
                     android:layout_width="0dp"
                     android:layout_height="200dp"
                     android:layout_weight="1"
@@ -84,7 +84,7 @@
                     android:layout_marginRight="7dp" />
 
                 <Button
-                    android:id="@+id/trophy_HowStudious"
+                    android:id="@+id/trophy_how_studious"
                     android:layout_width="0dp"
                     android:layout_height="200dp"
                     android:layout_weight="1"
@@ -101,7 +101,7 @@
                 android:padding="10dp" >
 
                 <Button
-                    android:id="@+id/trophy_HappyHealthy"
+                    android:id="@+id/trophy_happy_healthy"
                     android:layout_width="0dp"
                     android:layout_height="200dp"
                     android:layout_weight="1"
@@ -111,7 +111,7 @@
                     android:layout_marginRight="7dp"/>
 
                 <Button
-                    android:id="@+id/trophy_FinancialPlan"
+                    android:id="@+id/trophy_financial_plan"
                     android:layout_width="0dp"
                     android:layout_height="200dp"
                     android:layout_weight="1"
