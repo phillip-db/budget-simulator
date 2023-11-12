@@ -1,5 +1,7 @@
 package com.uiuc.budgetsimulator.ui.home;
 
+import static com.uiuc.budgetsimulator.ui.home.Scenarios.readScenariosFromFile;
+
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -59,13 +61,14 @@ public class HomeFragment extends Fragment implements SingleChoiceDialogFragment
     public void startScenarios() {
         Random random = new Random();
         //do random number of scenarios from 3 to 5
+        Scenarios sunday = readScenariosFromFile("assets/Scenarios.json");
         int randomNumber = random.nextInt(3) + 3;
         for (int i = 0; i < randomNumber; i++) {
-            openDialog("d");
+            openDialog(sunday.scenarios[i]);
         }
     }
-    public void openDialog(String tag) {
-        DialogFragment popupDialog = new PopUpDialog();
-        popupDialog.show(getActivity().getSupportFragmentManager(), tag);
+    public void openDialog(Scenarios.Scenario scenario) {
+        DialogFragment scenarioDialog = ScenarioDialog.newInstance(scenario);
+        scenarioDialog.show(getActivity().getSupportFragmentManager(), "scenario_dialog");
     }
 }

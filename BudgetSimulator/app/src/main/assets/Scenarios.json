@@ -1,0 +1,64 @@
+{
+  "scenarios": [
+    {
+      "event": "Event 1",
+      "choices": [
+        {
+          "choice": "Option A",
+          "healthOutcome": 5,
+          "gradeOutcome": 10,
+          "moneyOutcome": -5
+        },
+        {
+          "choice": "Option B",
+          "healthOutcome": -10,
+          "gradeOutcome": 5,
+          "moneyOutcome": 20
+        }
+      ],
+      "healthOutcome": 0,
+      "gradeOutcome": 0,
+      "moneyOutcome": 0
+    },
+    {
+      "event": "Event 2",
+      "choices": [
+        {
+          "choice": "Option X",
+          "healthOutcome": 3,
+          "gradeOutcome": 8,
+          "moneyOutcome": -2
+        },
+        {
+          "choice": "Option Y",
+          "healthOutcome": -5,
+          "gradeOutcome": 12,
+          "moneyOutcome": 15
+        }
+      ],
+      "healthOutcome": 0,
+      "gradeOutcome": 0,
+      "moneyOutcome": 0
+    },
+    {
+      "event": "Event 3",
+      "choices": [
+        {
+          "choice": "Option Alpha",
+          "healthOutcome": 7,
+          "gradeOutcome": 15,
+          "moneyOutcome": -8
+        },
+        {
+          "choice": "Option Beta",
+          "healthOutcome": -15,
+          "gradeOutcome": 7,
+          "moneyOutcome": 25
+        }
+      ],
+      "healthOutcome": 0,
+      "gradeOutcome": 0,
+      "moneyOutcome": 0
+    }
+  ]
+}
