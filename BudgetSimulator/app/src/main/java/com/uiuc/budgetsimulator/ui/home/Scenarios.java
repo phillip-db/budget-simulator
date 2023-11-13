@@ -6,9 +6,13 @@ import android.os.Parcelable;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
+
+
 
 public class Scenarios implements Parcelable {
-
+    public Scenarios() {
+    }
     public Scenario[] scenarios;
 
     protected Scenarios(Parcel in) {
@@ -38,11 +42,17 @@ public class Scenarios implements Parcelable {
     }
 
     public static class Scenario implements Parcelable{
+        public Scenario() {
+
+        }
         public String event;
 
         public Choice[] choices;
 
         public static class Choice implements Parcelable {
+            public Choice (){
+
+            }
             public String choice;
             public int healthOutcome;
             public int gradeOutcome;
@@ -119,10 +129,10 @@ public class Scenarios implements Parcelable {
         };
     }
 
-    public static Scenarios readScenariosFromFile(String filePath) {
+    public static Scenarios readScenariosFromFile(InputStream file) {
         ObjectMapper objectMapper = new ObjectMapper();
         try {
-            return objectMapper.readValue(new File(filePath), Scenarios.class);
+            return objectMapper.readValue(file, Scenarios.class);
         } catch (IOException e) {
             e.printStackTrace();
             return null;

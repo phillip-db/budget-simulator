@@ -3,6 +3,7 @@ package com.uiuc.budgetsimulator.ui.home;
 import static com.uiuc.budgetsimulator.ui.home.Scenarios.readScenariosFromFile;
 
 import android.os.Bundle;
+import android.renderscript.ScriptGroup;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +20,8 @@ import androidx.lifecycle.ViewModelProvider;
 import com.uiuc.budgetsimulator.R;
 import com.uiuc.budgetsimulator.SingleChoiceDialogFragment;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.Random;
 
 public class HomeFragment extends Fragment implements SingleChoiceDialogFragment.SingleChoiceListener {
@@ -61,8 +64,9 @@ public class HomeFragment extends Fragment implements SingleChoiceDialogFragment
     public void startScenarios() {
         Random random = new Random();
         //do random number of scenarios from 3 to 5
-        Scenarios sunday = readScenariosFromFile("assets/Scenarios.json");
-        int randomNumber = random.nextInt(3) + 3;
+        InputStream inputStream =  getResources().openRawResource(R.raw.scenarios);
+        Scenarios sunday = readScenariosFromFile(inputStream);
+        int randomNumber = random.nextInt(sunday.scenarios.length - 2) + 3;
         for (int i = 0; i < randomNumber; i++) {
             openDialog(sunday.scenarios[i]);
         }

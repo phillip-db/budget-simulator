@@ -29,7 +29,7 @@ public class ScenarioDialog extends DialogFragment {
             choicesStrings[i] = choices[i].choice;
         }
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setTitle("Choose!")
+        builder.setTitle(scenario.event)
                 .setSingleChoiceItems(choicesStrings, 0, (dialog, which) -> {})
                 .setPositiveButton("Submit", (dialog, which) -> {} );
         return builder.create();
