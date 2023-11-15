@@ -52,21 +52,21 @@ android:layout_height="match_parent">
         android:id="@+id/health"
         android:drawableLeft="@drawable/ic_status_heart"
         android:drawableTint="@android:color/holo_red_dark"
-        android:text="100%"
+        android:text="@integer/health"
         style="@style/status_component"/>
 
     <TextView
-        android:id="@+id/grades"
+        android:id="@+id/grade"
         android:drawableLeft="@drawable/ic_status_grades"
         android:drawableTint="@android:color/holo_blue_dark"
-        android:text="100%"
+        android:text="@integer/grade"
         style="@style/status_component" />
 
     <TextView
         android:id="@+id/money"
         android:drawableLeft="@drawable/ic_status_cash"
         android:drawableTint="@android:color/holo_green_dark"
-        android:text="$100"
+        android:text="@integer/money"
         style="@style/status_component" />
 </LinearLayout>
 

@@ -28,10 +28,28 @@ public class ScenarioDialog extends DialogFragment {
         for (int i = 0; i < choices.length; i++) {
             choicesStrings[i] = choices[i].choice;
         }
+        UpdateValuesListener updateValuesListener;
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        if (getActivity() instanceof UpdateValuesListener) {
+            updateValuesListener = (UpdateValuesListener) getActivity();
+        } else {
+            updateValuesListener = null;
+        }
         builder.setTitle(scenario.event)
                 .setSingleChoiceItems(choicesStrings, 0, (dialog, which) -> {})
-                .setPositiveButton("Submit", (dialog, which) -> {} );
+                .setPositiveButton("Submit", (dialog, which) -> {
+                    if (updateValuesListener != null) {
+                        int healthChange = 50;
+                        int gradeChange = 50;
+                        int moneyChange = 50;
+                        updateValuesListener.updateHealth(healthChange);
+                        updateValuesListener.updateGrade(gradeChange);
+                        updateValuesListener.updateMoney(moneyChange);
+//                        updateValuesListener.updateHealth(scenario.healthOutcome);
+//                        updateValuesListener.updateGrade(scenario.gradeOutcome);
+//                        updateValuesListener.updateMoney(scenario.moneyOutcome);
+                    }
+                } );
         return builder.create();
     }
 

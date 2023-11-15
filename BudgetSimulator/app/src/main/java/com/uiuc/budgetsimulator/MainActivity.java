@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.uiuc.budgetsimulator.ui.home.UpdateValuesListener;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
@@ -16,7 +17,7 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements UpdateValuesListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,4 +38,27 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    public void updateHealth(int newValue) {
+        TextView healthTextView = findViewById(R.id.health);
+        int originalHealthValue = Integer.parseInt(healthTextView.getText().toString());
+        int updatedHealthValue = originalHealthValue - newValue;
+        healthTextView.setText(String.valueOf(updatedHealthValue));
+    }
+
+    @Override
+    public void updateGrade(int newValue) {
+        TextView gradeTextView = findViewById(R.id.grade);
+        int originalGradeValue = Integer.parseInt(gradeTextView.getText().toString());
+        int updatedHealthValue = originalGradeValue - newValue;
+        gradeTextView.setText(String.valueOf(updatedHealthValue));
+    }
+
+    @Override
+    public void updateMoney(int newValue) {
+        TextView moneyTextView = findViewById(R.id.money);
+        int originalHMoneyValue = Integer.parseInt(moneyTextView.getText().toString());
+        int updatedHealthValue = originalHMoneyValue - newValue;
+        moneyTextView.setText(String.valueOf(updatedHealthValue));
+    }
 }
