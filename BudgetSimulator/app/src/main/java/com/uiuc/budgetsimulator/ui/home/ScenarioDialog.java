@@ -10,6 +10,12 @@ import androidx.fragment.app.DialogFragment;
 
 public class ScenarioDialog extends DialogFragment {
 
+    public boolean completed = false;
+
+    public void setCompleted(boolean completed) {
+        this.completed = completed;
+    }
+
     private int selectedChoiceIndex = 0;
 
     private static final String ARG_SCENARIO = "scenario";
@@ -47,6 +53,7 @@ public class ScenarioDialog extends DialogFragment {
                         updateValuesListener.updateHealth(selectedChoice.healthOutcome);
                         updateValuesListener.updateGrade(selectedChoice.gradeOutcome);
                         updateValuesListener.updateMoney(selectedChoice.moneyOutcome);
+                        completed = true;
                     }
                 } );
         return builder.create();

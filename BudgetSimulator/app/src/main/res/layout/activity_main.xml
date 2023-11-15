@@ -44,7 +44,8 @@ android:layout_height="match_parent">
 
     <TextView
         android:id="@+id/day_of_week"
-        android:text="Monday"
+        android:text="Sunday"
+        android:layout_width="30dp"
         android:gravity="center"
         style="@style/status_component" />
 
@@ -52,21 +53,21 @@ android:layout_height="match_parent">
         android:id="@+id/health"
         android:drawableLeft="@drawable/ic_status_heart"
         android:drawableTint="@android:color/holo_red_dark"
-        android:text="@integer/health"
+        android:text="100%"
         style="@style/status_component"/>
 
     <TextView
         android:id="@+id/grade"
         android:drawableLeft="@drawable/ic_status_grades"
         android:drawableTint="@android:color/holo_blue_dark"
-        android:text="@integer/grade"
+        android:text="100%"
         style="@style/status_component" />
 
     <TextView
         android:id="@+id/money"
         android:drawableLeft="@drawable/ic_status_cash"
         android:drawableTint="@android:color/holo_green_dark"
-        android:text="@integer/money"
+        android:text="$1000"
         style="@style/status_component" />
 </LinearLayout>
 

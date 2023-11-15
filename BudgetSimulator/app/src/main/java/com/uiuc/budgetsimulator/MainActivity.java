@@ -18,7 +18,8 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 public class MainActivity extends AppCompatActivity implements UpdateValuesListener {
-
+    private String[] days = {"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"};
+    private int day_id = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,27 +39,42 @@ public class MainActivity extends AppCompatActivity implements UpdateValuesListe
 
     }
 
+    public static String adjustFactors(TextView textView, int adjustment) {
+        String s = (String)textView.getText();
+        if (s.charAt(s.length() - 1) == '%') {
+            int newFactor = Math.min(100, adjustment + Integer.parseInt(s.substring(0, s.length() - 1)));
+            return newFactor + "%";
+        } else {
+            return "$" + (adjustment + Integer.parseInt(s.substring(1)));
+        }
+    }
+
     @Override
     public void updateHealth(int newValue) {
         TextView healthTextView = findViewById(R.id.health);
-        int originalHealthValue = Integer.parseInt(healthTextView.getText().toString());
-        int updatedHealthValue = originalHealthValue + newValue;
-        healthTextView.setText(String.valueOf(updatedHealthValue));
+        healthTextView.setText(adjustFactors(healthTextView, newValue));
     }
 
     @Override
     public void updateGrade(int newValue) {
         TextView gradeTextView = findViewById(R.id.grade);
-        int originalGradeValue = Integer.parseInt(gradeTextView.getText().toString());
-        int updatedHealthValue = originalGradeValue + newValue;
-        gradeTextView.setText(String.valueOf(updatedHealthValue));
+        gradeTextView.setText(adjustFactors(gradeTextView, newValue));
     }
 
     @Override
     public void updateMoney(int newValue) {
         TextView moneyTextView = findViewById(R.id.money);
-        int originalHMoneyValue = Integer.parseInt(moneyTextView.getText().toString());
-        int updatedHealthValue = originalHMoneyValue + newValue;
-        moneyTextView.setText(String.valueOf(updatedHealthValue));
+        moneyTextView.setText(adjustFactors(moneyTextView, newValue));
+    }
+
+    @Override
+    public void updateDay() {
+        TextView textview = findViewById(R.id.day_of_week);
+        if (day_id == 6) {
+            day_id = 0;
+        } else {
+            day_id += 1;
+        }
+        textview.setText(days[day_id]);
     }
 }

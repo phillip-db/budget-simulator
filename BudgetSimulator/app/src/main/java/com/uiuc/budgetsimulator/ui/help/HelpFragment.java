@@ -71,6 +71,8 @@ public class HelpFragment extends Fragment {
                 if (help_page != 0) {
                     help_page--;
                     help_text.setText(help_pages[help_page]);
+                } else {
+                    popupWindow.dismiss();
                 }
             }
         });
