@@ -10,6 +10,8 @@ import androidx.fragment.app.DialogFragment;
 
 public class ScenarioDialog extends DialogFragment {
 
+    private int selectedChoiceIndex = 0;
+
     private static final String ARG_SCENARIO = "scenario";
     public static ScenarioDialog newInstance(Scenarios.Scenario scenario) {
         ScenarioDialog fragment = new ScenarioDialog();
@@ -36,18 +38,15 @@ public class ScenarioDialog extends DialogFragment {
             updateValuesListener = null;
         }
         builder.setTitle(scenario.event)
-                .setSingleChoiceItems(choicesStrings, 0, (dialog, which) -> {})
+                .setSingleChoiceItems(choicesStrings, 0, (dialog, which) -> {
+                    selectedChoiceIndex = which;
+                })
                 .setPositiveButton("Submit", (dialog, which) -> {
                     if (updateValuesListener != null) {
-                        int healthChange = 50;
-                        int gradeChange = 50;
-                        int moneyChange = 50;
-                        updateValuesListener.updateHealth(healthChange);
-                        updateValuesListener.updateGrade(gradeChange);
-                        updateValuesListener.updateMoney(moneyChange);
-//                        updateValuesListener.updateHealth(scenario.healthOutcome);
-//                        updateValuesListener.updateGrade(scenario.gradeOutcome);
-//                        updateValuesListener.updateMoney(scenario.moneyOutcome);
+                        Scenarios.Scenario.Choice selectedChoice = choices[selectedChoiceIndex];
+                        updateValuesListener.updateHealth(selectedChoice.healthOutcome);
+                        updateValuesListener.updateGrade(selectedChoice.gradeOutcome);
+                        updateValuesListener.updateMoney(selectedChoice.moneyOutcome);
                     }
                 } );
         return builder.create();

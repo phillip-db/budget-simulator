@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity implements UpdateValuesListe
     public void updateHealth(int newValue) {
         TextView healthTextView = findViewById(R.id.health);
         int originalHealthValue = Integer.parseInt(healthTextView.getText().toString());
-        int updatedHealthValue = originalHealthValue - newValue;
+        int updatedHealthValue = originalHealthValue + newValue;
         healthTextView.setText(String.valueOf(updatedHealthValue));
     }
 
@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity implements UpdateValuesListe
     public void updateGrade(int newValue) {
         TextView gradeTextView = findViewById(R.id.grade);
         int originalGradeValue = Integer.parseInt(gradeTextView.getText().toString());
-        int updatedHealthValue = originalGradeValue - newValue;
+        int updatedHealthValue = originalGradeValue + newValue;
         gradeTextView.setText(String.valueOf(updatedHealthValue));
     }
 
@@ -58,7 +58,7 @@ public class MainActivity extends AppCompatActivity implements UpdateValuesListe
     public void updateMoney(int newValue) {
         TextView moneyTextView = findViewById(R.id.money);
         int originalHMoneyValue = Integer.parseInt(moneyTextView.getText().toString());
-        int updatedHealthValue = originalHMoneyValue - newValue;
+        int updatedHealthValue = originalHMoneyValue + newValue;
         moneyTextView.setText(String.valueOf(updatedHealthValue));
     }
 }
