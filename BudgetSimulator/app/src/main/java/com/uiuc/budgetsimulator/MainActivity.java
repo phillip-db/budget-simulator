@@ -20,6 +20,8 @@ import androidx.navigation.ui.NavigationUI;
 public class MainActivity extends AppCompatActivity implements UpdateValuesListener {
     private String[] days = {"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"};
     private int day_id = 0;
+
+    private String[] weeks = {"Week 1", "Week 2", "Week 3", "Week 4", "Week 5", "Week 6", "Week 7"};
     private int week_id = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,10 +75,17 @@ public class MainActivity extends AppCompatActivity implements UpdateValuesListe
         TextView textview = findViewById(R.id.day_of_week);
         if (day_id == 6) {
             day_id = 0;
-            week_id += 1;
+            updateWeek();
         } else {
             day_id += 1;
         }
         textview.setText(days[day_id]);
+    }
+
+    @Override
+    public void updateWeek() {
+        TextView textview = findViewById(R.id.week);
+        week_id += 1;
+        textview.setText(weeks[week_id]);
     }
 }

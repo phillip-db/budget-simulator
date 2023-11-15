@@ -6,5 +6,7 @@ public interface UpdateValuesListener {
     void updateMoney(int newValue);
     // Add other methods for updating other values if needed
     void updateDay();
+
+    void updateWeek();
 }
 
