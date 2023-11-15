@@ -1,19 +1,19 @@
 {
   "scenarios": [
     {
-      "event": "Event 1",
+      "event": "Your friends invite you to a road trip but exam is in 3 days.",
       "choices": [
         {
-          "choice": "Option A",
-          "healthOutcome": 5,
-          "gradeOutcome": 10,
-          "moneyOutcome": -5
+          "choice": "Join the road trip",
+          "healthOutcome": 6,
+          "gradeOutcome": -4,
+          "moneyOutcome": -100
         },
         {
-          "choice": "Option B",
-          "healthOutcome": -10,
+          "choice": "Stay and study",
+          "healthOutcome": -4,
           "gradeOutcome": 5,
-          "moneyOutcome": 20
+          "moneyOutcome": 0
         }
       ],
       "healthOutcome": 0,
@@ -21,19 +21,39 @@
       "moneyOutcome": 0
     },
     {
-      "event": "Event 2",
+      "event": "Your favorite band is playing a concert on a weekday.",
       "choices": [
         {
-          "choice": "Option X",
-          "healthOutcome": 3,
-          "gradeOutcome": 8,
-          "moneyOutcome": -2
+          "choice": "Attend the concert",
+          "healthOutcome": 8,
+          "gradeOutcome": -3,
+          "moneyOutcome": -200
         },
         {
-          "choice": "Option Y",
+          "choice": "Skip the concert",
+          "healthOutcome": 0,
+          "gradeOutcome": 3,
+          "moneyOutcome": 0
+        }
+      ],
+      "healthOutcome": 0,
+      "gradeOutcome": 0,
+      "moneyOutcome": 0
+    },
+    {
+      "event": "You are offered a catering job for this weekend.",
+      "choices": [
+        {
+          "choice": "Take the job",
           "healthOutcome": -5,
-          "gradeOutcome": 12,
-          "moneyOutcome": 15
+          "gradeOutcome": 0,
+          "moneyOutcome": 150
+        },
+        {
+          "choice": "Decline the job",
+          "healthOutcome": 5,
+          "gradeOutcome": 0,
+          "moneyOutcome": 0
         }
       ],
       "healthOutcome": 0,
@@ -41,19 +61,79 @@
       "moneyOutcome": 0
     },
     {
-      "event": "Event 3",
+      "event": "Extra credit for attending guest lecture in your free time.",
       "choices": [
         {
-          "choice": "Option Alpha",
-          "healthOutcome": 7,
-          "gradeOutcome": 15,
-          "moneyOutcome": -8
+          "choice": "Attend the lecture",
+          "healthOutcome": -1,
+          "gradeOutcome": 2,
+          "moneyOutcome": 0
         },
         {
-          "choice": "Option Beta",
-          "healthOutcome": -15,
-          "gradeOutcome": 7,
-          "moneyOutcome": 25
+          "choice": "Skip the lecture",
+          "healthOutcome": 2,
+          "gradeOutcome": 0,
+          "moneyOutcome": 0
+        }
+      ],
+      "healthOutcome": 0,
+      "gradeOutcome": 0,
+      "moneyOutcome": 0
+    },
+    {
+      "event": "You have a big exam tomorrow!",
+      "choices": [
+        {
+          "choice": "Study",
+          "healthOutcome": -3,
+          "gradeOutcome": 4,
+          "moneyOutcome": 0
+        },
+        {
+          "choice": "Don't study",
+          "healthOutcome": 1,
+          "gradeOutcome": -3,
+          "moneyOutcome": 0
+        }
+      ],
+      "healthOutcome": 0,
+      "gradeOutcome": 0,
+      "moneyOutcome": 0
+    },
+    {
+      "event": "You're offered a freelance gig but requires overnight working for a week.",
+      "choices": [
+        {
+          "choice": "Accept the gig",
+          "healthOutcome": -6,
+          "gradeOutcome": 0,
+          "moneyOutcome": 300
+        },
+        {
+          "choice": "Decline to maintain regular sleep schedule",
+          "healthOutcome": 4,
+          "gradeOutcome": 0,
+          "moneyOutcome": 0
+        }
+      ],
+      "healthOutcome": 0,
+      "gradeOutcome": 0,
+      "moneyOutcome": 0
+    },
+    {
+      "event": "Professor invites you to participate in a research project.",
+      "choices": [
+        {
+          "choice": "Join the project",
+          "healthOutcome": -5,
+          "gradeOutcome": 6,
+          "moneyOutcome": 0
+        },
+        {
+          "choice": "Focus on part-time job for immediate income",
+          "healthOutcome": -3,
+          "gradeOutcome": 0,
+          "moneyOutcome": 50
         }
       ],
       "healthOutcome": 0,
