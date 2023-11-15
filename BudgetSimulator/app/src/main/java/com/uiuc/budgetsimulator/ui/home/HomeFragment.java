@@ -21,13 +21,11 @@ import com.uiuc.budgetsimulator.R;
 import java.io.InputStream;
 import java.util.Random;
 
-public class HomeFragment extends Fragment {
+public class HomeFragment extends Fragment implements ScenarioDialog.ScenarioDialogListener {
 
     private HomeViewModel homeViewModel;
     private Button button;
 
-    private String[] days = {"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"};
-    private int day_id = 0;
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         homeViewModel =
@@ -41,8 +39,6 @@ public class HomeFragment extends Fragment {
             public void onClick(View view) {
                 button.setVisibility(View.GONE);
                 startScenarios();
-                //move day forward? INDICATE IT
-                //
             }
         });
 
@@ -62,18 +58,26 @@ public class HomeFragment extends Fragment {
         Scenarios sunday = readScenariosFromFile(inputStream);
         int randomNumber = random.nextInt(sunday.scenarios.length - 2) + 3;
         for (int i = 0; i < randomNumber; i++) {
-            openDialog(sunday.scenarios[i]);
+            if (i == 0) {
+                openDialog(sunday.scenarios[i], true);
+            } else {
+                openDialog(sunday.scenarios[i], false);
+            }
             //some sort of way to acquire the dialog choice
         }
     }
-    public void openDialog(Scenarios.Scenario scenario) {
+    public void openDialog(Scenarios.Scenario scenario, boolean lastScenario) {
         ScenarioDialog scenarioDialog = ScenarioDialog.newInstance(scenario);
         scenarioDialog.setTargetFragment(this, 0);
         scenarioDialog.setCancelable(false);
-        scenarioDialog.setCompleted(true);
+        scenarioDialog.setLastScenario(lastScenario);
         //if last scenario is completed, show button and also updateDay
         scenarioDialog.show(this.getParentFragmentManager(), "scenario_dialog");
     }
 
 
+    @Override
+    public void onDialogPositiveClick() {
+        button.setVisibility(View.VISIBLE);
+    }
 }

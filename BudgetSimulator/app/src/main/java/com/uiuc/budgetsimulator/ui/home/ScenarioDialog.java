@@ -2,6 +2,7 @@ package com.uiuc.budgetsimulator.ui.home;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.Context;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -10,10 +11,29 @@ import androidx.fragment.app.DialogFragment;
 
 public class ScenarioDialog extends DialogFragment {
 
-    public boolean completed = false;
+    public interface ScenarioDialogListener {
+        public void onDialogPositiveClick();
+    }
 
-    public void setCompleted(boolean completed) {
-        this.completed = completed;
+    public ScenarioDialogListener listener;
+
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        // Verify that the host activity implements the callback interface.
+        try {
+            // Instantiate the NoticeDialogListener so you can send events to
+            // the host.
+            listener = (ScenarioDialogListener) getTargetFragment();
+        } catch (ClassCastException e) {
+            // The activity doesn't implement the interface. Throw exception.
+            throw new ClassCastException(getActivity().toString()
+                    + " must implement ScenarioDialogListener");
+        }
+    }
+    public boolean lastScenario = false;
+
+    public void setLastScenario(boolean lastScenario) {
+        this.lastScenario = lastScenario;
     }
 
     private int selectedChoiceIndex = 0;
@@ -53,7 +73,10 @@ public class ScenarioDialog extends DialogFragment {
                         updateValuesListener.updateHealth(selectedChoice.healthOutcome);
                         updateValuesListener.updateGrade(selectedChoice.gradeOutcome);
                         updateValuesListener.updateMoney(selectedChoice.moneyOutcome);
-                        completed = true;
+                        if (lastScenario == true) {
+                            updateValuesListener.updateDay();
+                            listener.onDialogPositiveClick();
+                        }
                     }
                 } );
         return builder.create();

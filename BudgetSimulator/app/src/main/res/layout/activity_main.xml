@@ -43,6 +43,12 @@ android:layout_height="match_parent">
     app:layout_constraintRight_toRightOf="parent">
 
     <TextView
+        android:id="@+id/week"
+        android:text="Week 1"
+        android:gravity="center"
+        style="@style/status_component" />
+
+    <TextView
         android:id="@+id/day_of_week"
         android:text="Sunday"
         android:layout_width="30dp"
