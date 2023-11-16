@@ -1,17 +1,15 @@
 package com.uiuc.budgetsimulator;
 
 import android.os.Bundle;
-import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.Button;
 import android.widget.TextView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.uiuc.budgetsimulator.ui.home.UpdateValuesListener;
+import com.uiuc.budgetsimulator.ui.reports.ReportData;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.DialogFragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -34,6 +32,8 @@ public class MainActivity extends AppCompatActivity implements UpdateValuesListe
     }
     private Day day_id = Day.SUNDAY;
 
+    private static String gameSimId;
+
     private final String[] weeks = {"Week 1", "Week 2", "Week 3", "Week 4", "Week 5", "Week 6", "Week 7"};
     private int week_id = 0;
     @Override
@@ -53,16 +53,27 @@ public class MainActivity extends AppCompatActivity implements UpdateValuesListe
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(navView, navController);
 
+        // Figure out some way to change this later when switching simulations/starting new simulation
+        gameSimId = "test_sim";
+
+
+        // Create week 0 for testing
+        ReportData test_week = new ReportData(0, 100, 100, 1000);
+        Utils.appendReport(gameSimId, test_week, getApplicationContext());
     }
 
     public static String adjustFactors(TextView textView, int adjustment) {
         String s = (String)textView.getText();
         if (s.charAt(s.length() - 1) == '%') {
-            int newFactor = Math.min(100, adjustment + Integer.parseInt(s.substring(0, s.length() - 1)));
+            int newFactor = Math.min(100, adjustment + Utils.parseTextViewInt(textView));
             return newFactor + "%";
         } else {
-            return "$" + (adjustment + Integer.parseInt(s.substring(1)));
+            return "$" + (adjustment + Utils.parseTextViewInt(textView));
         }
+    }
+
+    public static String getGameSimId() {
+      return gameSimId;
     }
 
     @Override
@@ -98,5 +109,14 @@ public class MainActivity extends AppCompatActivity implements UpdateValuesListe
         TextView textview = findViewById(R.id.week);
         week_id += 1;
         textview.setText(weeks[week_id]);
+        Utils.appendReport(gameSimId, generateReport(week_id), getApplicationContext());
+    }
+
+    private ReportData generateReport(int weekNumber) {
+      int health = Utils.parseTextViewInt(findViewById(R.id.health));
+      int grade = Utils.parseTextViewInt(findViewById(R.id.grade));
+      int money = Utils.parseTextViewInt(findViewById(R.id.money));
+
+      return new ReportData(weekNumber, money, health, grade);
     }
 }

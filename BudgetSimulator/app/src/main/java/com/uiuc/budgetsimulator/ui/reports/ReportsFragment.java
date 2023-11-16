@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.gson.reflect.TypeToken;
+import com.uiuc.budgetsimulator.MainActivity;
 import com.uiuc.budgetsimulator.R;
 import com.uiuc.budgetsimulator.Simulation;
 import com.uiuc.budgetsimulator.Utils;
@@ -21,35 +22,41 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class ReportsFragment extends Fragment {
-    public View onCreateView(@NonNull LayoutInflater inflater,
-                             ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_reports, container, false);
+  public View onCreateView(@NonNull LayoutInflater inflater,
+                           ViewGroup container, Bundle savedInstanceState) {
+    return inflater.inflate(R.layout.fragment_reports, container, false);
+  }
+
+  @Override
+  public void onViewCreated(View view,
+                            Bundle savedInstanceState) {
+    super.onViewCreated(view, savedInstanceState);
+
+    ArrayList<ReportData> reportsList = new ArrayList<>();
+    try {
+      InputStream is = getContext().openFileInput(Utils.REPORTS_SAVE_FILE);
+      ArrayList<Simulation> simulations = Utils.fromJSON(new TypeToken<ArrayList<Simulation>>() {
+      }.getType(), is);
+      Simulation sim = Simulation.findSimByID(simulations, MainActivity.getGameSimId());
+
+      if (sim != null) reportsList = sim.getReports();
+    } catch (Exception e) {
+      e.printStackTrace();
     }
 
-    @Override
-    public void onViewCreated(View view,
-                              Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
+    ReportsAdapter reportsAdapter = new ReportsAdapter(reportsList);
+    RecyclerView recyclerView = view.findViewById(R.id.recyclerView);
+    recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+    recyclerView.setAdapter(reportsAdapter);
 
-        InputStream is = getResources().openRawResource(R.raw.reports);
-        ArrayList<Simulation> simulations = Utils.fromJSON(new TypeToken<ArrayList<Simulation>>() {}.getType(), is);
-        ArrayList<ReportData> reportsList =
-                (simulations.isEmpty()) ?
-                        new ArrayList<>() : simulations.get(0).getReports();
+    TextView emptyView = view.findViewById(R.id.empty_view);
 
-        ReportsAdapter reportsAdapter = new ReportsAdapter(reportsList);
-        RecyclerView recyclerView = view.findViewById(R.id.recyclerView);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        recyclerView.setAdapter(reportsAdapter);
-
-        TextView emptyView = view.findViewById(R.id.empty_view);
-
-        if (reportsList.isEmpty()) {
-            recyclerView.setVisibility(View.GONE);
-            emptyView.setVisibility(View.VISIBLE);
-        } else {
-            recyclerView.setVisibility(View.VISIBLE);
-            emptyView.setVisibility(View.GONE);
-        }
+    if (reportsList.isEmpty()) {
+      recyclerView.setVisibility(View.GONE);
+      emptyView.setVisibility(View.VISIBLE);
+    } else {
+      recyclerView.setVisibility(View.VISIBLE);
+      emptyView.setVisibility(View.GONE);
     }
+  }
 }

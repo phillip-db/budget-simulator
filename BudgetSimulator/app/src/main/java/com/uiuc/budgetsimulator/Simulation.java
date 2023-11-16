@@ -8,19 +8,33 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class Simulation {
-    private String gameSimID;
-    private ArrayList<ReportData> reports;
+  private String gameSimID;
+  private ArrayList<ReportData> reports;
 
-    public Simulation(@NonNull String gameSimID, ArrayList<ReportData> reports) {
-        this.gameSimID = gameSimID;
-        this.reports = reports;
-    }
+  public Simulation(@NonNull String gameSimID, ArrayList<ReportData> reports) {
+    this.gameSimID = gameSimID;
+    this.reports = reports;
+  }
 
-    public String getGameSimID() {
-        return gameSimID;
-    }
+  public String getGameSimID() {
+    return gameSimID;
+  }
 
-    public ArrayList<ReportData> getReports() {
-        return reports;
+  public ArrayList<ReportData> getReports() {
+    return reports;
+  }
+
+  public void addReport(ReportData report)
+  {
+    reports.add(report);
+  }
+
+  public static Simulation findSimByID(ArrayList<Simulation> simulations, String gameSimID) {
+    for (Simulation sim : simulations) {
+      if (sim.getGameSimID().equals(gameSimID)) {
+        return sim;
+      }
     }
+    return null;
+  }
 }

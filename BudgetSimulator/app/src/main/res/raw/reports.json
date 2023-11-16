@@ -3,7 +3,10 @@
     "gameSimID": "test_sim",
     "reports": [
       {
-        "weekNumber": 0
+        "weekNumber": 0,
+        "money": 1000,
+        "health": 100,
+        "grade": 100
       }
     ]
   }
