@@ -9,13 +9,12 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.uiuc.budgetsimulator.R;
-import com.uiuc.budgetsimulator.ui.Utils;
+import com.uiuc.budgetsimulator.Utils;
 
 import java.io.InputStream;
 import java.util.Random;

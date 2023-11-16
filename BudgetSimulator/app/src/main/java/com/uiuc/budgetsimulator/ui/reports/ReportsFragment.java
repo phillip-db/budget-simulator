@@ -11,10 +11,13 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.gson.reflect.TypeToken;
 import com.uiuc.budgetsimulator.R;
-import com.uiuc.budgetsimulator.ui.Utils;
+import com.uiuc.budgetsimulator.Simulation;
+import com.uiuc.budgetsimulator.Utils;
 
 import java.io.InputStream;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class ReportsFragment extends Fragment {
@@ -29,7 +32,10 @@ public class ReportsFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         InputStream is = getResources().openRawResource(R.raw.reports);
-        ArrayList<ReportData> reportsList = Utils.objListFromFile(is);
+        ArrayList<Simulation> simulations = Utils.fromJSON(new TypeToken<ArrayList<Simulation>>() {}.getType(), is);
+        ArrayList<ReportData> reportsList =
+                (simulations.isEmpty()) ?
+                        new ArrayList<>() : simulations.get(0).getReports();
 
         ReportsAdapter reportsAdapter = new ReportsAdapter(reportsList);
         RecyclerView recyclerView = view.findViewById(R.id.recyclerView);
