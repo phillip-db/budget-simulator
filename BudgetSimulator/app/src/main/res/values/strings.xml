@@ -46,5 +46,10 @@
     <string name="help_9">"Reports" will show your weekly reports and financial progress!</string>
     <string name="help_10">And return to "Help" to re-start this tutorial!</string>
     <string name="help_11">That concludes this tutorial! Please go back to the home page!</string>
+    <string name="help_tutorial">Help Tutorial</string>
+    <string name="empty_reports">No reports available. Reports are added each time you complete a week of the game.</string>
+    <string name="weekly_reports">Weekly Reports</string>
+    <string name="back">Back</string>
+    <string name="next">Next</string>
 
 </resources>

@@ -21,7 +21,7 @@
             android:layout_gravity="center"
             android:paddingTop="10dp"
             android:paddingBottom="10dp"
-            android:text="Weekly Reports"
+            android:text="@string/weekly_reports"
             android:textColor="@color/black"
             android:textSize="40sp"
             android:textStyle="bold" />
@@ -34,7 +34,7 @@
             android:textSize="30sp"
             android:padding="10dp"
             android:layout_marginBottom="30dp"
-            android:text="No reports available. Reports are added each time you complete a week of the game."
+            android:text="@string/empty_reports"
             android:textColor="#686868"
             android:visibility="gone" />
 
