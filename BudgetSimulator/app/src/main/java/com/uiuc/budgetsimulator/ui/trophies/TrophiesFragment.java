@@ -1,5 +1,6 @@
 package com.uiuc.budgetsimulator.ui.trophies;
 
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -31,8 +32,11 @@ public class TrophiesFragment extends Fragment {
                 new ViewModelProvider(this).get(TrophiesViewModel.class);
         root = inflater.inflate(R.layout.fragment_trophies, container, false);
 
+        Drawable bw_trophy = getResources().getDrawable(R.drawable.trophy_image_transparent_black_white);
+
 
         Button streak_button = root.findViewById(R.id.trophy_7_day_streak);
+        streak_button.setCompoundDrawablesWithIntrinsicBounds(null, bw_trophy , null, null);
         streak_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -41,6 +45,7 @@ public class TrophiesFragment extends Fragment {
         });
 
         Button saver_button = root.findViewById(R.id.trophy_amazing_saver);
+        saver_button.setCompoundDrawablesWithIntrinsicBounds(null, bw_trophy , null, null);
         saver_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -49,6 +54,7 @@ public class TrophiesFragment extends Fragment {
         });
 
         Button scraping_button = root.findViewById(R.id.trophy_scraping_by);
+        scraping_button.setCompoundDrawablesWithIntrinsicBounds(null, bw_trophy , null, null);
         scraping_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -57,6 +63,7 @@ public class TrophiesFragment extends Fragment {
         });
 
         Button studious_button = root.findViewById(R.id.trophy_how_studious);
+        studious_button.setCompoundDrawablesWithIntrinsicBounds(null, bw_trophy , null, null);
         studious_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -65,6 +72,7 @@ public class TrophiesFragment extends Fragment {
         });
 
         Button happy_healthy_button = root.findViewById(R.id.trophy_happy_healthy);
+        happy_healthy_button.setCompoundDrawablesWithIntrinsicBounds(null, bw_trophy , null, null);
         happy_healthy_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -73,6 +81,7 @@ public class TrophiesFragment extends Fragment {
         });
 
         Button financial_plan_button = root.findViewById(R.id.trophy_financial_plan);
+        financial_plan_button.setCompoundDrawablesWithIntrinsicBounds(null, bw_trophy , null, null);
         financial_plan_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
