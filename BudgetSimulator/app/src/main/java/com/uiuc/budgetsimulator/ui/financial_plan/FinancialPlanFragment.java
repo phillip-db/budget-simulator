@@ -35,13 +35,13 @@ public class FinancialPlanFragment extends Fragment {
         EditText entertainmentTextBox = root.findViewById(R.id.entertainmentTextBox);
 
         // Set pre-filled values (if needed)
-        jobIncomeTextBox.setText("$150");
-        allowanceTextBox.setText("678.90");
-        rentTextBox.setText("45.67");
-        utilitiesTextBox.setText("890.12");
-        groceriesTextBox.setText("123.45");
-        eatingOutTextBox.setText("123.45");
-        entertainmentTextBox.setText("123.45");
+        jobIncomeTextBox.setText("600");
+        allowanceTextBox.setText("1000");
+        rentTextBox.setText("500");
+        utilitiesTextBox.setText("75");
+        groceriesTextBox.setText("200");
+        eatingOutTextBox.setText("150");
+        entertainmentTextBox.setText("50");
 
         return root;
     }
