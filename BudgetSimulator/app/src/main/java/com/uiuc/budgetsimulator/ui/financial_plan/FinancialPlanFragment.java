@@ -4,15 +4,14 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-
-import android.widget.EditText;
+import androidx.cardview.widget.CardView;
 
 import com.uiuc.budgetsimulator.R;
-
 
 public class FinancialPlanFragment extends Fragment {
 
@@ -23,18 +22,26 @@ public class FinancialPlanFragment extends Fragment {
 
         // Find the views by their IDs
         TextView textFinancialPlan = root.findViewById(R.id.text_financial_plan);
-        EditText jobIncomeTextBox = root.findViewById(R.id.editText1);
-        EditText allowanceTextBox = root.findViewById(R.id.editText2);
-        EditText editText3 = root.findViewById(R.id.editText3);
-        EditText editText4 = root.findViewById(R.id.editText4);
-//        EditText editText5 = root.findViewById(R.id.editText5);
+        EditText jobIncomeTextBox = root.findViewById(R.id.jobIncomeTextBox);
+        EditText allowanceTextBox = root.findViewById(R.id.allowanceTextBox);
+
+        // For Fixed Expenses section
+        EditText rentTextBox = root.findViewById(R.id.rentTextBox);
+        EditText utilitiesTextBox = root.findViewById(R.id.utilitiesTextBox);
+        EditText groceriesTextBox = root.findViewById(R.id.groceriesTextBox);
+
+        // For Variable Expenses section
+        EditText eatingOutTextBox = root.findViewById(R.id.eatingOutTextBox);
+        EditText entertainmentTextBox = root.findViewById(R.id.entertainmentTextBox);
 
         // Set pre-filled values (if needed)
         jobIncomeTextBox.setText("$150");
         allowanceTextBox.setText("678.90");
-        editText3.setText("45.67");
-        editText4.setText("890.12");
-//        editText5.setText("123.45");
+        rentTextBox.setText("45.67");
+        utilitiesTextBox.setText("890.12");
+        groceriesTextBox.setText("123.45");
+        eatingOutTextBox.setText("123.45");
+        entertainmentTextBox.setText("123.45");
 
         return root;
     }

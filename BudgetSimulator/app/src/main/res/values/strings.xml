@@ -21,11 +21,30 @@
 
 
     <string name="trophy_seven_day_streak">7 Day Streak</string>
+    <string name="trophy_streak_description">Played through 7 in-game days!</string>
     <string name="trophy_amazing_saver">Amazing Saver</string>
-    <string name="trophy_scraping_by">7 Day Streak</string>
-    <string name="trophy_how_studious">7 Day Streak</string>
+    <string name="trophy_saver_description">Met a weekly saving goal!</string>
+    <string name="trophy_scraping_by">Scraping By</string>
+    <string name="trophy_scraping_description">Hit 50% health :(</string>
+    <string name="trophy_how_studious">How Studious</string>
+    <string name="trophy_studious_description">End with grades >= 90%</string>
     <string name="trophy_happy_healthy">Happy &amp; Healthy</string>
+    <string name="trophy_happy_healthy_description">End with health >= 90%</string>
     <string name="trophy_financial_plan">Financial Plan</string>
+    <string name="trophy_financial_plan_description">Created your first financial plan!</string>
 
+
+    <string name="help_0">Welcome to the tutorial!</string>
+    <string name="help_1">At the top are all your stats.</string>
+    <string name="help_2">From left to right, we have day of the week, health, grades, and money.</string>
+    <string name="help_3">To start a day and play through scenarios, click the START DAY button!</string>
+    <string name="help_4">The choices you make in scenarios will affect your stats!</string>
+    <string name="help_5">At the bottom, we have the navigation bar.</string>
+    <string name="help_6">See your achievements in the "Trophies" page!</string>
+    <string name="help_7">Go to "My Plan" to set goals and create a financial plan!</string>
+    <string name="help_8">Go to "Home" to start or continue your day!</string>
+    <string name="help_9">"Reports" will show your weekly reports and financial progress!</string>
+    <string name="help_10">And return to "Help" to re-start this tutorial!</string>
+    <string name="help_11">That concludes this tutorial! Please go back to the home page!</string>
 
 </resources>
