@@ -24,10 +24,12 @@ public class FinancialPlanFragment extends Fragment {
         TextView textFinancialPlan = root.findViewById(R.id.text_financial_plan);
         EditText jobIncomeTextBox = root.findViewById(R.id.jobIncomeTextBox);
         EditText allowanceTextBox = root.findViewById(R.id.allowanceTextBox);
+        jobIncomeTextBox.setEnabled(false);
+        allowanceTextBox.setEnabled(false);
 
         // For Fixed Expenses section
         EditText rentTextBox = root.findViewById(R.id.rentTextBox);
-        EditText utilitiesTextBox = root.findViewById(R.id.utilitiesTextBox);
+        rentTextBox.setEnabled(false);
         EditText groceriesTextBox = root.findViewById(R.id.groceriesTextBox);
 
         // For Variable Expenses section
@@ -38,7 +40,6 @@ public class FinancialPlanFragment extends Fragment {
         jobIncomeTextBox.setText("600");
         allowanceTextBox.setText("1000");
         rentTextBox.setText("500");
-        utilitiesTextBox.setText("75");
         groceriesTextBox.setText("200");
         eatingOutTextBox.setText("150");
         entertainmentTextBox.setText("50");
