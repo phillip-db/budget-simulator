@@ -1,7 +1,5 @@
 package com.uiuc.budgetsimulator.ui.home;
 
-import static com.uiuc.budgetsimulator.ui.home.Scenarios.readScenariosFromFile;
-
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,6 +15,7 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.uiuc.budgetsimulator.R;
+import com.uiuc.budgetsimulator.ui.Utils;
 
 import java.io.InputStream;
 import java.util.Random;
@@ -55,7 +54,7 @@ public class HomeFragment extends Fragment implements ScenarioDialog.ScenarioDia
         Random random = new Random();
         //do random number of scenarios from 3 to 5
         InputStream inputStream =  getResources().openRawResource(R.raw.scenarios);
-        Scenarios sunday = readScenariosFromFile(inputStream);
+        Scenarios sunday = Utils.fromJSON(Scenarios.class, inputStream);
         int randomNumber = random.nextInt(sunday.scenarios.length - 2) + 3;
         for (int i = 0; i < randomNumber; i++) {
             if (i == 0) {

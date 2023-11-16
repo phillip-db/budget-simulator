@@ -18,10 +18,23 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 public class MainActivity extends AppCompatActivity implements UpdateValuesListener {
-    private String[] days = {"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"};
-    private int day_id = 0;
+    public enum Day {
+        SUNDAY, MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY;
+        private static final Day[] vals = values();
+        private static final String[] days = {"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"};
 
-    private String[] weeks = {"Week 1", "Week 2", "Week 3", "Week 4", "Week 5", "Week 6", "Week 7"};
+        public Day next() {
+            return vals[(this.ordinal() + 1) % vals.length];
+        }
+
+        public String getDayString()
+        {
+            return days[this.ordinal()];
+        }
+    }
+    private Day day_id = Day.SUNDAY;
+
+    private final String[] weeks = {"Week 1", "Week 2", "Week 3", "Week 4", "Week 5", "Week 6", "Week 7"};
     private int week_id = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,13 +86,11 @@ public class MainActivity extends AppCompatActivity implements UpdateValuesListe
     @Override
     public void updateDay() {
         TextView textview = findViewById(R.id.day_of_week);
-        if (day_id == 6) {
-            day_id = 0;
+        if (day_id == Day.SATURDAY) {
             updateWeek();
-        } else {
-            day_id += 1;
         }
-        textview.setText(days[day_id]);
+        day_id = day_id.next();
+        textview.setText(day_id.getDayString());
     }
 
     @Override

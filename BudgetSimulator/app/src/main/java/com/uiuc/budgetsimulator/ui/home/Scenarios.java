@@ -128,15 +128,5 @@ public class Scenarios implements Parcelable {
             }
         };
     }
-
-    public static Scenarios readScenariosFromFile(InputStream file) {
-        ObjectMapper objectMapper = new ObjectMapper();
-        try {
-            return objectMapper.readValue(file, Scenarios.class);
-        } catch (IOException e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
 }
 
