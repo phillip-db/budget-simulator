@@ -37,10 +37,19 @@ public class ReportsFragment extends Fragment{
         ArrayList<ReportData> reportsList = ReportsConstants.getReportData();
 
         ReportsAdapter reportsAdapter = new ReportsAdapter(reportsList);
-
         RecyclerView recyclerView = view.findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-
         recyclerView.setAdapter(reportsAdapter);
+
+        TextView emptyView = view.findViewById(R.id.empty_view);
+
+        if (reportsList.isEmpty()) {
+            recyclerView.setVisibility(View.GONE);
+            emptyView.setVisibility(View.VISIBLE);
+        }
+        else {
+            recyclerView.setVisibility(View.VISIBLE);
+            emptyView.setVisibility(View.GONE);
+        }
     }
 }
