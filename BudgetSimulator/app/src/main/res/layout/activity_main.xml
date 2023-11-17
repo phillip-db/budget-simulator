@@ -52,7 +52,7 @@ android:layout_height="match_parent">
         android:id="@+id/day_of_week"
         style="@style/status_component"
         android:gravity="center"
-        android:text="Sunday" />
+        android:text="Sun" />
 
     <TextView
         android:id="@+id/health"
