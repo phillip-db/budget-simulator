@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity implements UpdateValuesListe
     public enum Day {
         SUNDAY, MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY;
         private static final Day[] vals = values();
-        private static final String[] days = {"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"};
+        private static final String[] days = {"Sun", "Mon", "Tue", "Wed", "Thurs", "Fri", "Sat"};
 
         public Day next() {
             return vals[(this.ordinal() + 1) % vals.length];
