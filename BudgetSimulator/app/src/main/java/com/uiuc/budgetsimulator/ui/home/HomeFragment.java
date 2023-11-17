@@ -18,12 +18,16 @@ import com.uiuc.budgetsimulator.R;
 import com.uiuc.budgetsimulator.Utils;
 
 import java.io.InputStream;
+import java.util.HashSet;
 import java.util.Random;
+import java.util.Set;
 
 public class HomeFragment extends Fragment implements ScenarioDialog.ScenarioDialogListener {
 
     private HomeViewModel homeViewModel;
     private Button button;
+
+    //public Set<Integer> selectedScenarios = new HashSet<>();
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -55,12 +59,21 @@ public class HomeFragment extends Fragment implements ScenarioDialog.ScenarioDia
         //do random number of scenarios from 3 to 5
         InputStream inputStream =  getResources().openRawResource(R.raw.scenarios);
         Scenarios sunday = Utils.fromJSON(Scenarios.class, inputStream);
-        int randomNumber = random.nextInt(sunday.scenarios.length - 2) + 3;
-        for (int i = 0; i < randomNumber; i++) {
+        int randomNumScenarios = random.nextInt(3) + 3;
+        int numScenarios = sunday.scenarios.length;
+        int countScenarios = 0;
+        for (int i = 0; i < randomNumScenarios; i++) {
+            Set<Integer> selectedScenarios = new HashSet<>();
+            int randomScenario;
+            do {
+                randomScenario = random.nextInt(numScenarios);
+                //countScenarios++;
+            } while (selectedScenarios.contains(randomScenario)/* && countScenarios < numScenarios*/);
+            selectedScenarios.add(randomScenario);
             if (i == 0) {
-                openDialog(sunday.scenarios[i], true);
+                openDialog(sunday.scenarios[randomScenario], true);
             } else {
-                openDialog(sunday.scenarios[i], false);
+                openDialog(sunday.scenarios[randomScenario], false);
             }
         }
     }

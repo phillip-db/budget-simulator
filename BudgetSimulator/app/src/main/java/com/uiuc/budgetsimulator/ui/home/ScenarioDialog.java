@@ -1,17 +1,14 @@
 package com.uiuc.budgetsimulator.ui.home;
 
-
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
-import com.google.android.material.snackbar.Snackbar;
 
 public class ScenarioDialog extends DialogFragment {
 
@@ -41,6 +38,8 @@ public class ScenarioDialog extends DialogFragment {
     }
 
     private int selectedChoiceIndex = 0;
+
+    private String message;
 
     private static final String ARG_SCENARIO = "scenario";
     public static ScenarioDialog newInstance(Scenarios.Scenario scenario) {
@@ -73,38 +72,36 @@ public class ScenarioDialog extends DialogFragment {
                 })
                 .setPositiveButton("Submit", (dialog, which) -> {
                     if (updateValuesListener != null) {
-                        Scenarios.Scenario.Choice selectedChoice = choices[selectedChoiceIndex];
-                        updateValuesListener.updateHealth(selectedChoice.healthOutcome);
-                        updateValuesListener.updateGrade(selectedChoice.gradeOutcome);
-                        updateValuesListener.updateMoney(selectedChoice.moneyOutcome);
+                        if (choices.length > 0) {
+                            Scenarios.Scenario.Choice selectedChoice = choices[selectedChoiceIndex];
+                            scenario.healthOutcome = selectedChoice.healthOutcome;
+                            scenario.gradeOutcome = selectedChoice.gradeOutcome;
+                            scenario.moneyOutcome = selectedChoice.moneyOutcome;
+                        }
+                        updateValuesListener.updateHealth(scenario.healthOutcome);
+                        updateValuesListener.updateGrade(scenario.gradeOutcome);
+                        updateValuesListener.updateMoney(scenario.moneyOutcome);
                         if (lastScenario == true) {
                             updateValuesListener.updateDay();
                             listener.onDialogPositiveClick();
                         }
-                        String message = "";
-                        if(selectedChoice.healthOutcome != 0) {
-                            message = message + "health";
-                            if (selectedChoice.healthOutcome > 0) {
-                                message = message + "+" + selectedChoice.healthOutcome + " ";
-                            } else {
-                                message = message + selectedChoice.healthOutcome + " ";
-                            }
+                        message = "Health: ";
+                        if (scenario.healthOutcome >= 0) {
+                            message = message + "+" + scenario.healthOutcome + " ";
+                        } else {
+                            message = message + "-" + scenario.healthOutcome + " ";
                         }
-                        if(selectedChoice.gradeOutcome != 0) {
-                            message = message + "grade";
-                            if (selectedChoice.gradeOutcome > 0) {
-                                message = message + "+" + selectedChoice.gradeOutcome + " ";
-                            } else {
-                                message = message + selectedChoice.gradeOutcome + " ";
-                            }
+                        message = message + "Grade: ";
+                        if (scenario.gradeOutcome >= 0) {
+                            message = message + "+" + scenario.gradeOutcome + " ";
+                        } else {
+                            message = message + "-" + scenario.gradeOutcome + " ";
                         }
-                        if(selectedChoice.moneyOutcome != 0) {
-                            message = message + "money";
-                            if (selectedChoice.moneyOutcome > 0) {
-                                message = message + "+" + selectedChoice.moneyOutcome + " ";
-                            } else {
-                                message = message + selectedChoice.moneyOutcome + " ";
-                            }
+                        message = message + "Money: ";
+                        if (scenario.moneyOutcome > 0) {
+                            message = message + "+" + scenario.moneyOutcome;
+                        } else {
+                            message = message + "-" + scenario.moneyOutcome;
                         }
                         showChange(message);
                     }
@@ -114,10 +111,10 @@ public class ScenarioDialog extends DialogFragment {
         return toReturn;
     }
     private void showChange(String message) {
-        Toast toast = Toast.makeText(getContext(), message, Toast.LENGTH_SHORT);
-        toast.show();
+        if (getContext() != null) {
+            Toast toast = Toast.makeText(getContext(), message, Toast.LENGTH_SHORT);
+            toast.show();
+        }
     }
-
-
     public static String TAG = "scenario_dialog";
 }

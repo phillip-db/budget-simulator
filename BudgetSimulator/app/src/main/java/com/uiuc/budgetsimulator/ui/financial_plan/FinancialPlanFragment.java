@@ -11,16 +11,18 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 
+import com.uiuc.budgetsimulator.MainActivity;
 import com.uiuc.budgetsimulator.R;
 
 public class FinancialPlanFragment extends Fragment {
 
-    public static int userGoalValue;
+//    public static int userGoalValue;
     SharedPreferences sharedPreferences;
     EditText groceriesTextBox, eatingOutTextBox, entertainmentTextBox, goalTextBox;
     private static final String PREFS_NAME = "MyPrefsFile";
@@ -74,7 +76,12 @@ public class FinancialPlanFragment extends Fragment {
 
             @Override
             public void afterTextChanged(Editable s) {
-                userGoalValue = Integer.parseInt(goalTextBox.getText().toString());
+                MainActivity.userGoalValue = Integer.parseInt(goalTextBox.getText().toString());
+                if (MainActivity.financial_goal_achieved == false) {
+                    Toast toast = Toast.makeText(getContext(), "Trophy Achieved: Financial Goal", Toast.LENGTH_SHORT);
+                    toast.show();
+                }
+                MainActivity.financial_goal_achieved = true;
             }
         });
 

@@ -5,6 +5,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.gson.Gson;
@@ -49,6 +50,10 @@ public class MainActivity extends AppCompatActivity implements UpdateValuesListe
 
     public static int health_val = 100;
     public static int grade_val = 100;
+    public static int weekly_earnings = 0;
+    public static int weekly_spending = 0;
+
+    public static int userGoalValue;
 
     // TROPHIES
     public static boolean streak_achieved = false;
@@ -56,7 +61,7 @@ public class MainActivity extends AppCompatActivity implements UpdateValuesListe
     public static boolean scraping_achieved = false;
     public static boolean studious_achieved = false;
     public static boolean happy_healthy_achieved = false;
-    public static boolean financial_plan_achieved = false;
+    public static boolean financial_goal_achieved = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -104,6 +109,9 @@ public class MainActivity extends AppCompatActivity implements UpdateValuesListe
         String s = (String)textView.getText();
         if (s.charAt(s.length() - 1) == '%') {
             int newFactor = Math.min(100, adjustment + Utils.parseTextViewInt(textView));
+            if (newFactor < 0) {
+                newFactor = 0;
+            }
             return newFactor + "%";
         } else {
             return "$" + (adjustment + Utils.parseTextViewInt(textView));
@@ -119,6 +127,11 @@ public class MainActivity extends AppCompatActivity implements UpdateValuesListe
         TextView healthTextView = findViewById(R.id.health);
         healthTextView.setText(adjustFactors(healthTextView, newValue));
         health_val = Utils.parseTextViewInt(healthTextView);
+        if (health_val <= 50) {
+            if (scraping_achieved == false)
+                generateToast("Trophy Achieved: Scraping By");
+            scraping_achieved = true;
+        }
     }
 
 
@@ -131,6 +144,10 @@ public class MainActivity extends AppCompatActivity implements UpdateValuesListe
 
     @Override
     public void updateMoney(int newValue) {
+        if (newValue > 0)
+            weekly_earnings += newValue;
+        else
+            weekly_spending -= newValue;
         TextView moneyTextView = findViewById(R.id.money);
         moneyTextView.setText(adjustFactors(moneyTextView, newValue));
     }
@@ -150,7 +167,7 @@ public class MainActivity extends AppCompatActivity implements UpdateValuesListe
     public void updatePerson() {
         TextView healthView = findViewById(R.id.health);
         TextView gradeView = findViewById(R.id.grade);
-        if (Utils.parseTextViewInt(healthView) <= 99 || Utils.parseTextViewInt(gradeView) <= 70 ) {
+        if (Utils.parseTextViewInt(healthView) <= 50 || Utils.parseTextViewInt(gradeView) <= 50 ) {
             ImageView persona = findViewById(R.id.persona);
             persona.setImageResource(R.drawable.persona_really_sad);
         } else if (Utils.parseTextViewInt(healthView) <= 70 || Utils.parseTextViewInt(gradeView) <= 70 ) {
@@ -163,12 +180,42 @@ public class MainActivity extends AppCompatActivity implements UpdateValuesListe
     public void updateWeek() {
         if (week_id == 2) {
             game_end = true;
+            if (grade_val >= 90) {
+                if (!studious_achieved)
+                    generateToast("Trophy Achieved: How Studious");
+                studious_achieved = true;
+            }
+            if (health_val >= 90) {
+                if (!happy_healthy_achieved)
+                    generateToast("Trophy Achieved: Happy & Healthy");
+                happy_healthy_achieved = true;
+            }
         } else {
+            if (weekly_earnings - weekly_spending >= userGoalValue) {
+                if (!saver_achieved)
+                    generateToast("Trophy Achieved: Amazing Saver");
+                saver_achieved = true;
+            }
+
             TextView textview = findViewById(R.id.week);
             week_id += 1;
+            weekly_earnings = 0;
+            weekly_spending = 0;
             textview.setText(weeks[week_id]);
             Utils.appendReport(gameSimId, generateReport(week_id), getApplicationContext());
+
+            if (week_id >= 1) {
+                if (!streak_achieved)
+                    generateToast("Trophy Achieved: 7 Day Streak");
+                streak_achieved = true;
+            }
         }
+    }
+
+    private void generateToast(CharSequence text) {
+        int duration = Toast.LENGTH_SHORT;
+        Toast toast = Toast.makeText(this /* MyActivity */, text, duration);
+        toast.show();
     }
 
     private ReportData generateReport(int weekNumber) {
