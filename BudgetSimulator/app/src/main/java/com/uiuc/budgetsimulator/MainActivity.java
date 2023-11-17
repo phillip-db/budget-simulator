@@ -35,7 +35,13 @@ public class MainActivity extends AppCompatActivity implements UpdateValuesListe
     private static String gameSimId;
 
     private final String[] weeks = {"Week 1", "Week 2", "Week 3", "Week 4", "Week 5", "Week 6", "Week 7"};
-    private int week_id = 0;
+    public static int week_id = 0;
+
+    public static int health_val = 100;
+
+    public static boolean streak_achieved = false;
+    public static boolean scraping_achieved = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -80,7 +86,9 @@ public class MainActivity extends AppCompatActivity implements UpdateValuesListe
     public void updateHealth(int newValue) {
         TextView healthTextView = findViewById(R.id.health);
         healthTextView.setText(adjustFactors(healthTextView, newValue));
+        health_val = Utils.parseTextViewInt(healthTextView);
     }
+
 
     @Override
     public void updateGrade(int newValue) {

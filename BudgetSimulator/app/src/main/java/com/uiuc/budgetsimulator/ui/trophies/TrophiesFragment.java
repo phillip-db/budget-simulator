@@ -19,6 +19,7 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 
+import com.uiuc.budgetsimulator.MainActivity;
 import com.uiuc.budgetsimulator.R;
 
 public class TrophiesFragment extends Fragment {
@@ -33,10 +34,16 @@ public class TrophiesFragment extends Fragment {
         root = inflater.inflate(R.layout.fragment_trophies, container, false);
 
         Drawable bw_trophy = getResources().getDrawable(R.drawable.trophy_image_transparent_black_white);
+        Drawable colored_trophy = getResources().getDrawable(R.drawable.trophy_image_transparent);
 
 
         Button streak_button = root.findViewById(R.id.trophy_7_day_streak);
-        streak_button.setCompoundDrawablesWithIntrinsicBounds(null, bw_trophy , null, null);
+        if (MainActivity.week_id >= 1)
+            MainActivity.streak_achieved = true;
+        if (MainActivity.streak_achieved)
+            streak_button.setCompoundDrawablesWithIntrinsicBounds(null, colored_trophy , null, null);
+        else
+            streak_button.setCompoundDrawablesWithIntrinsicBounds(null, bw_trophy , null, null);
         streak_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -54,7 +61,12 @@ public class TrophiesFragment extends Fragment {
         });
 
         Button scraping_button = root.findViewById(R.id.trophy_scraping_by);
-        scraping_button.setCompoundDrawablesWithIntrinsicBounds(null, bw_trophy , null, null);
+        if (MainActivity.health_val <= 50)
+            MainActivity.scraping_achieved = true;
+        if (MainActivity.scraping_achieved)
+            scraping_button.setCompoundDrawablesWithIntrinsicBounds(null, colored_trophy , null, null);
+        else
+            scraping_button.setCompoundDrawablesWithIntrinsicBounds(null, bw_trophy , null, null);
         scraping_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
