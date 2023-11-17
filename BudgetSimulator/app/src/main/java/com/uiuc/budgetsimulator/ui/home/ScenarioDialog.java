@@ -72,41 +72,40 @@ public class ScenarioDialog extends DialogFragment {
                     if (updateValuesListener != null) {
                         if (choices.length > 0) {
                             Scenarios.Scenario.Choice selectedChoice = choices[selectedChoiceIndex];
-                            updateValuesListener.updateHealth(selectedChoice.healthOutcome);
-                            updateValuesListener.updateGrade(selectedChoice.gradeOutcome);
-                            updateValuesListener.updateMoney(selectedChoice.moneyOutcome);
-                        } else {
-                            updateValuesListener.updateHealth(scenario.healthOutcome);
-                            updateValuesListener.updateGrade(scenario.gradeOutcome);
-                            updateValuesListener.updateMoney(scenario.moneyOutcome);
+                            scenario.healthOutcome = selectedChoice.healthOutcome;
+                            scenario.gradeOutcome = selectedChoice.gradeOutcome;
+                            scenario.moneyOutcome = selectedChoice.moneyOutcome;
                         }
+                        updateValuesListener.updateHealth(scenario.healthOutcome);
+                        updateValuesListener.updateGrade(scenario.gradeOutcome);
+                        updateValuesListener.updateMoney(scenario.moneyOutcome);
                         if (lastScenario == true) {
                             updateValuesListener.updateDay();
                             listener.onDialogPositiveClick();
                         }
                         String message = "";
-                        if(selectedChoice.healthOutcome != 0) {
+                        if(scenario.healthOutcome != 0) {
                             message = message + "health";
-                            if (selectedChoice.healthOutcome > 0) {
-                                message = message + "+" + selectedChoice.healthOutcome + " ";
+                            if (scenario.healthOutcome > 0) {
+                                message = message + "+" + scenario.healthOutcome + " ";
                             } else {
-                                message = message + selectedChoice.healthOutcome + " ";
+                                message = message + scenario.healthOutcome + " ";
                             }
                         }
-                        if(selectedChoice.gradeOutcome != 0) {
+                        if(scenario.gradeOutcome != 0) {
                             message = message + "grade";
-                            if (selectedChoice.gradeOutcome > 0) {
-                                message = message + "+" + selectedChoice.gradeOutcome + " ";
+                            if (scenario.gradeOutcome > 0) {
+                                message = message + "+" + scenario.gradeOutcome + " ";
                             } else {
-                                message = message + selectedChoice.gradeOutcome + " ";
+                                message = message + scenario.gradeOutcome + " ";
                             }
                         }
-                        if(selectedChoice.moneyOutcome != 0) {
+                        if(scenario.moneyOutcome != 0) {
                             message = message + "money";
-                            if (selectedChoice.moneyOutcome > 0) {
-                                message = message + "+" + selectedChoice.moneyOutcome + " ";
+                            if (scenario.moneyOutcome > 0) {
+                                message = message + "+" + scenario.moneyOutcome + " ";
                             } else {
-                                message = message + selectedChoice.moneyOutcome + " ";
+                                message = message + scenario.moneyOutcome + " ";
                             }
                         }
                         message = "Show message";
