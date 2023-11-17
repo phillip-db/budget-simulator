@@ -1,6 +1,9 @@
 package com.uiuc.budgetsimulator.ui.financial_plan;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +17,8 @@ import androidx.cardview.widget.CardView;
 import com.uiuc.budgetsimulator.R;
 
 public class FinancialPlanFragment extends Fragment {
+    SharedPreferences sharedPreferences;
+    EditText groceriesTextBox, eatingOutTextBox, entertainmentTextBox;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -30,20 +35,23 @@ public class FinancialPlanFragment extends Fragment {
         // For Fixed Expenses section
         EditText rentTextBox = root.findViewById(R.id.rentTextBox);
         rentTextBox.setEnabled(false);
-        EditText groceriesTextBox = root.findViewById(R.id.groceriesTextBox);
+        groceriesTextBox = root.findViewById(R.id.groceriesTextBox);
 
         // For Variable Expenses section
-        EditText eatingOutTextBox = root.findViewById(R.id.eatingOutTextBox);
-        EditText entertainmentTextBox = root.findViewById(R.id.entertainmentTextBox);
+        eatingOutTextBox = root.findViewById(R.id.eatingOutTextBox);
+        entertainmentTextBox = root.findViewById(R.id.entertainmentTextBox);
 
         // Set pre-filled values (if needed)
         jobIncomeTextBox.setText("600");
-        allowanceTextBox.setText("1000");
+        allowanceTextBox.setText("400");
         rentTextBox.setText("500");
         groceriesTextBox.setText("200");
         eatingOutTextBox.setText("150");
         entertainmentTextBox.setText("50");
 
+
         return root;
     }
+
+
 }
