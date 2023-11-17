@@ -3,6 +3,7 @@ package com.uiuc.budgetsimulator;
 import android.os.Bundle;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -102,6 +103,20 @@ public class MainActivity extends AppCompatActivity implements UpdateValuesListe
         }
         day_id = day_id.next();
         textview.setText(day_id.getDayString());
+        updatePerson();
+    }
+
+    @Override
+    public void updatePerson() {
+        TextView healthView = findViewById(R.id.health);
+        TextView gradeView = findViewById(R.id.grade);
+        if (Utils.parseTextViewInt(healthView) <= 99 || Utils.parseTextViewInt(gradeView) <= 70 ) {
+            ImageView persona = findViewById(R.id.persona);
+            persona.setImageResource(R.drawable.persona_really_sad);
+        } else if (Utils.parseTextViewInt(healthView) <= 70 || Utils.parseTextViewInt(gradeView) <= 70 ) {
+            ImageView persona = findViewById(R.id.persona);
+            persona.setImageResource(R.drawable.persona_sad);
+        }
     }
 
     @Override
