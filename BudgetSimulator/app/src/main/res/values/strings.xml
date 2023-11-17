@@ -5,13 +5,13 @@
     <string name="title_weekly_reports">Reports</string>
     <string name="title_trophies">Trophies</string>
     <string name="title_help">Help</string>
-    <string name="sunday">Sunday</string>
-    <string name="monday">Monday</string>
-    <string name="tuesday">Tuesday</string>
-    <string name="wednesday">Wednesday</string>
-    <string name="thursday">Thursday</string>
-    <string name="friday">Friday</string>
-    <string name="saturday">Saturday</string>
+    <string name="sunday">Sun</string>
+    <string name="monday">Mon</string>
+    <string name="tuesday">Tue</string>
+    <string name="wednesday">Wed</string>
+    <string name="thursday">Thurs</string>
+    <string name="friday">Fri</string>
+    <string name="saturday">Sat</string>
 
     <string name="pop_ups">SingleChoiceDialog</string>
     <string-array name="choice_items">
