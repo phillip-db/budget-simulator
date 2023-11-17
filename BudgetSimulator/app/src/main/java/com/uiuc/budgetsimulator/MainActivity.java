@@ -5,6 +5,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.gson.Gson;
@@ -126,6 +127,10 @@ public class MainActivity extends AppCompatActivity implements UpdateValuesListe
         TextView healthTextView = findViewById(R.id.health);
         healthTextView.setText(adjustFactors(healthTextView, newValue));
         health_val = Utils.parseTextViewInt(healthTextView);
+        if (health_val <= 50) {
+            scraping_achieved = true;
+            generateToast("Trophy Achieved: Scraping By");
+        }
     }
 
 
@@ -174,14 +179,38 @@ public class MainActivity extends AppCompatActivity implements UpdateValuesListe
     public void updateWeek() {
         if (week_id == 2) {
             game_end = true;
+            if (grade_val >= 90) {
+                studious_achieved = true;
+                generateToast("Trophy Achieved: How Studious");
+            }
+            if (health_val >= 90) {
+                happy_healthy_achieved = true;
+                generateToast("Trophy Achieved: Happy & Healthy");
+            }
         } else {
+            if (weekly_earnings - weekly_spending >= userGoalValue) {
+                saver_achieved = true;
+                generateToast("Trophy Achieved: Amazing Saver");
+            }
+
             TextView textview = findViewById(R.id.week);
             week_id += 1;
             weekly_earnings = 0;
             weekly_spending = 0;
             textview.setText(weeks[week_id]);
             Utils.appendReport(gameSimId, generateReport(week_id), getApplicationContext());
+
+            if (week_id >= 1) {
+                streak_achieved = true;
+                generateToast("Trophy Achieved: 7 Day Streak");
+            }
         }
+    }
+
+    private void generateToast(CharSequence text) {
+        int duration = Toast.LENGTH_SHORT;
+        Toast toast = Toast.makeText(this /* MyActivity */, text, duration);
+        toast.show();
     }
 
     private ReportData generateReport(int weekNumber) {

@@ -38,8 +38,6 @@ public class TrophiesFragment extends Fragment {
 
 
         Button streak_button = root.findViewById(R.id.trophy_7_day_streak);
-        if (MainActivity.week_id >= 1)
-            MainActivity.streak_achieved = true;
         if (MainActivity.streak_achieved)
             streak_button.setCompoundDrawablesWithIntrinsicBounds(null, colored_trophy , null, null);
         else
@@ -52,8 +50,6 @@ public class TrophiesFragment extends Fragment {
         });
 
         Button saver_button = root.findViewById(R.id.trophy_amazing_saver);
-        if (MainActivity.weekly_earnings - MainActivity.weekly_spending >= MainActivity.userGoalValue)
-            MainActivity.saver_achieved = true;
         if (MainActivity.saver_achieved)
             saver_button.setCompoundDrawablesWithIntrinsicBounds(null, colored_trophy , null, null);
         else
@@ -66,8 +62,6 @@ public class TrophiesFragment extends Fragment {
         });
 
         Button scraping_button = root.findViewById(R.id.trophy_scraping_by);
-        if (MainActivity.health_val <= 50)
-            MainActivity.scraping_achieved = true;
         if (MainActivity.scraping_achieved)
             scraping_button.setCompoundDrawablesWithIntrinsicBounds(null, colored_trophy , null, null);
         else
@@ -80,8 +74,6 @@ public class TrophiesFragment extends Fragment {
         });
 
         Button studious_button = root.findViewById(R.id.trophy_how_studious);
-        if (MainActivity.game_end && MainActivity.grade_val >= 90)
-            MainActivity.studious_achieved = true;
         if (MainActivity.studious_achieved)
             studious_button.setCompoundDrawablesWithIntrinsicBounds(null, colored_trophy , null, null);
         else
@@ -94,8 +86,6 @@ public class TrophiesFragment extends Fragment {
         });
 
         Button happy_healthy_button = root.findViewById(R.id.trophy_happy_healthy);
-        if (MainActivity.game_end && MainActivity.health_val >= 90)
-            MainActivity.happy_healthy_achieved = true;
         if (MainActivity.happy_healthy_achieved)
             happy_healthy_button.setCompoundDrawablesWithIntrinsicBounds(null, colored_trophy , null, null);
         else
@@ -108,8 +98,6 @@ public class TrophiesFragment extends Fragment {
         });
 
         Button financial_goal_button = root.findViewById(R.id.trophy_financial_goal);
-        if (MainActivity.userGoalValue != 0)
-            MainActivity.financial_goal_achieved = true;
         if (MainActivity.financial_goal_achieved)
             financial_goal_button.setCompoundDrawablesWithIntrinsicBounds(null, colored_trophy , null, null);
         else

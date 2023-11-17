@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
@@ -76,6 +77,9 @@ public class FinancialPlanFragment extends Fragment {
             @Override
             public void afterTextChanged(Editable s) {
                 MainActivity.userGoalValue = Integer.parseInt(goalTextBox.getText().toString());
+                MainActivity.financial_goal_achieved = true;
+                Toast toast = Toast.makeText(getContext(), "Trophy Achieved: Financial Goal", Toast.LENGTH_SHORT);
+                toast.show();
             }
         });
 
