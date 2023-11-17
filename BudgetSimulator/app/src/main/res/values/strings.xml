@@ -5,13 +5,13 @@
     <string name="title_weekly_reports">Reports</string>
     <string name="title_trophies">Trophies</string>
     <string name="title_help">Help</string>
-    <string name="sunday">Sunday</string>
-    <string name="monday">Monday</string>
-    <string name="tuesday">Tuesday</string>
-    <string name="wednesday">Wednesday</string>
-    <string name="thursday">Thursday</string>
-    <string name="friday">Friday</string>
-    <string name="saturday">Saturday</string>
+    <string name="sun">Sun</string>
+    <string name="monday">Mon</string>
+    <string name="tuesday">Tue</string>
+    <string name="wednesday">Wed</string>
+    <string name="thursday">Thurs</string>
+    <string name="friday">Fri</string>
+    <string name="saturday">Sat</string>
 
     <string name="pop_ups">SingleChoiceDialog</string>
     <string-array name="choice_items">
@@ -30,8 +30,8 @@
     <string name="trophy_studious_description">End with grades >= 90%</string>
     <string name="trophy_happy_healthy">Happy &amp; Healthy</string>
     <string name="trophy_happy_healthy_description">End with health >= 90%</string>
-    <string name="trophy_financial_plan">Financial Plan</string>
-    <string name="trophy_financial_plan_description">Created your first financial plan!</string>
+    <string name="trophy_financial_goal">Financial Goal</string>
+    <string name="trophy_financial_goal_description">Set your first financial Goal!</string>
 
 
     <string name="help_0">Welcome to the tutorial!</string>

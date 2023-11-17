@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -38,6 +39,8 @@ public class ScenarioDialog extends DialogFragment {
 
     private int selectedChoiceIndex = 0;
 
+    private String message;
+
     private static final String ARG_SCENARIO = "scenario";
     public static ScenarioDialog newInstance(Scenarios.Scenario scenario) {
         ScenarioDialog fragment = new ScenarioDialog();
@@ -69,20 +72,49 @@ public class ScenarioDialog extends DialogFragment {
                 })
                 .setPositiveButton("Submit", (dialog, which) -> {
                     if (updateValuesListener != null) {
-                        Scenarios.Scenario.Choice selectedChoice = choices[selectedChoiceIndex];
-                        updateValuesListener.updateHealth(selectedChoice.healthOutcome);
-                        updateValuesListener.updateGrade(selectedChoice.gradeOutcome);
-                        updateValuesListener.updateMoney(selectedChoice.moneyOutcome);
+                        if (choices.length > 0) {
+                            Scenarios.Scenario.Choice selectedChoice = choices[selectedChoiceIndex];
+                            scenario.healthOutcome = selectedChoice.healthOutcome;
+                            scenario.gradeOutcome = selectedChoice.gradeOutcome;
+                            scenario.moneyOutcome = selectedChoice.moneyOutcome;
+                        }
+                        updateValuesListener.updateHealth(scenario.healthOutcome);
+                        updateValuesListener.updateGrade(scenario.gradeOutcome);
+                        updateValuesListener.updateMoney(scenario.moneyOutcome);
                         if (lastScenario == true) {
                             updateValuesListener.updateDay();
                             listener.onDialogPositiveClick();
                         }
+                        message = "Health: ";
+                        if (scenario.healthOutcome >= 0) {
+                            message = message + "+" + scenario.healthOutcome + " ";
+                        } else {
+                            message = message + "-" + scenario.healthOutcome + " ";
+                        }
+                        message = message + "Grade: ";
+                        if (scenario.gradeOutcome >= 0) {
+                            message = message + "+" + scenario.gradeOutcome + " ";
+                        } else {
+                            message = message + "-" + scenario.gradeOutcome + " ";
+                        }
+                        message = message + "Money: ";
+                        if (scenario.moneyOutcome > 0) {
+                            message = message + "+" + scenario.moneyOutcome;
+                        } else {
+                            message = message + "-" + scenario.moneyOutcome;
+                        }
+                        showChange(message);
                     }
                 } );
         AlertDialog toReturn = builder.create();
         toReturn.getWindow().setDimAmount(0);
         return toReturn;
     }
-
+    private void showChange(String message) {
+        if (getContext() != null) {
+            Toast toast = Toast.makeText(getContext(), message, Toast.LENGTH_SHORT);
+            toast.show();
+        }
+    }
     public static String TAG = "scenario_dialog";
 }

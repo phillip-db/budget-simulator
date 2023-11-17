@@ -139,6 +139,14 @@
       "healthOutcome": 0,
       "gradeOutcome": 0,
       "moneyOutcome": 0
+    },
+    {
+      "event": "You got a mild cold. :(",
+      "choices": [
+      ],
+      "healthOutcome": -20,
+      "gradeOutcome": 0,
+      "moneyOutcome": 0
     }
   ]
 }

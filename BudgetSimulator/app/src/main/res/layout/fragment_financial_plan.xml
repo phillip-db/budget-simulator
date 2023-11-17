@@ -5,7 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.financial_plan.FinancialPlanFragment">
-
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -29,10 +31,75 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:textSize="20sp"
+            android:textSize="24sp"
             android:textColor="@color/black"
             android:textStyle="bold"
             android:text="My Financial Plan"/>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:elevation="4dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginHorizontal="8dp"
+                android:padding="16dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left"
+                    android:textSize="20sp"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    android:text="Goal"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:textColor="@color/black">
+
+                    <TextView
+                        android:id="@+id/budgetingGoal"
+                        android:layout_width="50dp"
+                        android:layout_height="wrap_content"
+                        android:text="Save"
+                        android:textStyle="bold"
+                        android:textColor="@color/black"
+                        android:textSize="18sp" />
+
+                    <EditText
+                        android:id="@+id/budgetingGoalTextBox"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:hint="Enter number"
+                        android:inputType="number"
+                        android:textStyle="bold"
+                        android:textColor="@color/black"
+                        android:textSize="18sp" />
+                    <TextView
+                        android:id="@+id/perWeek"
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"
+                        android:text="  per week"
+                        android:textStyle="bold"
+                        android:textColor="@color/black"
+                        android:textSize="18sp" />
+                </LinearLayout>
+
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
 
         <!-- Income section -->
         <androidx.cardview.widget.CardView
@@ -77,6 +144,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:hint="Enter number"
+                        android:inputType="number"
                         android:textSize="18sp" />
                 </LinearLayout>
 
@@ -98,6 +166,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:hint="Enter number"
+                        android:inputType="number"
                         android:textSize="18sp" />
                 </LinearLayout>
             </LinearLayout>
@@ -148,6 +217,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:hint="Enter number"
+                        android:inputType="number"
                         android:textSize="18sp" />
                 </LinearLayout>
 
@@ -171,6 +241,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:hint="Enter number"
+                        android:inputType="number"
                         android:textSize="18sp" />
                 </LinearLayout>
             </LinearLayout>
@@ -220,6 +291,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:hint="Enter number"
+                        android:inputType="number"
                         android:textSize="18sp" />
                 </LinearLayout>
 
@@ -242,9 +314,11 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:hint="Enter number"
+                        android:inputType="number"
                         android:textSize="18sp" />
                 </LinearLayout>
             </LinearLayout>
         </androidx.cardview.widget.CardView>
     </LinearLayout>
+</ScrollView>
 </LinearLayout>

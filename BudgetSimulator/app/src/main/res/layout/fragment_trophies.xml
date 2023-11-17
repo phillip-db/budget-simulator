@@ -111,11 +111,11 @@
                         android:layout_marginRight="7dp"/>
 
                     <Button
-                        android:id="@+id/trophy_financial_plan"
+                        android:id="@+id/trophy_financial_goal"
                         android:layout_width="0dp"
                         android:layout_height="200dp"
                         android:layout_weight="1"
-                        android:text="Financial Plan"
+                        android:text="Financial Goal"
                         android:textSize="16dp" />
 
                 </LinearLayout>

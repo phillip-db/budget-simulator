@@ -19,6 +19,7 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 
+import com.uiuc.budgetsimulator.MainActivity;
 import com.uiuc.budgetsimulator.R;
 
 public class TrophiesFragment extends Fragment {
@@ -33,10 +34,14 @@ public class TrophiesFragment extends Fragment {
         root = inflater.inflate(R.layout.fragment_trophies, container, false);
 
         Drawable bw_trophy = getResources().getDrawable(R.drawable.trophy_image_transparent_black_white);
+        Drawable colored_trophy = getResources().getDrawable(R.drawable.trophy_image_transparent);
 
 
         Button streak_button = root.findViewById(R.id.trophy_7_day_streak);
-        streak_button.setCompoundDrawablesWithIntrinsicBounds(null, bw_trophy , null, null);
+        if (MainActivity.streak_achieved)
+            streak_button.setCompoundDrawablesWithIntrinsicBounds(null, colored_trophy , null, null);
+        else
+            streak_button.setCompoundDrawablesWithIntrinsicBounds(null, bw_trophy , null, null);
         streak_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -45,7 +50,10 @@ public class TrophiesFragment extends Fragment {
         });
 
         Button saver_button = root.findViewById(R.id.trophy_amazing_saver);
-        saver_button.setCompoundDrawablesWithIntrinsicBounds(null, bw_trophy , null, null);
+        if (MainActivity.saver_achieved)
+            saver_button.setCompoundDrawablesWithIntrinsicBounds(null, colored_trophy , null, null);
+        else
+            saver_button.setCompoundDrawablesWithIntrinsicBounds(null, bw_trophy , null, null);
         saver_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -54,7 +62,10 @@ public class TrophiesFragment extends Fragment {
         });
 
         Button scraping_button = root.findViewById(R.id.trophy_scraping_by);
-        scraping_button.setCompoundDrawablesWithIntrinsicBounds(null, bw_trophy , null, null);
+        if (MainActivity.scraping_achieved)
+            scraping_button.setCompoundDrawablesWithIntrinsicBounds(null, colored_trophy , null, null);
+        else
+            scraping_button.setCompoundDrawablesWithIntrinsicBounds(null, bw_trophy , null, null);
         scraping_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -63,7 +74,10 @@ public class TrophiesFragment extends Fragment {
         });
 
         Button studious_button = root.findViewById(R.id.trophy_how_studious);
-        studious_button.setCompoundDrawablesWithIntrinsicBounds(null, bw_trophy , null, null);
+        if (MainActivity.studious_achieved)
+            studious_button.setCompoundDrawablesWithIntrinsicBounds(null, colored_trophy , null, null);
+        else
+            studious_button.setCompoundDrawablesWithIntrinsicBounds(null, bw_trophy , null, null);
         studious_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -72,7 +86,10 @@ public class TrophiesFragment extends Fragment {
         });
 
         Button happy_healthy_button = root.findViewById(R.id.trophy_happy_healthy);
-        happy_healthy_button.setCompoundDrawablesWithIntrinsicBounds(null, bw_trophy , null, null);
+        if (MainActivity.happy_healthy_achieved)
+            happy_healthy_button.setCompoundDrawablesWithIntrinsicBounds(null, colored_trophy , null, null);
+        else
+            happy_healthy_button.setCompoundDrawablesWithIntrinsicBounds(null, bw_trophy , null, null);
         happy_healthy_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -80,12 +97,15 @@ public class TrophiesFragment extends Fragment {
             }
         });
 
-        Button financial_plan_button = root.findViewById(R.id.trophy_financial_plan);
-        financial_plan_button.setCompoundDrawablesWithIntrinsicBounds(null, bw_trophy , null, null);
-        financial_plan_button.setOnClickListener(new View.OnClickListener() {
+        Button financial_goal_button = root.findViewById(R.id.trophy_financial_goal);
+        if (MainActivity.financial_goal_achieved)
+            financial_goal_button.setCompoundDrawablesWithIntrinsicBounds(null, colored_trophy , null, null);
+        else
+            financial_goal_button.setCompoundDrawablesWithIntrinsicBounds(null, bw_trophy , null, null);
+        financial_goal_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                createPopUp(R.string.trophy_financial_plan, R.string.trophy_financial_plan_description);
+                createPopUp(R.string.trophy_financial_goal, R.string.trophy_financial_goal_description);
             }
         });
 

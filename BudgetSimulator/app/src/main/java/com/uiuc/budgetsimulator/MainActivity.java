@@ -3,7 +3,9 @@ package com.uiuc.budgetsimulator;
 import android.os.Bundle;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.gson.Gson;
@@ -26,7 +28,7 @@ public class MainActivity extends AppCompatActivity implements UpdateValuesListe
     public enum Day {
         SUNDAY, MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY;
         private static final Day[] vals = values();
-        private static final String[] days = {"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"};
+        private static final String[] days = {"Sun", "Mon", "Tue", "Wed", "Thurs", "Fri", "Sat"};
 
         public Day next() {
             return vals[(this.ordinal() + 1) % vals.length];
@@ -41,8 +43,26 @@ public class MainActivity extends AppCompatActivity implements UpdateValuesListe
 
     private static String gameSimId;
 
-    private final String[] weeks = {"Week 1", "Week 2", "Week 3", "Week 4", "Week 5", "Week 6", "Week 7"};
-    private int week_id = 0;
+    private final String[] weeks = {"Week 1", "Week 2", "Week 3"};
+    public static int week_id = 0;
+
+    public static boolean game_end = false;
+
+    public static int health_val = 100;
+    public static int grade_val = 100;
+    public static int weekly_earnings = 0;
+    public static int weekly_spending = 0;
+
+    public static int userGoalValue;
+
+    // TROPHIES
+    public static boolean streak_achieved = false;
+    public static boolean saver_achieved = false;
+    public static boolean scraping_achieved = false;
+    public static boolean studious_achieved = false;
+    public static boolean happy_healthy_achieved = false;
+    public static boolean financial_goal_achieved = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -89,6 +109,9 @@ public class MainActivity extends AppCompatActivity implements UpdateValuesListe
         String s = (String)textView.getText();
         if (s.charAt(s.length() - 1) == '%') {
             int newFactor = Math.min(100, adjustment + Utils.parseTextViewInt(textView));
+            if (newFactor < 0) {
+                newFactor = 0;
+            }
             return newFactor + "%";
         } else {
             return "$" + (adjustment + Utils.parseTextViewInt(textView));
@@ -103,16 +126,28 @@ public class MainActivity extends AppCompatActivity implements UpdateValuesListe
     public void updateHealth(int newValue) {
         TextView healthTextView = findViewById(R.id.health);
         healthTextView.setText(adjustFactors(healthTextView, newValue));
+        health_val = Utils.parseTextViewInt(healthTextView);
+        if (health_val <= 50) {
+            if (scraping_achieved == false)
+                generateToast("Trophy Achieved: Scraping By");
+            scraping_achieved = true;
+        }
     }
+
 
     @Override
     public void updateGrade(int newValue) {
         TextView gradeTextView = findViewById(R.id.grade);
         gradeTextView.setText(adjustFactors(gradeTextView, newValue));
+        grade_val = Utils.parseTextViewInt(gradeTextView);
     }
 
     @Override
     public void updateMoney(int newValue) {
+        if (newValue > 0)
+            weekly_earnings += newValue;
+        else
+            weekly_spending -= newValue;
         TextView moneyTextView = findViewById(R.id.money);
         moneyTextView.setText(adjustFactors(moneyTextView, newValue));
     }
@@ -125,14 +160,62 @@ public class MainActivity extends AppCompatActivity implements UpdateValuesListe
         }
         day_id = day_id.next();
         textview.setText(day_id.getDayString());
+        updatePerson();
+    }
+
+    @Override
+    public void updatePerson() {
+        TextView healthView = findViewById(R.id.health);
+        TextView gradeView = findViewById(R.id.grade);
+        if (Utils.parseTextViewInt(healthView) <= 50 || Utils.parseTextViewInt(gradeView) <= 50 ) {
+            ImageView persona = findViewById(R.id.persona);
+            persona.setImageResource(R.drawable.persona_really_sad);
+        } else if (Utils.parseTextViewInt(healthView) <= 70 || Utils.parseTextViewInt(gradeView) <= 70 ) {
+            ImageView persona = findViewById(R.id.persona);
+            persona.setImageResource(R.drawable.persona_sad);
+        }
     }
 
     @Override
     public void updateWeek() {
-        TextView textview = findViewById(R.id.week);
-        week_id += 1;
-        textview.setText(weeks[week_id]);
-        Utils.appendReport(gameSimId, generateReport(week_id), getApplicationContext());
+        if (week_id == 2) {
+            game_end = true;
+            if (grade_val >= 90) {
+                if (!studious_achieved)
+                    generateToast("Trophy Achieved: How Studious");
+                studious_achieved = true;
+            }
+            if (health_val >= 90) {
+                if (!happy_healthy_achieved)
+                    generateToast("Trophy Achieved: Happy & Healthy");
+                happy_healthy_achieved = true;
+            }
+        } else {
+            if (weekly_earnings - weekly_spending >= userGoalValue) {
+                if (!saver_achieved)
+                    generateToast("Trophy Achieved: Amazing Saver");
+                saver_achieved = true;
+            }
+
+            TextView textview = findViewById(R.id.week);
+            week_id += 1;
+            weekly_earnings = 0;
+            weekly_spending = 0;
+            textview.setText(weeks[week_id]);
+            Utils.appendReport(gameSimId, generateReport(week_id), getApplicationContext());
+
+            if (week_id >= 1) {
+                if (!streak_achieved)
+                    generateToast("Trophy Achieved: 7 Day Streak");
+                streak_achieved = true;
+            }
+        }
+    }
+
+    private void generateToast(CharSequence text) {
+        int duration = Toast.LENGTH_SHORT;
+        Toast toast = Toast.makeText(this /* MyActivity */, text, duration);
+        toast.show();
     }
 
     private ReportData generateReport(int weekNumber) {
