@@ -166,10 +166,10 @@ public class MainActivity extends AppCompatActivity implements UpdateValuesListe
     public void updatePerson() {
         TextView healthView = findViewById(R.id.health);
         TextView gradeView = findViewById(R.id.grade);
-        if (Utils.parseTextViewInt(healthView) <= 50 || Utils.parseTextViewInt(gradeView) <= 50 ) {
+        if (Utils.parseTextViewInt(healthView) <= 60 || Utils.parseTextViewInt(gradeView) <= 60 ) {
             ImageView persona = findViewById(R.id.persona);
             persona.setImageResource(R.drawable.persona_really_sad);
-        } else if (Utils.parseTextViewInt(healthView) <= 70 || Utils.parseTextViewInt(gradeView) <= 70 ) {
+        } else if (Utils.parseTextViewInt(healthView) <= 80 || Utils.parseTextViewInt(gradeView) <= 80 ) {
             ImageView persona = findViewById(R.id.persona);
             persona.setImageResource(R.drawable.persona_sad);
         }
