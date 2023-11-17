@@ -79,7 +79,9 @@ public class ScenarioDialog extends DialogFragment {
                         }
                     }
                 } );
-        return builder.create();
+        AlertDialog toReturn = builder.create();
+        toReturn.getWindow().setDimAmount(0);
+        return toReturn;
     }
 
     public static String TAG = "scenario_dialog";

@@ -44,23 +44,23 @@ android:layout_height="match_parent">
 
     <TextView
         android:id="@+id/week"
-        android:text="Week 1"
+        android:text="Week 1: "
         android:gravity="center"
         style="@style/status_component" />
 
     <TextView
         android:id="@+id/day_of_week"
-        android:text="Sunday"
-        android:layout_width="30dp"
+        style="@style/status_component"
         android:gravity="center"
-        style="@style/status_component" />
+        android:text="Sunday" />
 
     <TextView
         android:id="@+id/health"
+        style="@style/status_component"
+        android:layout_weight="1"
         android:drawableLeft="@drawable/ic_status_heart"
         android:drawableTint="@android:color/holo_red_dark"
-        android:text="100%"
-        style="@style/status_component"/>
+        android:text="100%" />
 
     <TextView
         android:id="@+id/grade"
