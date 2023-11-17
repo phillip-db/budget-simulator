@@ -9,12 +9,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 
 import com.uiuc.budgetsimulator.MainActivity;
@@ -23,11 +21,12 @@ import com.uiuc.budgetsimulator.R;
 public class FinancialPlanFragment extends Fragment {
 
 //    public static int userGoalValue;
-    SharedPreferences sharedPreferences;
+    static SharedPreferences sharedPreferences;
     EditText groceriesTextBox, eatingOutTextBox, entertainmentTextBox, goalTextBox;
     private static final String PREFS_NAME = "MyPrefsFile";
     private static final String KEY_GOAL = "goal";
     private static final String KEY_GROCERIES = "groceries";
+    private static final int defaultGoal = 100;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -106,5 +105,13 @@ public class FinancialPlanFragment extends Fragment {
     private void loadSavedValues() {
         goalTextBox.setText(sharedPreferences.getString(KEY_GOAL, ""));
         groceriesTextBox.setText(sharedPreferences.getString(KEY_GROCERIES, ""));
+    }
+
+    public static int getGoal()
+    {
+      if (sharedPreferences == null) return defaultGoal;
+      String s = sharedPreferences.getString(KEY_GOAL, null);
+      if (s == null) return defaultGoal;
+      return Integer.parseInt(s);
     }
 }

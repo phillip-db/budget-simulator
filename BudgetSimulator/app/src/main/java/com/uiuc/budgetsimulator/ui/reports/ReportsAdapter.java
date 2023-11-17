@@ -38,6 +38,7 @@ public class ReportsAdapter extends RecyclerView.Adapter<ReportsViewHolder> {
         holder.weekText.setOnClickListener(v -> {
             onClickListener.onClick(position, currentReport);
         });
+        if (currentReport.getWeekNumber() == 0) holder.hideItem();
     }
 
     @Override
@@ -47,7 +48,6 @@ public class ReportsAdapter extends RecyclerView.Adapter<ReportsViewHolder> {
 
     public ReportData getItem(int position) {
         return reportList.get(position);
-
     }
 
     public void setOnClickListener(OnClickListener onClickListener) {

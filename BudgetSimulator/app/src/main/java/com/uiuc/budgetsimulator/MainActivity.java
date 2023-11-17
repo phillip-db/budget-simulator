@@ -14,16 +14,12 @@ import com.uiuc.budgetsimulator.ui.home.UpdateValuesListener;
 import com.uiuc.budgetsimulator.ui.reports.ReportData;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.DialogFragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.OutputStreamWriter;
-import java.io.Writer;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity implements UpdateValuesListener {
@@ -86,8 +82,8 @@ public class MainActivity extends AppCompatActivity implements UpdateValuesListe
         gameSimId = "test_sim";
 
 
-        // Create week 0 for testing
-        ReportData test_week = new ReportData(0, 100, 100, 1000);
+        // Create initial week 0 for comparisons
+        ReportData test_week = new ReportData(0, 100, 100, 1000, 0, 0);
         ArrayList<ReportData> reports = new ArrayList<ReportData>();
         reports.add(test_week);
         Simulation testSim = new Simulation(gameSimId, reports);
@@ -210,11 +206,11 @@ public class MainActivity extends AppCompatActivity implements UpdateValuesListe
 
             TextView textview = findViewById(R.id.week);
             week_id += 1;
-            weekly_earnings = 0;
-            weekly_spending = 0;
             textview.setText(weeks[week_id]);
             Utils.appendReport(gameSimId, generateReport(week_id), getApplicationContext());
 
+            weekly_earnings = 0;
+            weekly_spending = 0;
             if (week_id >= 1) {
                 if (!streak_achieved)
                     generateToast("Trophy Achieved: 7 Day Streak");
@@ -234,6 +230,6 @@ public class MainActivity extends AppCompatActivity implements UpdateValuesListe
       int grade = Utils.parseTextViewInt(findViewById(R.id.grade));
       int money = Utils.parseTextViewInt(findViewById(R.id.money));
 
-      return new ReportData(weekNumber, money, health, grade);
+      return new ReportData(weekNumber, money, health, grade, MainActivity.weekly_spending, MainActivity.weekly_earnings);
     }
 }

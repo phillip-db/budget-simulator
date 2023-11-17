@@ -31,6 +31,15 @@
         <item name="android:textSize">@dimen/report_summary_standard</item>
     </style>
 
+    <style name="summary_text_large">
+        <item name="android:textColor">@color/black</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_margin">5dp</item>
+        <item name="android:textSize">@dimen/report_summary_large</item>
+    </style>
+
     <style name="summary_button" xmlns:app="http://schemas.android.com/apk/res-auto">
         <item name="android:layout_width">0dp</item>
         <item name="android:minHeight">80dp</item>

@@ -16,6 +16,7 @@ import java.io.Reader;
 import java.io.Writer;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Locale;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -45,6 +46,11 @@ public class Utils {
       s = s.substring(1);
     }
     return Integer.parseInt(s);
+  }
+
+  public static void setTextViewText(View view, int viewID, String text)
+  {
+    ((TextView) view.findViewById(viewID)).setText(text);
   }
 
   public static void appendReport(String gameSimID, ReportData reportData, Context context) {

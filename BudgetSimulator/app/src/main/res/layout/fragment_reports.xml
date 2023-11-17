@@ -58,20 +58,18 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    style="@style/summary_text_standard"
-                    android:id="@+id/money_spent"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:text="$100/$100 Spent"
-                    android:textSize="@dimen/report_summary_large" />
-
-                <TextView
-                    style="@style/summary_text_standard"
+                    style="@style/summary_text_large"
                     android:id="@+id/money_earned"
                     android:layout_width="0dp"
                     android:layout_weight="1"
-                    android:text="$100/$100 Earned"
-                    android:textSize="@dimen/report_summary_large" />
+                    android:text="$100/$100 Earned" />
+
+                <TextView
+                    style="@style/summary_text_large"
+                    android:id="@+id/money_spent"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:text="$100/$100 Spent" />
 
             </LinearLayout>
 

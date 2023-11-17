@@ -18,4 +18,9 @@ public class ReportsViewHolder extends RecyclerView.ViewHolder {
         weekText = itemView.findViewById(R.id.weekText);
         view = itemView;
     }
+
+    public void hideItem() {
+      view.setVisibility(View.GONE);
+      view.setLayoutParams(new RecyclerView.LayoutParams(0, 0));
+    }
 }
