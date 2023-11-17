@@ -1,14 +1,17 @@
 package com.uiuc.budgetsimulator.ui.home;
 
+
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
+import com.google.android.material.snackbar.Snackbar;
 
 public class ScenarioDialog extends DialogFragment {
 
@@ -103,7 +106,6 @@ public class ScenarioDialog extends DialogFragment {
                                 message = message + selectedChoice.moneyOutcome + " ";
                             }
                         }
-                        message = "Show message";
                         showChange(message);
                     }
                 } );
@@ -112,19 +114,10 @@ public class ScenarioDialog extends DialogFragment {
         return toReturn;
     }
     private void showChange(String message) {
-        if (getContext() != null) {
-            Toast toast = Toast.makeText(getContext(), message, Toast.LENGTH_SHORT);
-            toast.show();
-        } else {
-            AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-            builder.setMessage(message)
-                    .setPositiveButton("OK", (dialog, which) -> {
-
-                    });
-            AlertDialog popup = builder.create();
-
-            popup.show();
-        }
+        Toast toast = Toast.makeText(getContext(), message, Toast.LENGTH_SHORT);
+        toast.show();
     }
+
+
     public static String TAG = "scenario_dialog";
 }
