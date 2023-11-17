@@ -52,6 +52,9 @@ android:layout_height="match_parent">
         android:id="@+id/day_of_week"
         style="@style/status_component"
         android:gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_weight="0"
+        android:paddingEnd="7dp"
         android:text="Sun" />
 
     <TextView

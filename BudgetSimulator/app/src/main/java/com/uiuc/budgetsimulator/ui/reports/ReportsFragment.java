@@ -90,6 +90,8 @@ public class ReportsFragment extends Fragment {
 
     private void loadSummary(View view, int position, ReportData report) {
         // Change spent/earned to be based on values in weekly report
+        // Use avg health, find a way to get prev week values if they exist (use position?)
+        // Generic placeholder text to replace placeholder
         ((TextView) view.findViewById(R.id.money_spent)).setText(String.format(Locale.ENGLISH, "$%d Spent", MainActivity.weekly_spending));
         ((TextView) view.findViewById(R.id.money_earned)).setText(String.format(Locale.ENGLISH, "$%d Earned", MainActivity.weekly_earnings));
         ((TextView) view.findViewById(R.id.total_savings))
