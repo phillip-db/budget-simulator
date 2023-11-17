@@ -2,8 +2,10 @@ package com.uiuc.budgetsimulator;
 
 import androidx.annotation.NonNull;
 
+import com.google.gson.reflect.TypeToken;
 import com.uiuc.budgetsimulator.ui.reports.ReportData;
 
+import java.io.InputStream;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 
