@@ -26,6 +26,10 @@ public class FinancialPlanFragment extends Fragment {
     private static final String PREFS_NAME = "MyPrefsFile";
     private static final String KEY_GOAL = "goal";
     private static final String KEY_GROCERIES = "groceries";
+    private static final String KEY_EATING_OUT = "eatingOut";
+
+    private static final String KEY_ENTERTAINMENT = "entertainment";
+
     private static final int defaultGoal = 100;
 
     @Override
@@ -66,6 +70,9 @@ public class FinancialPlanFragment extends Fragment {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 sharedPreferences.edit().putString(KEY_GOAL, s.toString()).apply();
+                sharedPreferences.edit().putString(KEY_GROCERIES, s.toString()).apply();
+                sharedPreferences.edit().putString(KEY_ENTERTAINMENT, s.toString()).apply();
+                sharedPreferences.edit().putString(KEY_EATING_OUT, s.toString()).apply();
             }
 
             @Override
@@ -99,12 +106,16 @@ public class FinancialPlanFragment extends Fragment {
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString(KEY_GOAL, goalTextBox.getText().toString());
         editor.putString(KEY_GROCERIES, groceriesTextBox.getText().toString());
+        editor.putString(KEY_ENTERTAINMENT, entertainmentTextBox.getText().toString());
+        editor.putString(KEY_EATING_OUT, eatingOutTextBox.getText().toString());
         editor.apply();
     }
 
     private void loadSavedValues() {
         goalTextBox.setText(sharedPreferences.getString(KEY_GOAL, ""));
         groceriesTextBox.setText(sharedPreferences.getString(KEY_GROCERIES, ""));
+        eatingOutTextBox.setText(sharedPreferences.getString(KEY_EATING_OUT,""));
+        entertainmentTextBox.setText(sharedPreferences.getString(KEY_ENTERTAINMENT,""));
     }
 
     public static int getGoal()
