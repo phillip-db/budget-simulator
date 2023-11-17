@@ -42,8 +42,22 @@ public class MainActivity extends AppCompatActivity implements UpdateValuesListe
 
     private static String gameSimId;
 
-    private final String[] weeks = {"Week 1", "Week 2", "Week 3", "Week 4", "Week 5", "Week 6", "Week 7"};
-    private int week_id = 0;
+    private final String[] weeks = {"Week 1", "Week 2", "Week 3"};
+    public static int week_id = 0;
+
+    public static boolean game_end = false;
+
+    public static int health_val = 100;
+    public static int grade_val = 100;
+
+    // TROPHIES
+    public static boolean streak_achieved = false;
+    public static boolean saver_achieved = false;
+    public static boolean scraping_achieved = false;
+    public static boolean studious_achieved = false;
+    public static boolean happy_healthy_achieved = false;
+    public static boolean financial_plan_achieved = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -107,12 +121,15 @@ public class MainActivity extends AppCompatActivity implements UpdateValuesListe
     public void updateHealth(int newValue) {
         TextView healthTextView = findViewById(R.id.health);
         healthTextView.setText(adjustFactors(healthTextView, newValue));
+        health_val = Utils.parseTextViewInt(healthTextView);
     }
+
 
     @Override
     public void updateGrade(int newValue) {
         TextView gradeTextView = findViewById(R.id.grade);
         gradeTextView.setText(adjustFactors(gradeTextView, newValue));
+        grade_val = Utils.parseTextViewInt(gradeTextView);
     }
 
     @Override
@@ -147,10 +164,14 @@ public class MainActivity extends AppCompatActivity implements UpdateValuesListe
 
     @Override
     public void updateWeek() {
-        TextView textview = findViewById(R.id.week);
-        week_id += 1;
-        textview.setText(weeks[week_id]);
-        Utils.appendReport(gameSimId, generateReport(week_id), getApplicationContext());
+        if (week_id == 2) {
+            game_end = true;
+        } else {
+            TextView textview = findViewById(R.id.week);
+            week_id += 1;
+            textview.setText(weeks[week_id]);
+            Utils.appendReport(gameSimId, generateReport(week_id), getApplicationContext());
+        }
     }
 
     private ReportData generateReport(int weekNumber) {
