@@ -34,7 +34,6 @@ public class HelpFragment extends Fragment {
                 new ViewModelProvider(this).get(HelpViewModel.class);
         root = inflater.inflate(R.layout.fragment_home, container, false);
         createPopUp(R.string.help_0);
-
         return root;
     }
 
@@ -60,6 +59,8 @@ public class HelpFragment extends Fragment {
                     help_page++;
                     help_text.setText(help_pages[help_page]);
                 } else {
+                    Button button = root.findViewById(R.id.start_day_id);
+                    button.setVisibility(View.GONE);
                     popupWindow.dismiss();
                 }
             }
@@ -72,6 +73,8 @@ public class HelpFragment extends Fragment {
                     help_page--;
                     help_text.setText(help_pages[help_page]);
                 } else {
+                    Button button = root.findViewById(R.id.start_day_id);
+                    button.setVisibility(View.GONE);
                     popupWindow.dismiss();
                 }
             }
