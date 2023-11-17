@@ -1,5 +1,6 @@
 package com.uiuc.budgetsimulator;
 
+import android.app.AlertDialog;
 import android.os.Bundle;
 import android.view.Window;
 import android.view.WindowManager;
@@ -13,6 +14,7 @@ import com.uiuc.budgetsimulator.ui.home.UpdateValuesListener;
 import com.uiuc.budgetsimulator.ui.reports.ReportData;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.DialogFragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -175,6 +177,14 @@ public class MainActivity extends AppCompatActivity implements UpdateValuesListe
             persona.setImageResource(R.drawable.persona_sad);
         }
     }
+    @Override
+    public void endGame() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage("Game End! We haven't implemented anything past this yet.");
+        AlertDialog end = builder.create();
+        end.setCancelable(false);
+        end.show();
+    }
 
     @Override
     public void updateWeek() {
@@ -190,6 +200,7 @@ public class MainActivity extends AppCompatActivity implements UpdateValuesListe
                     generateToast("Trophy Achieved: Happy & Healthy");
                 happy_healthy_achieved = true;
             }
+            endGame();
         } else {
             if (weekly_earnings - weekly_spending >= userGoalValue) {
                 if (!saver_achieved)

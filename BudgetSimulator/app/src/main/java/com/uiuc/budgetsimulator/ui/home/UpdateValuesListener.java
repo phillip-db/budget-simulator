@@ -9,5 +9,6 @@ public interface UpdateValuesListener {
 
     void updateWeek();
     void updatePerson();
+    void endGame();
 }
 
