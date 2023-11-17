@@ -52,7 +52,12 @@ public class TrophiesFragment extends Fragment {
         });
 
         Button saver_button = root.findViewById(R.id.trophy_amazing_saver);
-        saver_button.setCompoundDrawablesWithIntrinsicBounds(null, bw_trophy , null, null);
+        if (MainActivity.weekly_earnings - MainActivity.weekly_spending >= MainActivity.userGoalValue)
+            MainActivity.saver_achieved = true;
+        if (MainActivity.saver_achieved)
+            saver_button.setCompoundDrawablesWithIntrinsicBounds(null, colored_trophy , null, null);
+        else
+            saver_button.setCompoundDrawablesWithIntrinsicBounds(null, bw_trophy , null, null);
         saver_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -89,7 +94,12 @@ public class TrophiesFragment extends Fragment {
         });
 
         Button happy_healthy_button = root.findViewById(R.id.trophy_happy_healthy);
-        happy_healthy_button.setCompoundDrawablesWithIntrinsicBounds(null, bw_trophy , null, null);
+        if (MainActivity.game_end && MainActivity.health_val >= 90)
+            MainActivity.happy_healthy_achieved = true;
+        if (MainActivity.happy_healthy_achieved)
+            happy_healthy_button.setCompoundDrawablesWithIntrinsicBounds(null, colored_trophy , null, null);
+        else
+            happy_healthy_button.setCompoundDrawablesWithIntrinsicBounds(null, bw_trophy , null, null);
         happy_healthy_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -97,12 +107,17 @@ public class TrophiesFragment extends Fragment {
             }
         });
 
-        Button financial_plan_button = root.findViewById(R.id.trophy_financial_plan);
-        financial_plan_button.setCompoundDrawablesWithIntrinsicBounds(null, bw_trophy , null, null);
-        financial_plan_button.setOnClickListener(new View.OnClickListener() {
+        Button financial_goal_button = root.findViewById(R.id.trophy_financial_goal);
+        if (MainActivity.userGoalValue != 0)
+            MainActivity.financial_goal_achieved = true;
+        if (MainActivity.financial_goal_achieved)
+            financial_goal_button.setCompoundDrawablesWithIntrinsicBounds(null, colored_trophy , null, null);
+        else
+            financial_goal_button.setCompoundDrawablesWithIntrinsicBounds(null, bw_trophy , null, null);
+        financial_goal_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                createPopUp(R.string.trophy_financial_plan, R.string.trophy_financial_plan_description);
+                createPopUp(R.string.trophy_financial_goal, R.string.trophy_financial_goal_description);
             }
         });
 

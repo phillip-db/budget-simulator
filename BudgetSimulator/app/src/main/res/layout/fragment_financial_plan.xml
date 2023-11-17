@@ -87,10 +87,10 @@
                         android:textColor="@color/black"
                         android:textSize="18sp" />
                     <TextView
-                        android:id="@+id/perMonth"
+                        android:id="@+id/perWeek"
                         android:layout_width="100dp"
                         android:layout_height="wrap_content"
-                        android:text="  per month"
+                        android:text="  per week"
                         android:textStyle="bold"
                         android:textColor="@color/black"
                         android:textSize="18sp" />

@@ -49,6 +49,10 @@ public class MainActivity extends AppCompatActivity implements UpdateValuesListe
 
     public static int health_val = 100;
     public static int grade_val = 100;
+    public static int weekly_earnings = 0;
+    public static int weekly_spending = 0;
+
+    public static int userGoalValue;
 
     // TROPHIES
     public static boolean streak_achieved = false;
@@ -56,7 +60,7 @@ public class MainActivity extends AppCompatActivity implements UpdateValuesListe
     public static boolean scraping_achieved = false;
     public static boolean studious_achieved = false;
     public static boolean happy_healthy_achieved = false;
-    public static boolean financial_plan_achieved = false;
+    public static boolean financial_goal_achieved = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -131,6 +135,10 @@ public class MainActivity extends AppCompatActivity implements UpdateValuesListe
 
     @Override
     public void updateMoney(int newValue) {
+        if (newValue > 0)
+            weekly_earnings += newValue;
+        else
+            weekly_spending -= newValue;
         TextView moneyTextView = findViewById(R.id.money);
         moneyTextView.setText(adjustFactors(moneyTextView, newValue));
     }
@@ -166,6 +174,8 @@ public class MainActivity extends AppCompatActivity implements UpdateValuesListe
         } else {
             TextView textview = findViewById(R.id.week);
             week_id += 1;
+            weekly_earnings = 0;
+            weekly_spending = 0;
             textview.setText(weeks[week_id]);
             Utils.appendReport(gameSimId, generateReport(week_id), getApplicationContext());
         }

@@ -16,11 +16,12 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 
+import com.uiuc.budgetsimulator.MainActivity;
 import com.uiuc.budgetsimulator.R;
 
 public class FinancialPlanFragment extends Fragment {
 
-    public static int userGoalValue;
+//    public static int userGoalValue;
     SharedPreferences sharedPreferences;
     EditText groceriesTextBox, eatingOutTextBox, entertainmentTextBox, goalTextBox;
     private static final String PREFS_NAME = "MyPrefsFile";
@@ -74,7 +75,7 @@ public class FinancialPlanFragment extends Fragment {
 
             @Override
             public void afterTextChanged(Editable s) {
-                userGoalValue = Integer.parseInt(goalTextBox.getText().toString());
+                MainActivity.userGoalValue = Integer.parseInt(goalTextBox.getText().toString());
             }
         });
 
