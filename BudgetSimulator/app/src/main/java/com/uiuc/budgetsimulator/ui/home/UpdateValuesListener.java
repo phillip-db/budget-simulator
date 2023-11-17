@@ -8,5 +8,6 @@ public interface UpdateValuesListener {
     void updateDay();
 
     void updateWeek();
+    void updatePerson();
 }
 

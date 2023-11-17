@@ -6,6 +6,8 @@ import android.content.Context;
 import android.view.View;
 import android.widget.TextView;
 
+import java.io.BufferedReader;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -47,23 +49,19 @@ public class Utils {
 
   public static void appendReport(String gameSimID, ReportData reportData, Context context) {
     try {
-      FileOutputStream fos = context.openFileOutput(REPORTS_SAVE_FILE, MODE_PRIVATE);
-      fos.close();
-      InputStream is = context.openFileInput(REPORTS_SAVE_FILE);
+      InputStream is = context.openFileInput(Utils.REPORTS_SAVE_FILE);
       ArrayList<Simulation> simulations = Utils.fromJSON(new TypeToken<ArrayList<Simulation>>() {
       }.getType(), is);
+      is.close();
       Simulation sim = Simulation.findSimByID(simulations, gameSimID);
-
-      assert sim != null;
 
       sim.addReport(reportData);
       Gson gson = new Gson();
       String json = gson.toJson(simulations);
 
-      is.close();
+      FileOutputStream fos = context.openFileOutput(REPORTS_SAVE_FILE, MODE_PRIVATE);
       fos = context.openFileOutput(REPORTS_SAVE_FILE, MODE_PRIVATE);
-      Writer writer = new OutputStreamWriter(fos);
-      writer.write(json);
+      fos.write(json.getBytes());
     } catch (Exception e) {
       e.printStackTrace();
     }

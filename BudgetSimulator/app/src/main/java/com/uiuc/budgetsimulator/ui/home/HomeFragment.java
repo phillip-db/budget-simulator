@@ -1,5 +1,6 @@
 package com.uiuc.budgetsimulator.ui.home;
 
+import android.app.AlertDialog;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -61,7 +62,6 @@ public class HomeFragment extends Fragment implements ScenarioDialog.ScenarioDia
             } else {
                 openDialog(sunday.scenarios[i], false);
             }
-            //some sort of way to acquire the dialog choice
         }
     }
     public void openDialog(Scenarios.Scenario scenario, boolean lastScenario) {
@@ -69,7 +69,6 @@ public class HomeFragment extends Fragment implements ScenarioDialog.ScenarioDia
         scenarioDialog.setTargetFragment(this, 0);
         scenarioDialog.setCancelable(false);
         scenarioDialog.setLastScenario(lastScenario);
-        //if last scenario is completed, show button and also updateDay
         scenarioDialog.show(this.getParentFragmentManager(), "scenario_dialog");
     }
 

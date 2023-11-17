@@ -3,9 +3,11 @@ package com.uiuc.budgetsimulator;
 import android.os.Bundle;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.gson.Gson;
 import com.uiuc.budgetsimulator.ui.home.UpdateValuesListener;
 import com.uiuc.budgetsimulator.ui.reports.ReportData;
 
@@ -15,11 +17,17 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
+import java.io.Writer;
+import java.util.ArrayList;
+
 public class MainActivity extends AppCompatActivity implements UpdateValuesListener {
     public enum Day {
         SUNDAY, MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY;
         private static final Day[] vals = values();
-        private static final String[] days = {"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"};
+        private static final String[] days = {"Sun", "Mon", "Tue", "Wed", "Thurs", "Fri", "Sat"};
 
         public Day next() {
             return vals[(this.ordinal() + 1) % vals.length];
@@ -65,7 +73,23 @@ public class MainActivity extends AppCompatActivity implements UpdateValuesListe
 
         // Create week 0 for testing
         ReportData test_week = new ReportData(0, 100, 100, 1000);
-        Utils.appendReport(gameSimId, test_week, getApplicationContext());
+        ArrayList<ReportData> reports = new ArrayList<ReportData>();
+        reports.add(test_week);
+        Simulation testSim = new Simulation(gameSimId, reports);
+        ArrayList<Simulation> sims = new ArrayList<Simulation>();
+        sims.add(testSim);
+
+        Gson gson = new Gson();
+        String jsonString = gson.toJson(sims);
+        System.out.println(sims);
+
+        try {
+            FileOutputStream fos = getApplicationContext().openFileOutput(Utils.REPORTS_SAVE_FILE, MODE_PRIVATE);
+            fos.write(jsonString.getBytes());
+            fos.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public static String adjustFactors(TextView textView, int adjustment) {
@@ -110,6 +134,20 @@ public class MainActivity extends AppCompatActivity implements UpdateValuesListe
         }
         day_id = day_id.next();
         textview.setText(day_id.getDayString());
+        updatePerson();
+    }
+
+    @Override
+    public void updatePerson() {
+        TextView healthView = findViewById(R.id.health);
+        TextView gradeView = findViewById(R.id.grade);
+        if (Utils.parseTextViewInt(healthView) <= 99 || Utils.parseTextViewInt(gradeView) <= 70 ) {
+            ImageView persona = findViewById(R.id.persona);
+            persona.setImageResource(R.drawable.persona_really_sad);
+        } else if (Utils.parseTextViewInt(healthView) <= 70 || Utils.parseTextViewInt(gradeView) <= 70 ) {
+            ImageView persona = findViewById(R.id.persona);
+            persona.setImageResource(R.drawable.persona_sad);
+        }
     }
 
     @Override
