@@ -75,7 +75,12 @@ public class TrophiesFragment extends Fragment {
         });
 
         Button studious_button = root.findViewById(R.id.trophy_how_studious);
-        studious_button.setCompoundDrawablesWithIntrinsicBounds(null, bw_trophy , null, null);
+        if (MainActivity.game_end && MainActivity.grade_val >= 90)
+            MainActivity.studious_achieved = true;
+        if (MainActivity.studious_achieved)
+            studious_button.setCompoundDrawablesWithIntrinsicBounds(null, colored_trophy , null, null);
+        else
+            studious_button.setCompoundDrawablesWithIntrinsicBounds(null, bw_trophy , null, null);
         studious_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
