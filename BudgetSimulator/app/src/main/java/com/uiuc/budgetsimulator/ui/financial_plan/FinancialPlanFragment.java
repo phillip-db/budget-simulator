@@ -77,9 +77,11 @@ public class FinancialPlanFragment extends Fragment {
             @Override
             public void afterTextChanged(Editable s) {
                 MainActivity.userGoalValue = Integer.parseInt(goalTextBox.getText().toString());
+                if (MainActivity.financial_goal_achieved == false) {
+                    Toast toast = Toast.makeText(getContext(), "Trophy Achieved: Financial Goal", Toast.LENGTH_SHORT);
+                    toast.show();
+                }
                 MainActivity.financial_goal_achieved = true;
-                Toast toast = Toast.makeText(getContext(), "Trophy Achieved: Financial Goal", Toast.LENGTH_SHORT);
-                toast.show();
             }
         });
 

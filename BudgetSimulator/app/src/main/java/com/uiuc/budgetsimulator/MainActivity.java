@@ -128,8 +128,9 @@ public class MainActivity extends AppCompatActivity implements UpdateValuesListe
         healthTextView.setText(adjustFactors(healthTextView, newValue));
         health_val = Utils.parseTextViewInt(healthTextView);
         if (health_val <= 50) {
+            if (scraping_achieved == false)
+                generateToast("Trophy Achieved: Scraping By");
             scraping_achieved = true;
-            generateToast("Trophy Achieved: Scraping By");
         }
     }
 
@@ -180,17 +181,20 @@ public class MainActivity extends AppCompatActivity implements UpdateValuesListe
         if (week_id == 2) {
             game_end = true;
             if (grade_val >= 90) {
+                if (!studious_achieved)
+                    generateToast("Trophy Achieved: How Studious");
                 studious_achieved = true;
-                generateToast("Trophy Achieved: How Studious");
             }
             if (health_val >= 90) {
+                if (!happy_healthy_achieved)
+                    generateToast("Trophy Achieved: Happy & Healthy");
                 happy_healthy_achieved = true;
-                generateToast("Trophy Achieved: Happy & Healthy");
             }
         } else {
             if (weekly_earnings - weekly_spending >= userGoalValue) {
+                if (!saver_achieved)
+                    generateToast("Trophy Achieved: Amazing Saver");
                 saver_achieved = true;
-                generateToast("Trophy Achieved: Amazing Saver");
             }
 
             TextView textview = findViewById(R.id.week);
@@ -201,8 +205,9 @@ public class MainActivity extends AppCompatActivity implements UpdateValuesListe
             Utils.appendReport(gameSimId, generateReport(week_id), getApplicationContext());
 
             if (week_id >= 1) {
+                if (!streak_achieved)
+                    generateToast("Trophy Achieved: 7 Day Streak");
                 streak_achieved = true;
-                generateToast("Trophy Achieved: 7 Day Streak");
             }
         }
     }
