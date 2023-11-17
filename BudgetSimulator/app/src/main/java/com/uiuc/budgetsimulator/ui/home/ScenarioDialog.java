@@ -92,20 +92,17 @@ public class ScenarioDialog extends DialogFragment {
                             message = message + "-" + scenario.healthOutcome + " ";
                         }
                         message = message + "Grade: ";
-                        if (scenario.gradeOutcome > 0) {
+                        if (scenario.gradeOutcome >= 0) {
                             message = message + "+" + scenario.gradeOutcome + " ";
                         } else {
-                            message = message + scenario.gradeOutcome + " ";
+                            message = message + "-" + scenario.gradeOutcome + " ";
                         }
-                        if(scenario.moneyOutcome != 0) {
-                            message = message + "Money: ";
-                            if (scenario.moneyOutcome > 0) {
-                                message = message + "+" + scenario.moneyOutcome + " ";
-                            } else {
-                                message = message + scenario.moneyOutcome + " ";
-                            }
+                        message = message + "Money: ";
+                        if (scenario.moneyOutcome > 0) {
+                            message = message + "+" + scenario.moneyOutcome;
+                        } else {
+                            message = message + "-" + scenario.moneyOutcome;
                         }
-                        message = "Show message";
                         showChange(message);
                     }
                 } );

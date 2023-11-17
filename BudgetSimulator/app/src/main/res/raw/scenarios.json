@@ -141,10 +141,10 @@
       "moneyOutcome": 0
     },
     {
-      "event": "You got covid. :(",
+      "event": "You got a mild cold. :(",
       "choices": [
       ],
-      "healthOutcome": -50,
+      "healthOutcome": -20,
       "gradeOutcome": 0,
       "moneyOutcome": 0
     }
