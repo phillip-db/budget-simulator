@@ -30,8 +30,8 @@
     <string name="trophy_studious_description">End with grades >= 90%</string>
     <string name="trophy_happy_healthy">Happy &amp; Healthy</string>
     <string name="trophy_happy_healthy_description">End with health >= 90%</string>
-    <string name="trophy_financial_plan">Financial Plan</string>
-    <string name="trophy_financial_plan_description">Created your first financial plan!</string>
+    <string name="trophy_financial_goal">Financial Goal</string>
+    <string name="trophy_financial_goal_description">Set your first financial Goal!</string>
 
 
     <string name="help_0">Welcome to the tutorial!</string>
