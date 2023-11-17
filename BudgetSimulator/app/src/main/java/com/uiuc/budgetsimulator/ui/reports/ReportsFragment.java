@@ -37,6 +37,7 @@ public class ReportsFragment extends Fragment {
       InputStream is = getContext().openFileInput(Utils.REPORTS_SAVE_FILE);
       ArrayList<Simulation> simulations = Utils.fromJSON(new TypeToken<ArrayList<Simulation>>() {
       }.getType(), is);
+      is.close();
       Simulation sim = Simulation.findSimByID(simulations, MainActivity.getGameSimId());
 
       if (sim != null) reportsList = sim.getReports();

@@ -6,6 +6,7 @@ import android.view.WindowManager;
 import android.widget.TextView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.gson.Gson;
 import com.uiuc.budgetsimulator.ui.home.UpdateValuesListener;
 import com.uiuc.budgetsimulator.ui.reports.ReportData;
 
@@ -14,6 +15,12 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
+
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
+import java.io.Writer;
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity implements UpdateValuesListener {
     public enum Day {
@@ -59,7 +66,23 @@ public class MainActivity extends AppCompatActivity implements UpdateValuesListe
 
         // Create week 0 for testing
         ReportData test_week = new ReportData(0, 100, 100, 1000);
-        Utils.appendReport(gameSimId, test_week, getApplicationContext());
+        ArrayList<ReportData> reports = new ArrayList<ReportData>();
+        reports.add(test_week);
+        Simulation testSim = new Simulation(gameSimId, reports);
+        ArrayList<Simulation> sims = new ArrayList<Simulation>();
+        sims.add(testSim);
+
+        Gson gson = new Gson();
+        String jsonString = gson.toJson(sims);
+        System.out.println(sims);
+
+        try {
+            FileOutputStream fos = getApplicationContext().openFileOutput(Utils.REPORTS_SAVE_FILE, MODE_PRIVATE);
+            fos.write(jsonString.getBytes());
+            fos.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public static String adjustFactors(TextView textView, int adjustment) {
