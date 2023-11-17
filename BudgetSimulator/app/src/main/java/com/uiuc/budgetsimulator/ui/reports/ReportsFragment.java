@@ -135,14 +135,16 @@ public class ReportsFragment extends Fragment {
 
     Utils.setTextViewText(view, R.id.money_spent, String.format(Locale.ENGLISH, "$%d\nSpent", report.getWeeklySpending()));
     Utils.setTextViewText(view, R.id.money_earned, String.format(Locale.ENGLISH, "$%d\nEarned", report.getWeeklyEarning()));
+
+    ReportData prevReport = reportsList.get(position-1);
     Utils.setTextViewText(view, R.id.total_savings, String.format(Locale.ENGLISH,
-        "Total Savings: $#->$%d",
-        report.getMoney()));
+        "Total Savings: $%d->$%d",
+        prevReport.getMoney(), report.getMoney()));
     Utils.setTextViewText(view, R.id.grade_change, String.format(Locale.ENGLISH,
-        "Grade: #->%d",
-        report.getGrade()));
+        "Grade: %d->%d",
+        prevReport.getGrade(), report.getGrade()));
     Utils.setTextViewText(view, R.id.health_change, String.format(Locale.ENGLISH,
-        "Health: #->%d",
-        report.getHealth()));
+        "Health: %d->%d",
+        prevReport.getHealth(), report.getHealth()));
   }
 }

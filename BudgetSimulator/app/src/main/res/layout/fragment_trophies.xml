@@ -18,24 +18,15 @@
 
             <TextView
                 android:id="@+id/text_trophies"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="8dp"
-                android:textAlignment="center"
+                style="@style/center_top_text"
                 android:text="TROPHIES"
-                android:textStyle="bold"
-                android:textSize="40sp"
-                android:textColor="#000000" />
+                android:layout_marginHorizontal="@dimen/report_recycler_margin"/>
 
             <View
                 android:id="@+id/text_line"
-                android:layout_width="0dp"
-                android:layout_height="4dp"
+                style="@style/linebreak"
                 android:layout_alignLeft="@+id/text_trophies"
                 android:layout_alignRight="@+id/text_trophies"
-                android:background="@android:color/black"
                 android:layout_below="@+id/text_trophies"
                 android:layout_marginBottom="10dp"/>
 

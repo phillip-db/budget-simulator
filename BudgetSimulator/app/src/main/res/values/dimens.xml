@@ -4,4 +4,5 @@
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="report_summary_standard">30sp</dimen>
     <dimen name="report_summary_large">35sp</dimen>
+    <dimen name="report_recycler_margin">10dp</dimen>
 </resources>

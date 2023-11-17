@@ -10,6 +10,7 @@ import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.gson.Gson;
+import com.uiuc.budgetsimulator.ui.financial_plan.FinancialPlanFragment;
 import com.uiuc.budgetsimulator.ui.home.UpdateValuesListener;
 import com.uiuc.budgetsimulator.ui.reports.ReportData;
 
@@ -83,7 +84,7 @@ public class MainActivity extends AppCompatActivity implements UpdateValuesListe
 
 
         // Create initial week 0 for comparisons
-        ReportData test_week = new ReportData(0, 100, 100, 1000, 0, 0);
+        ReportData test_week = new ReportData(0, Utils.parseTextViewInt(findViewById(R.id.money)), health_val, grade_val, 0, 0);
         ArrayList<ReportData> reports = new ArrayList<ReportData>();
         reports.add(test_week);
         Simulation testSim = new Simulation(gameSimId, reports);
@@ -198,7 +199,7 @@ public class MainActivity extends AppCompatActivity implements UpdateValuesListe
             }
             endGame();
         } else {
-            if (weekly_earnings - weekly_spending >= userGoalValue) {
+            if (weekly_earnings - weekly_spending >= FinancialPlanFragment.getGoal()) {
                 if (!saver_achieved)
                     generateToast("Trophy Achieved: Amazing Saver");
                 saver_achieved = true;
