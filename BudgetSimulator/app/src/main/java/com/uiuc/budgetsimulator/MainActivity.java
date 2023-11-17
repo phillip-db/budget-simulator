@@ -90,6 +90,9 @@ public class MainActivity extends AppCompatActivity implements UpdateValuesListe
         String s = (String)textView.getText();
         if (s.charAt(s.length() - 1) == '%') {
             int newFactor = Math.min(100, adjustment + Utils.parseTextViewInt(textView));
+            if (newFactor < 0) {
+                newFactor = 0;
+            }
             return newFactor + "%";
         } else {
             return "$" + (adjustment + Utils.parseTextViewInt(textView));
@@ -133,7 +136,7 @@ public class MainActivity extends AppCompatActivity implements UpdateValuesListe
     public void updatePerson() {
         TextView healthView = findViewById(R.id.health);
         TextView gradeView = findViewById(R.id.grade);
-        if (Utils.parseTextViewInt(healthView) <= 99 || Utils.parseTextViewInt(gradeView) <= 70 ) {
+        if (Utils.parseTextViewInt(healthView) <= 50 || Utils.parseTextViewInt(gradeView) <= 50 ) {
             ImageView persona = findViewById(R.id.persona);
             persona.setImageResource(R.drawable.persona_really_sad);
         } else if (Utils.parseTextViewInt(healthView) <= 70 || Utils.parseTextViewInt(gradeView) <= 70 ) {

@@ -139,6 +139,14 @@
       "healthOutcome": 0,
       "gradeOutcome": 0,
       "moneyOutcome": 0
+    },
+    {
+      "event": "You got covid. :(",
+      "choices": [
+      ],
+      "healthOutcome": -50,
+      "gradeOutcome": 0,
+      "moneyOutcome": 0
     }
   ]
 }

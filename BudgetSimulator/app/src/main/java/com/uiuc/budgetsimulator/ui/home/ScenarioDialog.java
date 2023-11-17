@@ -69,10 +69,16 @@ public class ScenarioDialog extends DialogFragment {
                 })
                 .setPositiveButton("Submit", (dialog, which) -> {
                     if (updateValuesListener != null) {
-                        Scenarios.Scenario.Choice selectedChoice = choices[selectedChoiceIndex];
-                        updateValuesListener.updateHealth(selectedChoice.healthOutcome);
-                        updateValuesListener.updateGrade(selectedChoice.gradeOutcome);
-                        updateValuesListener.updateMoney(selectedChoice.moneyOutcome);
+                        if (choices.length > 0) {
+                            Scenarios.Scenario.Choice selectedChoice = choices[selectedChoiceIndex];
+                            updateValuesListener.updateHealth(selectedChoice.healthOutcome);
+                            updateValuesListener.updateGrade(selectedChoice.gradeOutcome);
+                            updateValuesListener.updateMoney(selectedChoice.moneyOutcome);
+                        } else {
+                            updateValuesListener.updateHealth(scenario.healthOutcome);
+                            updateValuesListener.updateGrade(scenario.gradeOutcome);
+                            updateValuesListener.updateMoney(scenario.moneyOutcome);
+                        }
                         if (lastScenario == true) {
                             updateValuesListener.updateDay();
                             listener.onDialogPositiveClick();
