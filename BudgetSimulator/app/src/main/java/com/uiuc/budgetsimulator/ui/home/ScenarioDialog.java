@@ -39,6 +39,8 @@ public class ScenarioDialog extends DialogFragment {
 
     private int selectedChoiceIndex = 0;
 
+    private String message;
+
     private static final String ARG_SCENARIO = "scenario";
     public static ScenarioDialog newInstance(Scenarios.Scenario scenario) {
         ScenarioDialog fragment = new ScenarioDialog();
@@ -83,25 +85,20 @@ public class ScenarioDialog extends DialogFragment {
                             updateValuesListener.updateDay();
                             listener.onDialogPositiveClick();
                         }
-                        String message = "";
-                        if(scenario.healthOutcome != 0) {
-                            message = message + "health";
-                            if (scenario.healthOutcome > 0) {
-                                message = message + "+" + scenario.healthOutcome + " ";
-                            } else {
-                                message = message + scenario.healthOutcome + " ";
-                            }
+                        message = "Health: ";
+                        if (scenario.healthOutcome >= 0) {
+                            message = message + "+" + scenario.healthOutcome + " ";
+                        } else {
+                            message = message + "-" + scenario.healthOutcome + " ";
                         }
-                        if(scenario.gradeOutcome != 0) {
-                            message = message + "grade";
-                            if (scenario.gradeOutcome > 0) {
-                                message = message + "+" + scenario.gradeOutcome + " ";
-                            } else {
-                                message = message + scenario.gradeOutcome + " ";
-                            }
+                        message = message + "Grade: ";
+                        if (scenario.gradeOutcome > 0) {
+                            message = message + "+" + scenario.gradeOutcome + " ";
+                        } else {
+                            message = message + scenario.gradeOutcome + " ";
                         }
                         if(scenario.moneyOutcome != 0) {
-                            message = message + "money";
+                            message = message + "Money: ";
                             if (scenario.moneyOutcome > 0) {
                                 message = message + "+" + scenario.moneyOutcome + " ";
                             } else {
@@ -120,15 +117,6 @@ public class ScenarioDialog extends DialogFragment {
         if (getContext() != null) {
             Toast toast = Toast.makeText(getContext(), message, Toast.LENGTH_SHORT);
             toast.show();
-        } else {
-            AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-            builder.setMessage(message)
-                    .setPositiveButton("OK", (dialog, which) -> {
-
-                    });
-            AlertDialog popup = builder.create();
-
-            popup.show();
         }
     }
     public static String TAG = "scenario_dialog";
