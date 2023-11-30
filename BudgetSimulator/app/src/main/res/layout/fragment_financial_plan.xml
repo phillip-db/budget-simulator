@@ -44,7 +44,7 @@
             android:layout_marginLeft="5dp"
             android:layout_marginRight="5dp"
             android:elevation="4dp"
-            android:tooltipText="Set a weekly savings goal based off your monthly expenses!"/>
+            android:tooltipText="Set a weekly savings goal based off your monthly expenses!">
 
 
             <LinearLayout
@@ -185,7 +185,7 @@
             android:layout_marginLeft="5dp"
             android:layout_marginRight="5dp"
             android:elevation="4dp"
-            android:tooltipText="Rent is fixed- your landlord sets your rent, not you. "/>
+            android:tooltipText="Rent is fixed- your landlord sets your rent, not you. ">
 
 
             <LinearLayout
