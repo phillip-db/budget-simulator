@@ -13,6 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.widget.TooltipCompat;
 import androidx.fragment.app.Fragment;
 
 import com.uiuc.budgetsimulator.MainActivity;
@@ -88,6 +89,18 @@ public class FinancialPlanFragment extends Fragment {
                     toast.show();
                 }
                 MainActivity.financial_goal_achieved = true;
+            }
+        });
+
+        // Add a tooltip to the "Income" section
+        // Add a long press listener to show the tooltip for "Income" section
+        TextView incomeLabel = root.findViewById(R.id.jobIncomeLabel);
+        TooltipCompat.setTooltipText(incomeLabel, "Temporary text here");
+        incomeLabel.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                TooltipCompat.setTooltipText(incomeLabel, incomeLabel.getTooltipText());
+                return true;
             }
         });
 
