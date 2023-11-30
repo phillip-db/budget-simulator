@@ -45,7 +45,14 @@ public class Scenarios implements Parcelable {
         public Scenario() {
 
         }
+
+        public enum Category
+        {
+            NONE, ENTERTAINMENT, FOOD, WORK, ALLOWANCE, EMERGENCY
+        }
         public String event;
+
+        public Category category = Category.NONE;
 
         public Choice[] choices;
 
@@ -96,6 +103,7 @@ public class Scenarios implements Parcelable {
 
         protected Scenario(Parcel in) {
             event = in.readString();
+            category = Category.valueOf(in.readString());
             choices = in.createTypedArray(Choice.CREATOR);
             healthOutcome = in.readInt();
             gradeOutcome = in.readInt();
@@ -105,6 +113,7 @@ public class Scenarios implements Parcelable {
         @Override
         public void writeToParcel(Parcel dest, int flags) {
             dest.writeString(event);
+            dest.writeString(category.name());
             dest.writeTypedArray(choices, flags);
             dest.writeInt(healthOutcome);
             dest.writeInt(gradeOutcome);
