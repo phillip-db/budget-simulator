@@ -201,6 +201,7 @@ public class MainActivity extends AppCompatActivity implements UpdateValuesListe
 
     @Override
     public void updateMoney(int newValue, Category category) {
+        if (category == null) category = Category.NONE;
         Log.d("DEBUG", String.valueOf(category) + " " + newValue);
         if (newValue > 0) {
             weekly_earnings += newValue;

@@ -76,7 +76,7 @@ public class ReportSummaryFragment extends Fragment {
         float[] earning = new float[Category.values().length - 1];
         for (Category c : Category.values())
         {
-          if (c == Category.NONE) continue;
+          if (c == Category.NONE || c == null) continue;
           spending[c.ordinal() - 1] = reportData.getCategorySpending().getOrDefault(c, 0);
           earning[c.ordinal() - 1] = reportData.getCategoryEarning().getOrDefault(c, 0);
         }
