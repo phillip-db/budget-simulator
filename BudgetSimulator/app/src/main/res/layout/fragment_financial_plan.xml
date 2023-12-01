@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.financial_plan.FinancialPlanFragment">
+    tools:context=".ui.financial_plan.FinancialPlanFragment"
+    android:orientation="horizontal">
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -44,8 +45,7 @@
             android:layout_marginLeft="5dp"
             android:layout_marginRight="5dp"
             android:elevation="4dp"
-            android:tooltipText="Set a weekly savings goal based off your monthly expenses!"/>
-
+            android:tooltipText="Set a weekly savings goal based off your monthly expenses!">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -97,8 +97,6 @@
                         android:textColor="@color/black"
                         android:textSize="18sp" />
                 </LinearLayout>
-
-
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
@@ -185,8 +183,7 @@
             android:layout_marginLeft="5dp"
             android:layout_marginRight="5dp"
             android:elevation="4dp"
-            android:tooltipText="Rent is fixed- your landlord sets your rent, not you. "/>
-
+            android:tooltipText="Rent is fixed- your landlord sets your rent, not you. ">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -199,9 +196,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="left"
-
                     android:textSize="20sp"
                     android:textColor="@color/black"
+                    android:textStyle="bold"
                     android:text="Fixed Expenses"/>
 
                 <LinearLayout
@@ -228,7 +225,6 @@
                         android:textSize="18sp"
                         />
                 </LinearLayout>
-
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -263,7 +259,9 @@
             android:layout_marginBottom="16dp"
             android:layout_marginLeft="5dp"
             android:layout_marginRight="5dp"
-            android:elevation="4dp">
+            android:elevation="4dp"
+            android:tooltipText="You control your variable expenses- this depends on how much you want to spend in these categories. ">
+
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -328,5 +326,5 @@
             </LinearLayout>
         </androidx.cardview.widget.CardView>
     </LinearLayout>
-</ScrollView>
+ </ScrollView>
 </LinearLayout>
