@@ -37,7 +37,7 @@
     <string name="help_0">Welcome to the ultimate budgeting game! Let\'s show you how this works!</string>
     <string name="help_1">At the top are all your stats.</string>
     <string name="help_2">From left to right, we have day of the week, health, grades, and money.</string>
-    <string name="help_3">To start a day and play through scenarios, click the START DAY button!</string>
+    <string name="help_3">To start a day and play through scenarios, click the START DAY button! Note that the choice you make will affect your stats!</string>
     <string name="help_4">The choices you made here will have affect your stats above!</string>
 
     <string name="help_5">Here, you can see all your Achievements!</string>
