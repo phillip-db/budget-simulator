@@ -104,7 +104,7 @@
       "moneyOutcome": 0
     },
     {
-      "event": "You're offered a freelance gig but requires overnight working for a week.",
+      "event": "You're offered a freelance gig but needs overnight working.",
       "category": "WORK",
       "choices": [
         {
@@ -150,6 +150,237 @@
       "choices": [
       ],
       "healthOutcome": -20,
+      "gradeOutcome": 0,
+      "moneyOutcome": 0
+    },
+    {
+      "event": "Your friends invite you to a road trip but exam is in 3 days.",
+      "category": "ENTERTAINMENT",
+      "choices": [
+        {
+          "choice": "Join the road trip",
+          "healthOutcome": 6,
+          "gradeOutcome": -4,
+          "moneyOutcome": -100
+        },
+        {
+          "choice": "Stay and study",
+          "healthOutcome": -4,
+          "gradeOutcome": 5,
+          "moneyOutcome": 0
+        }
+      ],
+      "healthOutcome": 0,
+      "gradeOutcome": 0,
+      "moneyOutcome": 0
+    },
+    {
+      "event": "You fell on the way to class and got injured.",
+      "category": "ACCIDENT",
+      "choices": [
+        {
+          "choice": "Seek medical treatment",
+          "healthOutcome": 0,
+          "gradeOutcome": 0,
+          "moneyOutcome": -100
+        },
+        {
+          "choice": "Delay treatment",
+          "healthOutcome": -5,
+          "gradeOutcome": 0,
+          "moneyOutcome": 0
+        }
+      ],
+      "healthOutcome": 0,
+      "gradeOutcome": 0,
+      "moneyOutcome": 0
+    },
+    {
+      "event": "Your car breaks down and require repairs.",
+      "category": "EMERGENCY",
+      "choices": [
+        {
+          "choice": "Fix the car",
+          "healthOutcome": 0,
+          "gradeOutcome": 0,
+          "moneyOutcome": -300
+        },
+        {
+          "choice": "Fix it yourself",
+          "healthOutcome": -4,
+          "gradeOutcome": 0,
+          "moneyOutcome": 0
+        }
+      ],
+      "healthOutcome": 0,
+      "gradeOutcome": 0,
+      "moneyOutcome": 0
+    },
+    {
+      "event": "You need to travel due to a family emergency.",
+      "category": "EMERGENCY",
+      "choices": [
+        {
+          "choice": "Book last-minute flight",
+          "healthOutcome": 0,
+          "gradeOutcome": 0,
+          "moneyOutcome": -300
+        },
+        {
+          "choice": "Explore budget-friendly travel options",
+          "healthOutcome": 0,
+          "gradeOutcome": 0,
+          "moneyOutcome": -200
+        }
+      ],
+      "healthOutcome": 0,
+      "gradeOutcome": 0,
+      "moneyOutcome": 0
+    },
+    {
+      "event": "Your laptop stops working suddenly.",
+      "category": "EMERGENCY",
+      "choices": [
+        {
+          "choice": "Purchase a new one",
+          "healthOutcome": 0,
+          "gradeOutcome": 0,
+          "moneyOutcome": -800
+        },
+        {
+          "choice": "Attempt repairs and borrow one temporarily",
+          "healthOutcome": 0,
+          "gradeOutcome": 0,
+          "moneyOutcome": -100
+        }
+      ],
+      "healthOutcome": 0,
+      "gradeOutcome": 0,
+      "moneyOutcome": 0
+    },
+    {
+      "event": "You're invited to join a prestigious academic club.",
+      "category": "MISCELLANEOUS",
+      "choices": [
+        {
+          "choice": "Join the club",
+          "healthOutcome": 2,
+          "gradeOutcome": 3,
+          "moneyOutcome": -50
+        },
+        {
+          "choice": "Decline the offer",
+          "healthOutcome": 0,
+          "gradeOutcome": 0,
+          "moneyOutcome": 0
+        }
+      ],
+      "healthOutcome": 0,
+      "gradeOutcome": 0,
+      "moneyOutcome": 0
+    },
+    {
+      "event": "You're invited to a university formal event.",
+      "category": "MISCELLANEOUS",
+      "choices": [
+        {
+          "choice": "Purchase a ticket and attend",
+          "healthOutcome": 3,
+          "gradeOutcome": 0,
+          "moneyOutcome": -50
+        },
+        {
+          "choice": "Skip the event",
+          "healthOutcome": 0,
+          "gradeOutcome": 0,
+          "moneyOutcome": 0
+        }
+      ],
+      "healthOutcome": 0,
+      "gradeOutcome": 0,
+      "moneyOutcome": 0
+    },
+    {
+      "event": "Your friend is organizing a charity fundraiser for a good cause.",
+      "category": "MISCELLANEOUS",
+      "choices": [
+        {
+          "choice": "Make a donation",
+          "healthOutcome": 2,
+          "gradeOutcome": 0,
+          "moneyOutcome": -50
+        },
+        {
+          "choice": "Decline to donate",
+          "healthOutcome": 0,
+          "gradeOutcome": 0,
+          "moneyOutcome": 0
+        }
+      ],
+      "healthOutcome": 0,
+      "gradeOutcome": 0,
+      "moneyOutcome": 0
+    },
+    {
+      "event": "There is a competition for your passion project with entry fee.",
+      "category": "MISCELLANEOUS",
+      "choices": [
+        {
+          "choice": "Enter the competition",
+          "healthOutcome": 2,
+          "gradeOutcome": 3,
+          "moneyOutcome": -30
+        },
+        {
+          "choice": "Opt not to participate",
+          "healthOutcome": 0,
+          "gradeOutcome": 0,
+          "moneyOutcome": 0
+        }
+      ],
+      "healthOutcome": 0,
+      "gradeOutcome": 0,
+      "moneyOutcome": 0
+    },
+    {
+      "event": "An industry conference relevant to your major is happening.",
+      "category": "MISCELLANEOUS",
+      "choices": [
+        {
+          "choice": "Register for the conference",
+          "healthOutcome": 1,
+          "gradeOutcome": 4,
+          "moneyOutcome": -100
+        },
+        {
+          "choice": "Skip the conference",
+          "healthOutcome": 0,
+          "gradeOutcome": 0,
+          "moneyOutcome": 0
+        }
+      ],
+      "healthOutcome": 0,
+      "gradeOutcome": 0,
+      "moneyOutcome": 0
+    },
+    {
+      "event": "Your favorite hobby club hosts a workshop for a fee.",
+      "category": "MISCELLANEOUS",
+      "choices": [
+        {
+          "choice": "Register and attend the workshop",
+          "healthOutcome": 3,
+          "gradeOutcome": 0,
+          "moneyOutcome": -5
+        },
+        {
+          "choice": "Skip the workshop",
+          "healthOutcome": 0,
+          "gradeOutcome": 0,
+          "moneyOutcome": 0
+        }
+      ],
+      "healthOutcome": 0,
       "gradeOutcome": 0,
       "moneyOutcome": 0
     }
