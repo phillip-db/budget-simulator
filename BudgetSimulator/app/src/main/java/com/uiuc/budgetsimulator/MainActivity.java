@@ -1,14 +1,10 @@
 package com.uiuc.budgetsimulator;
 
 import android.app.AlertDialog;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Window;
 import android.view.WindowManager;
-import android.view.animation.AlphaAnimation;
-import android.view.animation.Animation;
-import android.view.animation.TranslateAnimation;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -30,6 +26,8 @@ import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.EnumMap;
 import java.util.Map;
+
+import android.animation.ValueAnimator;
 
 public class MainActivity extends AppCompatActivity implements UpdateValuesListener {
     public enum Day {
@@ -118,62 +116,43 @@ public class MainActivity extends AppCompatActivity implements UpdateValuesListe
         }
     }
 
-    public void adjustmentAnimation(TextView textView, int adjustment) {
-        if (adjustment >= 0) {
-            textView.setTextColor(Color.GREEN);
-            textView.setText("+" + adjustment);
-        } else {
-            textView.setTextColor(Color.RED);
-            textView.setText("" + adjustment);
-        }
-        AlphaAnimation fadeIn = new AlphaAnimation(0.0f , 1.0f );
-        AlphaAnimation fadeOut = new AlphaAnimation( 1.0f , 0.0f );
-        textView.startAnimation(fadeIn);
-        textView.startAnimation(fadeOut);
-        fadeIn.setDuration(1000);
-        fadeIn.setFillAfter(true);
-        fadeOut.setDuration(1000);
-        fadeOut.setFillAfter(true);
-        fadeOut.setStartOffset(3000+fadeIn.getStartOffset());
+    public static String getGameSimId() {
+        return gameSimId;
     }
-    public static String adjustFactors(TextView textView, int adjustment) {
-        String s = (String) textView.getText();
+
+    public static int adjustFactors(TextView textView, int adjustment) {
+        String s = (String)textView.getText();
         if (s.charAt(s.length() - 1) == '%') {
             int newFactor = Math.min(100, adjustment + Utils.parseTextViewInt(textView));
             if (newFactor < 0) {
                 newFactor = 0;
             }
-            return newFactor + "%";
+            //return newFactor + "%";
+            return newFactor;
         } else {
-            return "$" + (adjustment + Utils.parseTextViewInt(textView));
+            //return "$" + (adjustment + Utils.parseTextViewInt(textView));
+            return adjustment + Utils.parseTextViewInt(textView);
         }
     }
 
-    public static String getGameSimId() {
-        return gameSimId;
-    }
 
     @Override
     public void updateHealth(int newValue) {
         TextView healthTextView = findViewById(R.id.health);
-        TextView heatlhAdjustmentView = findViewById(R.id.healthAdjustment);
-        adjustmentAnimation(heatlhAdjustmentView, newValue);
-        healthTextView.setText(adjustFactors(healthTextView, newValue));
+        newValue = adjustFactors(healthTextView, newValue);
+        updateTopBarTextWithAnimation(newValue, healthTextView);
         health_val = Utils.parseTextViewInt(healthTextView);
-        if (health_val <= 50) {
-            if (scraping_achieved == false)
-                generateToast("Trophy Achieved: Scraping By");
+        if (health_val <= 50 && !scraping_achieved) {
+            generateToast("Trophy Achieved: Scraping By");
             scraping_achieved = true;
         }
     }
 
-
     @Override
     public void updateGrade(int newValue) {
         TextView gradeTextView = findViewById(R.id.grade);
-        TextView gradeAdjustmentView = findViewById(R.id.gradeAdjustment);
-        adjustmentAnimation(gradeAdjustmentView, newValue);
-        gradeTextView.setText(adjustFactors(gradeTextView, newValue));
+        newValue = adjustFactors(gradeTextView, newValue);
+        updateTopBarTextWithAnimation(newValue, gradeTextView);
         grade_val = Utils.parseTextViewInt(gradeTextView);
     }
 
@@ -188,11 +167,29 @@ public class MainActivity extends AppCompatActivity implements UpdateValuesListe
             categorySpending.put(category, categorySpending.getOrDefault(category, 0) + newValue);
         }
         TextView moneyTextView = findViewById(R.id.money);
-        TextView moneyAdjustmentView = findViewById(R.id.moneyAdjustment);
-        adjustmentAnimation(moneyAdjustmentView, newValue);
-        moneyTextView.setText(adjustFactors(moneyTextView, newValue));
-
+        newValue = adjustFactors(moneyTextView, newValue);
+        updateTopBarTextWithAnimation(newValue, moneyTextView);
     }
+
+    private void updateTopBarTextWithAnimation(int newValue, TextView textView) {
+        ValueAnimator animator = ValueAnimator.ofInt(Utils.parseTextViewInt(textView), newValue);
+        animator.setDuration(1000); // Set the duration of the animation (in milliseconds)
+
+        animator.addUpdateListener(animation -> {
+            int animatedValue = (int) animation.getAnimatedValue();
+            String text;
+            if (textView.getText().toString().endsWith("%")) {
+                text = animatedValue + "%";
+            } else {
+                text = "$" + animatedValue;
+            }
+            textView.setText(text);
+        });
+
+        animator.start();
+    }
+
+
 
     @Override
     public void updateDay() {
