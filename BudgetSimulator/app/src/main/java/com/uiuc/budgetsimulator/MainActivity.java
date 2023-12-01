@@ -159,7 +159,7 @@ public class MainActivity extends AppCompatActivity implements UpdateValuesListe
         fadeIn.setFillAfter(true);
         fadeOut.setDuration(500);
         fadeOut.setFillAfter(true);
-        fadeOut.setStartOffset(1500+fadeIn.getStartOffset());
+        fadeOut.setStartOffset(3000+fadeIn.getStartOffset());
     }
     public static int adjustFactors(TextView textView, int adjustment) {
         String s = (String)textView.getText();
@@ -243,7 +243,7 @@ public class MainActivity extends AppCompatActivity implements UpdateValuesListe
 
         });
         ValueAnimator colorAnimation2= ValueAnimator.ofObject(new ArgbEvaluator(), Color.RED, Color.WHITE);
-        colorAnimation2.setDuration(1000);
+        colorAnimation2.setDuration(2500);
 
         colorAnimation2.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
 
@@ -265,7 +265,7 @@ public class MainActivity extends AppCompatActivity implements UpdateValuesListe
 
         });
         ValueAnimator colorAnimation4= ValueAnimator.ofObject(new ArgbEvaluator(), Color.GREEN, Color.WHITE);
-        colorAnimation4.setDuration(1000);
+        colorAnimation4.setDuration(2500);
 
         colorAnimation4.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
 

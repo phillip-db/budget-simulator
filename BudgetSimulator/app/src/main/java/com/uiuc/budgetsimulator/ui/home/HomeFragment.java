@@ -124,11 +124,16 @@ public class HomeFragment extends Fragment implements ScenarioDialog.ScenarioDia
         TextView help_text = popUpView.findViewById(R.id.help_text);
         help_text.setText(string_help);
         MainActivity.help_page = 0;
+        Button back_button = popUpView.findViewById(R.id.help_back_button);
 
         Button next_button = popUpView.findViewById(R.id.help_next_button);
         next_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                back_button.setVisibility(View.VISIBLE);
+                if (MainActivity.help_page == 2) {
+                    next_button.setText("GOT IT");
+                }
                 if (MainActivity.help_page != 3) {
                     MainActivity.help_page++;
                     help_text.setText(MainActivity.help_pages[MainActivity.help_page]);
@@ -138,13 +143,17 @@ public class HomeFragment extends Fragment implements ScenarioDialog.ScenarioDia
                 }
             }
         });
-        Button back_button = popUpView.findViewById(R.id.help_back_button);
+        back_button.setVisibility(View.INVISIBLE);
         back_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                next_button.setText("Next");
                 if (MainActivity.help_page != 0) {
                     MainActivity.help_page--;
                     help_text.setText(MainActivity.help_pages[MainActivity.help_page]);
+                }
+                if (MainActivity.help_page == 0){
+                    back_button.setVisibility(View.INVISIBLE);
                 }
             }
         });
@@ -164,6 +173,9 @@ public class HomeFragment extends Fragment implements ScenarioDialog.ScenarioDia
         help_text.setText(R.string.help_4);
 
         Button next_button = popUpView.findViewById(R.id.help_next_button);
+        next_button.setText("Got it");
+        Button back_button = popUpView.findViewById(R.id.help_back_button);
+        back_button.setVisibility(View.INVISIBLE);
         next_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

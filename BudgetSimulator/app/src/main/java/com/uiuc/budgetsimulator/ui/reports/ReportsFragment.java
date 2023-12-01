@@ -198,9 +198,14 @@ public class ReportsFragment extends Fragment {
         MainActivity.help_page = 9;
 
         Button next_button = popUpView.findViewById(R.id.help_next_button);
+        Button back_button = popUpView.findViewById(R.id.help_back_button);
         next_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                back_button.setVisibility(View.VISIBLE);
+                if (MainActivity.help_page == 10) {
+                    next_button.setText("GOT IT");
+                }
                 if (MainActivity.help_page != 11) {
                     MainActivity.help_page++;
                     help_text.setText(MainActivity.help_pages[MainActivity.help_page]);
@@ -210,13 +215,17 @@ public class ReportsFragment extends Fragment {
                 }
             }
         });
-        Button back_button = popUpView.findViewById(R.id.help_back_button);
+        back_button.setVisibility(View.INVISIBLE);
         back_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                next_button.setText("Next");
                 if (MainActivity.help_page != 9) {
                     MainActivity.help_page--;
                     help_text.setText(MainActivity.help_pages[MainActivity.help_page]);
+                }
+                if (MainActivity.help_page == 9){
+                    back_button.setVisibility(View.INVISIBLE);
                 }
             }
         });

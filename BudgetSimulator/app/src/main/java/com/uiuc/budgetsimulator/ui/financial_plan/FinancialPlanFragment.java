@@ -198,9 +198,16 @@ public class FinancialPlanFragment extends Fragment {
         MainActivity.help_page = 7;
 
         Button next_button = popUpView.findViewById(R.id.help_next_button);
+        Button back_button = popUpView.findViewById(R.id.help_back_button);
+        back_button.setVisibility(View.INVISIBLE);
+
         next_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                back_button.setVisibility(View.VISIBLE);
+                if (MainActivity.help_page == 7) {
+                    next_button.setText("GOT IT");
+                }
                 if (MainActivity.help_page != 8) {
                     MainActivity.help_page++;
                     help_text.setText(MainActivity.help_pages[MainActivity.help_page]);
@@ -210,13 +217,16 @@ public class FinancialPlanFragment extends Fragment {
                 }
             }
         });
-        Button back_button = popUpView.findViewById(R.id.help_back_button);
         back_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                next_button.setText("Next");
                 if (MainActivity.help_page != 7) {
                     MainActivity.help_page--;
                     help_text.setText(MainActivity.help_pages[MainActivity.help_page]);
+                }
+                if (MainActivity.help_page == 7){
+                    back_button.setVisibility(View.INVISIBLE);
                 }
             }
         });
