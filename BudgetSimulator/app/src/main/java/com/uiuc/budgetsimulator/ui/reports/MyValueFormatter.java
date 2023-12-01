@@ -15,7 +15,12 @@ public class MyValueFormatter extends com.github.mikephil.charting.formatter.Val
 
     @Override
     public String getFormattedValue(float value) {
+      if (value > 0) {
         return "$" + mFormat.format(value);
+      }
+      else {
+        return "";
+      }
     }
 
     @Override

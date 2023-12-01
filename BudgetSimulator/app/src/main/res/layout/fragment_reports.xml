@@ -57,10 +57,35 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
 
-                    <TextView
-                        android:id="@+id/summary_feedback"
-                        style="@style/summary_text_standard"
-                        android:text="Placeholder" />
+                    <FrameLayout
+                        android:layout_marginTop="10dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center">
+                        <ProgressBar
+                            android:id="@+id/progress_savings_goal"
+                            style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+                            android:layout_marginHorizontal="@dimen/activity_horizontal_margin"
+                            android:layout_width="match_parent"
+                            android:scaleY="12"
+                            android:progressBackgroundTint="@color/design_default_color_secondary"
+                            android:progressTint="#4CAF50"
+                            android:progress="50"
+                            android:layout_height="match_parent"/>
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                            <TextView
+                                android:id="@+id/summary_feedback"
+                                android:layout_margin="0dp"
+                                android:padding="0dp"
+                                style="@style/summary_text_standard"
+                                android:background="#00000000"
+                                android:text="Placeholder" />
+                        </RelativeLayout>
+                    </FrameLayout>
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -125,7 +150,7 @@
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/full_report"
                     style="@style/summary_button"
-                    android:text="Full Report" />
+                    android:text="Graph" />
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/report_continue"

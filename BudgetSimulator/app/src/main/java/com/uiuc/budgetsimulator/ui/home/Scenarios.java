@@ -52,7 +52,7 @@ public class Scenarios implements Parcelable {
             NONE, ENTERTAINMENT, FOOD, WORK, ALLOWANCE, EMERGENCY;
 
 
-            public static final int[] categoryColors = new int[]{Color.LTGRAY, Color.BLUE, Color.GREEN, Color.YELLOW, Color.MAGENTA, Color.RED};
+            public static final int[] categoryColors = new int[]{Color.LTGRAY, Color.parseColor("#2E86AB"), Color.parseColor("#65743A"), Color.parseColor("#DFDFDF"), Color.parseColor("#736372"), Color.parseColor("#F24236")};
         }
         public String event;
 

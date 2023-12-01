@@ -12,6 +12,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.components.AxisBase;
@@ -25,6 +26,7 @@ import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.formatter.DefaultAxisValueFormatter;
 import com.github.mikephil.charting.formatter.ValueFormatter;
 import com.github.mikephil.charting.interfaces.datasets.IBarDataSet;
+import com.google.android.material.button.MaterialButton;
 import com.uiuc.budgetsimulator.R;
 import com.uiuc.budgetsimulator.ui.home.Scenarios.Scenario.Category;
 
@@ -33,6 +35,7 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.EnumSet;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 import java.util.TreeSet;
 import java.util.stream.Collectors;
@@ -57,17 +60,25 @@ public class ReportSummaryFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+      MaterialButton fullReport = view.findViewById(R.id.button_report_summary);
+      fullReport.setOnClickListener(v -> {
+        requireActivity()
+            .getSupportFragmentManager()
+            .popBackStack ("fullReport", FragmentManager.POP_BACK_STACK_INCLUSIVE);
+      });
+
         mChart = view.findViewById(R.id.category_chart);
 
         ArrayList<BarEntry> yVals1 = new ArrayList<>();
 
         // Collection<Float> spendingCollection = reportData.getCategorySpending().values().stream().map(Integer::floatValue).collect(Collectors.toCollection(TreeSet::new));
-        float[] spending = new float[Category.values().length];
-        float[] earning = new float[Category.values().length];
+        float[] spending = new float[Category.values().length - 1];
+        float[] earning = new float[Category.values().length - 1];
         for (Category c : Category.values())
         {
-            spending[c.ordinal()] = reportData.getCategorySpending().getOrDefault(c, 0);
-            earning[c.ordinal()] = reportData.getCategoryEarning().getOrDefault(c, 0);
+          if (c == Category.NONE) continue;
+          spending[c.ordinal() - 1] = reportData.getCategorySpending().getOrDefault(c, 0);
+          earning[c.ordinal() - 1] = reportData.getCategoryEarning().getOrDefault(c, 0);
         }
 
 
@@ -97,6 +108,7 @@ public class ReportSummaryFragment extends Fragment {
             Set<Category> combinedCategories = new HashSet<>(spendingSet);
             combinedCategories.addAll(earningSet);
             String[] labels = Arrays.stream(Category.values()).map(e -> e.name().substring(0,1).toUpperCase() + e.name().substring(1).toLowerCase()).toArray(String[]::new);
+            labels = Arrays.copyOfRange(labels, 1, labels.length);
             set1.setStackLabels(labels);
             set1.setColors(getColors(labels));
 
@@ -110,6 +122,8 @@ public class ReportSummaryFragment extends Fragment {
 
             mChart.setData(data);
             mChart.setPinchZoom(false);
+            mChart.setDoubleTapToZoomEnabled(false);
+            mChart.setTouchEnabled(false);
 
             mChart.setDrawGridBackground(false);
             mChart.setDrawBarShadow(false);
@@ -122,6 +136,7 @@ public class ReportSummaryFragment extends Fragment {
             leftAxis.setValueFormatter(new MyValueFormatter());
             leftAxis.setDrawGridLines(false);
             leftAxis.setTextSize(14f);
+            leftAxis.setAxisLineWidth(2f);
             leftAxis.setAxisMinimum(0f); // this replaces setStartAtZero(true)
             mChart.getAxisRight().setEnabled(false);
 
@@ -139,6 +154,7 @@ public class ReportSummaryFragment extends Fragment {
                 }
             });
             xLabels.setDrawGridLines(false);
+            xLabels.setAxisLineWidth(2f);
             xLabels.setTextSize(14f);
             xLabels.setPosition(XAxis.XAxisPosition.BOTTOM);
 

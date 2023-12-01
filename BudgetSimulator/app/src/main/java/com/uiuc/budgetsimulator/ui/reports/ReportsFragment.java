@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -169,6 +170,10 @@ public class ReportsFragment extends Fragment {
         Utils.setTextViewText(view, R.id.health_change, String.format(Locale.ENGLISH,
                 "Health: %d->%d",
                 prevReport.getHealth(), report.getHealth()));
+
+        ProgressBar progressBar = view.findViewById(R.id.progress_savings_goal);
+        progressBar.setMax(FinancialPlanFragment.getGoal());
+        progressBar.setProgress(netSavings);
 
         MaterialButton fullReport = view.findViewById(R.id.full_report);
         fullReport.setOnClickListener(v -> {
