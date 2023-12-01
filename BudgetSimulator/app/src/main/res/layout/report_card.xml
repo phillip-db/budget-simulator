@@ -8,8 +8,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:gravity="center_vertical"
-    android:orientation="horizontal"
-    android:padding="@dimen/report_recycler_margin">
+    android:orientation="horizontal">
 
     <!--TextView for displaying Name -->
 <!--    <androidx.cardview.widget.CardView-->
@@ -27,20 +26,56 @@
 
 <!--    </androidx.cardview.widget.CardView>-->
     <LinearLayout
+        android:id="@+id/card_clickable"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="horizontal"
+        android:layout_margin="10dp"
+        android:background="@color/design_default_color_primary">
 
         <!--TextView for displaying Name -->
         <com.google.android.material.button.MaterialButton
             android:id="@+id/weekText"
-            android:textAllCaps="false"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="90dp"
+            android:layout_weight="3"
+            android:textAlignment="textStart"
+            android:layout_gravity="center_vertical"
+            android:paddingHorizontal="20dp"
+            android:textAllCaps="false"
             android:textColor="@color/white"
             android:textSize="30sp"
+            android:background="#00000000"
+            android:backgroundTint="#00000000"
+            android:autoSizeMaxTextSize="30sp"
+            android:autoSizeMinTextSize="14sp"
+            android:autoSizeStepGranularity="2sp"
+            app:cornerRadius="0dp"
+            style="?android:attr/borderlessButtonStyle"
             tools:text="Week #_"
-            app:cornerRadius="10dp" />
+            tools:ignore="RtlCompat" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/savingsText"
+            android:layout_width="0dp"
+            android:layout_height="90dp"
+            android:layout_weight="4"
+            android:layout_gravity="center_vertical"
+            android:textAlignment="textEnd"
+            android:paddingHorizontal="20dp"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:autoSizeMaxTextSize="30sp"
+            android:autoSizeMinTextSize="14sp"
+            android:autoSizeStepGranularity="2sp"
+            android:autoSizeTextType="uniform"
+            android:paddingStart="0dp"
+            android:background="#00000000"
+            android:backgroundTint="#00000000"
+            app:cornerRadius="0dp"
+            style="?android:attr/borderlessButtonStyle"
+            tools:text="$ #### Saved"
+            tools:ignore="RtlCompat" />
     </LinearLayout>
 
 </LinearLayout>

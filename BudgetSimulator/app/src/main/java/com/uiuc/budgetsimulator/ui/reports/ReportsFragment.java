@@ -15,7 +15,6 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -28,7 +27,6 @@ import com.uiuc.budgetsimulator.Utils;
 import com.uiuc.budgetsimulator.ui.financial_plan.FinancialPlanFragment;
 
 import java.io.InputStream;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Locale;
 
@@ -135,7 +133,7 @@ public class ReportsFragment extends Fragment {
         // Generic placeholder text to replace placeholder
         String tipsString = "";
         int netSavings = (report.getWeeklyEarning() - report.getWeeklySpending());
-        GoalSavings eval = GoalSavings.evalGoalSaving(netSavings, FinancialPlanFragment.getGoal());
+        GoalSavings eval = GoalSavings.evalGoalSaving(netSavings, FinancialPlanFragment.getValueByKey(FinancialPlanFragment.KEY_GOAL));
         switch (eval) {
             case FAILED:
                 tipsString = "Cut down unnecessary expenses and look for more income opportunities.";

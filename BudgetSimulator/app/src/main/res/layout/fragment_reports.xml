@@ -93,18 +93,18 @@
                         android:orientation="horizontal">
 
                         <TextView
-                            android:id="@+id/money_earned"
-                            style="@style/summary_text_large"
-                            android:layout_width="0dp"
-                            android:layout_weight="1"
-                            android:text="$100/$100 Earned" />
-
-                        <TextView
                             android:id="@+id/money_spent"
                             style="@style/summary_text_large"
                             android:layout_width="0dp"
                             android:layout_weight="1"
                             android:text="$100/$100 Spent" />
+
+                        <TextView
+                            android:id="@+id/money_earned"
+                            style="@style/summary_text_large"
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:text="$100/$100 Earned" />
 
                     </LinearLayout>
 

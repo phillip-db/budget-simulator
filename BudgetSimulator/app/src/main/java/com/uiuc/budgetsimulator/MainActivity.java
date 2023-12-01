@@ -5,29 +5,18 @@ import android.app.AlertDialog;
 import android.graphics.Color;
 import android.os.Bundle;
 
-import android.view.Gravity;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.view.animation.AlphaAnimation;
-import android.widget.Button;
 
 import android.util.Log;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.ImageView;
-import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.gson.Gson;
 import com.uiuc.budgetsimulator.ui.financial_plan.FinancialPlanFragment;
-import com.uiuc.budgetsimulator.ui.home.Scenarios;
-
-import com.uiuc.budgetsimulator.ui.home.HomeFragment;
 
 import com.uiuc.budgetsimulator.ui.home.Scenarios.Scenario.Category;
 
@@ -212,7 +201,7 @@ public class MainActivity extends AppCompatActivity implements UpdateValuesListe
 
     @Override
     public void updateMoney(int newValue, Category category) {
-        Log.d("DEBUG", String.valueOf(category));
+        Log.d("DEBUG", String.valueOf(category) + " " + newValue);
         if (newValue > 0) {
             weekly_earnings += newValue;
             categoryEarning.put(category, categoryEarning.getOrDefault(category, 0) + newValue);
@@ -346,16 +335,30 @@ public class MainActivity extends AppCompatActivity implements UpdateValuesListe
             }
             endGame();
         } else {
-            if (weekly_earnings - weekly_spending >= FinancialPlanFragment.getGoal()) {
+            if (weekly_earnings - weekly_spending >= FinancialPlanFragment.getValueByKey(FinancialPlanFragment.KEY_GOAL)) {
                 if (!saver_achieved)
                     generateToast("Trophy Achieved: Amazing Saver");
                 saver_achieved = true;
             }
 
+            // TODO: Figure out intervals to apply the financial plan values
+            int entertainmentExpense = FinancialPlanFragment.getValueByKey(FinancialPlanFragment.KEY_ENTERTAINMENT);
+            updateMoney(-entertainmentExpense, Category.ENTERTAINMENT);
+            int foodExpense = FinancialPlanFragment.getValueByKey(FinancialPlanFragment.KEY_EATING_OUT);
+            foodExpense += FinancialPlanFragment.getValueByKey(FinancialPlanFragment.KEY_GROCERIES);
+            updateMoney(-foodExpense, Category.FOOD);
+
+            // int rentExpense = FinancialPlanFragment.getValueByKey(FinancialPlanFragment.KEY_RENT);
+            // updateMoney(-rentExpense, Category.ALLOWANCE);
+
+            int workEarning = FinancialPlanFragment.getValueByKey(FinancialPlanFragment.KEY_JOB_INCOME);
+            updateMoney(workEarning, Category.WORK);
+            int allowanceEarning = FinancialPlanFragment.getValueByKey(FinancialPlanFragment.KEY_ALLOWANCE);
+            updateMoney(allowanceEarning, Category.ALLOWANCE);
+
             TextView textview = findViewById(R.id.week);
             week_id += 1;
             textview.setText(weeks[week_id]);
-            Log.d("CAT TEST", String.valueOf(categoryEarning.get(Category.ALLOWANCE)));
 
             Utils.appendReport(gameSimId, generateReport(week_id), getApplicationContext());
 
@@ -391,7 +394,7 @@ public class MainActivity extends AppCompatActivity implements UpdateValuesListe
             MainActivity.weekly_earnings, MainActivity.categorySpending,
             MainActivity.categoryEarning);
 
-        reportData.setWeeklyGoal(FinancialPlanFragment.getGoal());
+        reportData.setWeeklyGoal(FinancialPlanFragment.getValueByKey(FinancialPlanFragment.KEY_GOAL));
 
         return reportData;
     }

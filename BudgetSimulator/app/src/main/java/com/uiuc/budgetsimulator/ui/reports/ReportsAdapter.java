@@ -35,8 +35,12 @@ public class ReportsAdapter extends RecyclerView.Adapter<ReportsViewHolder> {
     public void onBindViewHolder(@NonNull ReportsViewHolder holder, int position) {
         ReportData currentReport = reportList.get(position);
         holder.weekText.setText(String.format(Locale.ENGLISH, "Week #%d", currentReport.getWeekNumber()));
+        holder.savingsText.setText(String.format(Locale.ENGLISH, "$%d Saved", currentReport.getWeeklyEarning() - currentReport.getWeeklySpending()));
         holder.weekText.setOnClickListener(v -> {
             onClickListener.onClick(position, currentReport);
+        });
+        holder.savingsText.setOnClickListener(v -> {
+          onClickListener.onClick(position, currentReport);
         });
         if (currentReport.getWeekNumber() == 0) holder.hideItem();
     }

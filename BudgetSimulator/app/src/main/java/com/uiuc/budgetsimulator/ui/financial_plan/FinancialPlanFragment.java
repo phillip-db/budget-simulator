@@ -26,17 +26,54 @@ public class FinancialPlanFragment extends Fragment {
 
 //    public static int userGoalValue;
     static SharedPreferences sharedPreferences;
-    EditText groceriesTextBox, eatingOutTextBox, entertainmentTextBox, goalTextBox;
-    private static final String PREFS_NAME = "MyPrefsFile";
-    private static final String KEY_GOAL = "goal";
-    private static final String KEY_GROCERIES = "groceries";
-    private static final String KEY_EATING_OUT = "eatingOut";
+    EditText groceriesTextBox, eatingOutTextBox, entertainmentTextBox, goalTextBox,
+        jobIncomeTextBox, allowanceTextBox, rentTextBox;
+    public static final String PREFS_NAME = "MyPrefsFile";
+    public static final String KEY_GOAL = "goal";
+    public static final String KEY_GROCERIES = "groceries";
+    public static final String KEY_EATING_OUT = "eatingOut";
 
-    private static final String KEY_ENTERTAINMENT = "entertainment";
+    public static final String KEY_ENTERTAINMENT = "entertainment";
 
-    private static final int defaultGoal = 100;
+    public static final String KEY_JOB_INCOME = "job income";
+    public static final String KEY_ALLOWANCE = "allowance";
+    public static final String KEY_RENT = "rent";
 
+    public static final String[] KEYS_POSITIVE = { KEY_JOB_INCOME, KEY_ALLOWANCE };
+    public static final String[] KEYS_NEGATIVE = { KEY_GROCERIES, KEY_EATING_OUT, KEY_ENTERTAINMENT, KEY_RENT };
+
+
+    private static final int defaultGoal = 500;
+    private static final int defaultIncome = 600;
+    private static final int defaultAllowance = 400;
+    private static final int defaultRent = 500;
+    private static final int defaultGroceries = 200;
+    private static final int defaultEatOut = 150;
+    private static final int defaultEntertainment = 50;
     View root;
+
+    public static int getDefaultValueByKey(String key)
+    {
+      switch(key)
+      {
+        case KEY_GOAL:
+          return defaultGoal;
+        case KEY_ALLOWANCE:
+          return defaultAllowance;
+        case KEY_JOB_INCOME:
+          return defaultIncome;
+        case KEY_RENT:
+          return defaultRent;
+        case KEY_GROCERIES:
+          return defaultGroceries;
+        case KEY_EATING_OUT:
+          return defaultEatOut;
+        case KEY_ENTERTAINMENT:
+          return defaultEntertainment;
+        default:
+          return 0;
+      }
+    }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -45,13 +82,13 @@ public class FinancialPlanFragment extends Fragment {
 
         // Find the views by their IDs
         TextView textFinancialPlan = root.findViewById(R.id.text_financial_plan);
-        EditText jobIncomeTextBox = root.findViewById(R.id.jobIncomeTextBox);
-        EditText allowanceTextBox = root.findViewById(R.id.allowanceTextBox);
+        jobIncomeTextBox = root.findViewById(R.id.jobIncomeTextBox);
+        allowanceTextBox = root.findViewById(R.id.allowanceTextBox);
         jobIncomeTextBox.setEnabled(false);
         allowanceTextBox.setEnabled(false);
 
         // For Fixed Expenses section
-        EditText rentTextBox = root.findViewById(R.id.rentTextBox);
+        rentTextBox = root.findViewById(R.id.rentTextBox);
         rentTextBox.setEnabled(false);
         groceriesTextBox = root.findViewById(R.id.groceriesTextBox);
 
@@ -61,12 +98,13 @@ public class FinancialPlanFragment extends Fragment {
         goalTextBox = root.findViewById(R.id.budgetingGoalTextBox);
 
         // Set pre-filled values
-        jobIncomeTextBox.setText("600");
-        allowanceTextBox.setText("400");
-        rentTextBox.setText("500");
-        groceriesTextBox.setText("200");
-        eatingOutTextBox.setText("150");
-        entertainmentTextBox.setText("50");
+        goalTextBox.setText(Integer.toString(defaultGoal));
+        jobIncomeTextBox.setText(Integer.toString(defaultIncome));
+        allowanceTextBox.setText(Integer.toString(defaultAllowance));
+        rentTextBox.setText(Integer.toString(defaultRent));
+        groceriesTextBox.setText(Integer.toString(defaultGroceries));
+        eatingOutTextBox.setText(Integer.toString(defaultEatOut));
+        entertainmentTextBox.setText(Integer.toString(defaultEntertainment));
 
         sharedPreferences = requireActivity().getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
         loadSavedValues();
@@ -124,6 +162,9 @@ public class FinancialPlanFragment extends Fragment {
         editor.putString(KEY_GROCERIES, groceriesTextBox.getText().toString());
         editor.putString(KEY_ENTERTAINMENT, entertainmentTextBox.getText().toString());
         editor.putString(KEY_EATING_OUT, eatingOutTextBox.getText().toString());
+        editor.putString(KEY_JOB_INCOME, jobIncomeTextBox.getText().toString());
+        editor.putString(KEY_ALLOWANCE, allowanceTextBox.getText().toString());
+        editor.putString(KEY_RENT, rentTextBox.getText().toString());
         editor.apply();
     }
 
@@ -134,11 +175,11 @@ public class FinancialPlanFragment extends Fragment {
         entertainmentTextBox.setText(sharedPreferences.getString(KEY_ENTERTAINMENT,""));
     }
 
-    public static int getGoal()
+    public static int getValueByKey(String key)
     {
-      if (sharedPreferences == null) return defaultGoal;
-      String s = sharedPreferences.getString(KEY_GOAL, null);
-      if (s == null || s.isEmpty()) return defaultGoal;
+      if (sharedPreferences == null) return getDefaultValueByKey(key);
+      String s = sharedPreferences.getString(key, null);
+      if (s == null || s.isEmpty()) return getDefaultValueByKey(key);
       return Integer.parseInt(s);
     }
 
