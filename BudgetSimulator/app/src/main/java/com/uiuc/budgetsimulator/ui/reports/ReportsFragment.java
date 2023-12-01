@@ -61,7 +61,7 @@ public class ReportsFragment extends Fragment {
             @Override
             public void run() {
                 if (MainActivity.tutorial_reports == false)
-                    startTutorial(R.string.help_8);
+                    startTutorial(R.string.help_9);
             }
         },100);
 
@@ -192,13 +192,13 @@ public class ReportsFragment extends Fragment {
 
         TextView help_text = popUpView.findViewById(R.id.help_text);
         help_text.setText(string_help);
-        MainActivity.help_page = 8;
+        MainActivity.help_page = 9;
 
         Button next_button = popUpView.findViewById(R.id.help_next_button);
         next_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (MainActivity.help_page != 10) {
+                if (MainActivity.help_page != 11) {
                     MainActivity.help_page++;
                     help_text.setText(MainActivity.help_pages[MainActivity.help_page]);
                 } else {
@@ -211,7 +211,7 @@ public class ReportsFragment extends Fragment {
         back_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (MainActivity.help_page != 8) {
+                if (MainActivity.help_page != 9) {
                     MainActivity.help_page--;
                     help_text.setText(MainActivity.help_pages[MainActivity.help_page]);
                 }
