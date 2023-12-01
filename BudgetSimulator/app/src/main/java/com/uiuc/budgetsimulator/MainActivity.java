@@ -1,5 +1,6 @@
 package com.uiuc.budgetsimulator;
 
+import android.animation.ArgbEvaluator;
 import android.app.AlertDialog;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -225,6 +226,7 @@ public class MainActivity extends AppCompatActivity implements UpdateValuesListe
     }
 
     private void updateTopBarTextWithAnimation(int newValue, TextView textView) {
+        int oldValue = Utils.parseTextViewInt(textView);
         ValueAnimator animator = ValueAnimator.ofInt(Utils.parseTextViewInt(textView), newValue);
         animator.setDuration(1000); // Set the duration of the animation (in milliseconds)
 
@@ -240,6 +242,56 @@ public class MainActivity extends AppCompatActivity implements UpdateValuesListe
         });
 
         animator.start();
+        ValueAnimator colorAnimation = ValueAnimator.ofObject(new ArgbEvaluator(), Color.WHITE, Color.RED);
+        colorAnimation.setDuration(500);
+        colorAnimation.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+
+            @Override
+            public void onAnimationUpdate(ValueAnimator animator) {
+                textView.setTextColor((Integer)animator.getAnimatedValue());
+            }
+
+        });
+        ValueAnimator colorAnimation2= ValueAnimator.ofObject(new ArgbEvaluator(), Color.RED, Color.WHITE);
+        colorAnimation2.setDuration(1000);
+
+        colorAnimation2.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+
+            @Override
+            public void onAnimationUpdate(ValueAnimator animator) {
+                textView.setTextColor((Integer)animator.getAnimatedValue());
+            }
+
+        });
+        ValueAnimator colorAnimation3 = ValueAnimator.ofObject(new ArgbEvaluator(), Color.WHITE, Color.GREEN);
+        colorAnimation3.setDuration(500);
+
+        colorAnimation3.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+
+            @Override
+            public void onAnimationUpdate(ValueAnimator animator) {
+                textView.setTextColor((Integer)animator.getAnimatedValue());
+            }
+
+        });
+        ValueAnimator colorAnimation4= ValueAnimator.ofObject(new ArgbEvaluator(), Color.GREEN, Color.WHITE);
+        colorAnimation4.setDuration(1000);
+
+        colorAnimation4.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+
+            @Override
+            public void onAnimationUpdate(ValueAnimator animator) {
+                textView.setTextColor((Integer)animator.getAnimatedValue());
+            }
+
+        });
+        if (oldValue > newValue) {
+            colorAnimation.start();
+            colorAnimation2.start();
+        } else {
+            colorAnimation3.start();
+            colorAnimation4.start();
+        }
     }
 
 
