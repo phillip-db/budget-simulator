@@ -50,9 +50,6 @@ public class ReportsFragment extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        getActivity()
-                .getSupportFragmentManager()
-                .popBackStack ("fullReport", FragmentManager.POP_BACK_STACK_INCLUSIVE);
         return inflater.inflate(R.layout.fragment_reports, container, false);
     }
 
@@ -114,6 +111,14 @@ public class ReportsFragment extends Fragment {
             recyclerView.setVisibility(View.VISIBLE);
             emptyView.setVisibility(View.GONE);
         }
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        getActivity()
+                .getSupportFragmentManager()
+                .popBackStack ("fullReport", FragmentManager.POP_BACK_STACK_INCLUSIVE);
     }
 
     private void loadSummary(View view, int position, ReportData report) {
