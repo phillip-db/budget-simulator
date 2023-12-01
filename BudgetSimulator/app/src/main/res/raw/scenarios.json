@@ -152,6 +152,78 @@
       "healthOutcome": -20,
       "gradeOutcome": 0,
       "moneyOutcome": 0
+    },
+    {
+      "event": "Your friend crashed their car asks you to help cover repair costs.",
+      "category": "EMERGENCY",
+      "choices": [
+        {
+          "choice": "Accept",
+          "healthOutcome": 10,
+          "gradeOutcome": 0,
+          "moneyOutcome": -400
+        },
+        {
+          "choice": "Decline",
+          "healthOutcome": -5,
+          "gradeOutcome": 0,
+          "moneyOutcome": 0
+        }
+      ],
+      "healthOutcome": 0,
+      "gradeOutcome": 0,
+      "moneyOutcome": 0
+    },
+    {
+      "event": "Your grandparents visit and give you money as a gift.",
+      "category": "ALLOWANCE",
+      "choices": [
+      ],
+      "healthOutcome": 20,
+      "gradeOutcome": 0,
+      "moneyOutcome": 100
+    },
+    {
+      "event": "Your friends invite you to each out for lunch together.",
+      "category": "FOOD",
+      "choices": [
+        {
+          "choice": "Accept",
+          "healthOutcome": 15,
+          "gradeOutcome": 0,
+          "moneyOutcome": -25
+        },
+        {
+          "choice": "Decline",
+          "healthOutcome": -8,
+          "gradeOutcome": 0,
+          "moneyOutcome": 0
+        }
+      ],
+      "healthOutcome": 0,
+      "gradeOutcome": 0,
+      "moneyOutcome": 0
+    },
+    {
+      "event": "Your notice your laptop has considerably slowed down for everyday use.",
+      "category": "WORK",
+      "choices": [
+        {
+          "choice": "Buy a new laptop",
+          "healthOutcome": 5,
+          "gradeOutcome": 0,
+          "moneyOutcome": -750
+        },
+        {
+          "choice": "Continue using your current laptop",
+          "healthOutcome": -5,
+          "gradeOutcome": 0,
+          "moneyOutcome": 0
+        }
+      ],
+      "healthOutcome": 0,
+      "gradeOutcome": 0,
+      "moneyOutcome": 0
     }
   ]
 }
