@@ -24,9 +24,9 @@
         android:icon="@drawable/ic_report"
         android:title="@string/title_weekly_reports" />
 
-    <item
-        android:id="@+id/navigation_help"
-        android:icon="@drawable/ic_help_circle"
-        android:title="@string/title_help" />
+<!--    <item-->
+<!--        android:id="@+id/navigation_help"-->
+<!--        android:icon="@drawable/ic_help_circle"-->
+<!--        android:title="@string/title_help" />-->
 
 </menu>

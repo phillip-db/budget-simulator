@@ -2,17 +2,31 @@ package com.uiuc.budgetsimulator;
 
 import android.app.AlertDialog;
 import android.os.Bundle;
+
+import android.view.Gravity;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
+import android.widget.Button;
+
 import android.util.Log;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.gson.Gson;
 import com.uiuc.budgetsimulator.ui.financial_plan.FinancialPlanFragment;
+
+import com.uiuc.budgetsimulator.ui.home.HomeFragment;
+
 import com.uiuc.budgetsimulator.ui.home.Scenarios.Scenario.Category;
+
 import com.uiuc.budgetsimulator.ui.home.UpdateValuesListener;
 import com.uiuc.budgetsimulator.ui.reports.ReportData;
 
@@ -71,6 +85,20 @@ public class MainActivity extends AppCompatActivity implements UpdateValuesListe
     public static boolean happy_healthy_achieved = false;
     public static boolean financial_goal_achieved = false;
 
+    // TUTORIAL DAY
+//    public static boolean first_day = true;
+    public static boolean tutorial_intro = false;
+    public static boolean tutorial_popup = false;
+    public static boolean tutorial_trophies = false;
+    public static boolean tutorial_plan = false;
+    public static boolean tutorial_reports = false;
+    public static int help_page;
+    public static int[] help_pages = new int[] {
+            R.string.help_0, R.string.help_1, R.string.help_2, R.string.help_3, R.string.help_4,
+            R.string.help_5, R.string.help_6, R.string.help_7, R.string.help_8, R.string.help_9,
+            R.string.help_10, R.string.help_11 };
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -82,7 +110,7 @@ public class MainActivity extends AppCompatActivity implements UpdateValuesListe
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.navigation_home, R.id.navigation_financial_plans, R.id.navigation_weekly_reports, R.id.navigation_trophies, R.id.navigation_help)
+                R.id.navigation_home, R.id.navigation_financial_plans, R.id.navigation_weekly_reports, R.id.navigation_trophies)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
@@ -114,6 +142,8 @@ public class MainActivity extends AppCompatActivity implements UpdateValuesListe
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+//        createPopUp(R.string.help_0);
     }
 
     public static String getGameSimId() {
@@ -276,4 +306,53 @@ public class MainActivity extends AppCompatActivity implements UpdateValuesListe
                 MainActivity.weekly_earnings, MainActivity.categorySpending,
                 MainActivity.categoryEarning);
     }
+
+
+
+//    public void createPopUp(int string_help) {
+//        View root = R.layout.activity_main;
+//        LayoutInflater inflater = getLayoutInflater();
+//        View popUpView = inflater.inflate(R.layout.fragment_help, null);
+//
+//        int width = ViewGroup.LayoutParams.MATCH_PARENT;
+//        int height = ViewGroup.LayoutParams.MATCH_PARENT;
+//        boolean focusable = true;
+//        PopupWindow popupWindow = new PopupWindow(popUpView, width, height, focusable);
+//        popupWindow.showAtLocation(this, Gravity.CENTER, 0, 0);
+//
+//        TextView help_text = popUpView.findViewById(R.id.help_text);
+//        help_text.setText(string_help);
+//        help_page = 0;
+//
+//        Button next_button = popUpView.findViewById(R.id.help_next_button);
+//        next_button.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                if (help_page != 11) {
+//                    help_page++;
+//                    help_text.setText(help_pages[help_page]);
+//                } else {
+//                    Button button = root.findViewById(R.id.start_day_id);
+//                    button.setVisibility(View.GONE);
+//                    popupWindow.dismiss();
+//                }
+//            }
+//        });
+//        Button back_button = popUpView.findViewById(R.id.help_back_button);
+//        back_button.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                if (help_page != 0) {
+//                    help_page--;
+//                    help_text.setText(help_pages[help_page]);
+//                } else {
+//                    Button button = root.findViewById(R.id.start_day_id);
+//                    button.setVisibility(View.GONE);
+//                    popupWindow.dismiss();
+//                }
+//            }
+//        });
+//
+//    }
+
 }

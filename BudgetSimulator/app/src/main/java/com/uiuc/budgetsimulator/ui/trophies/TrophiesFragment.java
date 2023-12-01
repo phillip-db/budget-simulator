@@ -2,6 +2,7 @@ package com.uiuc.budgetsimulator.ui.trophies;
 
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -109,6 +110,15 @@ public class TrophiesFragment extends Fragment {
             }
         });
 
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                if (MainActivity.tutorial_trophies == false) {
+                    startTutorial(R.string.help_5);
+                    MainActivity.tutorial_trophies = true;
+                }
+            }
+        },100);
 
         return root;
     }
@@ -133,6 +143,45 @@ public class TrophiesFragment extends Fragment {
             public boolean onTouch(View v, MotionEvent event) {
                 popupWindow.dismiss();
                 return true;
+            }
+        });
+    }
+
+    public void startTutorial(int string_help) {
+        LayoutInflater inflater = getLayoutInflater();
+        View popUpView = inflater.inflate(R.layout.fragment_help, null);
+
+        int width = ViewGroup.LayoutParams.MATCH_PARENT;
+        int height = ViewGroup.LayoutParams.MATCH_PARENT;
+        boolean focusable = true;
+        PopupWindow popupWindow = new PopupWindow(popUpView, width, height, focusable);
+        popupWindow.showAtLocation(this.getView(), Gravity.CENTER, 0, 0);
+
+        TextView help_text = popUpView.findViewById(R.id.help_text);
+        help_text.setText(string_help);
+        MainActivity.help_page = 5;
+
+        Button next_button = popUpView.findViewById(R.id.help_next_button);
+        next_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (MainActivity.help_page != 6) {
+                    MainActivity.help_page++;
+                    help_text.setText(MainActivity.help_pages[MainActivity.help_page]);
+                } else {
+                    MainActivity.tutorial_intro = true;
+                    popupWindow.dismiss();
+                }
+            }
+        });
+        Button back_button = popUpView.findViewById(R.id.help_back_button);
+        back_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (MainActivity.help_page != 5) {
+                    MainActivity.help_page--;
+                    help_text.setText(MainActivity.help_pages[MainActivity.help_page]);
+                }
             }
         });
     }
