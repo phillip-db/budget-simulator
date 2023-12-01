@@ -109,8 +109,13 @@ public class ReportSummaryFragment extends Fragment {
             combinedCategories.addAll(earningSet);
             String[] labels = Arrays.stream(Category.values()).map(e -> e.name().substring(0,1).toUpperCase() + e.name().substring(1).toLowerCase()).toArray(String[]::new);
             labels = Arrays.copyOfRange(labels, 1, labels.length);
-            set1.setStackLabels(labels);
             set1.setColors(getColors(labels));
+            set1.setStackLabels(labels);
+
+//            for (int i = 0; i < labels.length; i++)
+//            {
+//              labels[i] = labels[i] + "\nSpending" + reportData.getCategorySpending()
+//            }
 
             ArrayList<IBarDataSet> dataSets = new ArrayList<IBarDataSet>();
             dataSets.add(set1);
@@ -137,6 +142,7 @@ public class ReportSummaryFragment extends Fragment {
             leftAxis.setDrawGridLines(false);
             leftAxis.setTextSize(14f);
             leftAxis.setAxisLineWidth(2f);
+            leftAxis.setSpaceBottom(25f);
             leftAxis.setAxisMinimum(0f); // this replaces setStartAtZero(true)
             mChart.getAxisRight().setEnabled(false);
 
@@ -162,7 +168,7 @@ public class ReportSummaryFragment extends Fragment {
 
             Legend l = mChart.getLegend();
             l.setVerticalAlignment(Legend.LegendVerticalAlignment.BOTTOM);
-            l.setHorizontalAlignment(Legend.LegendHorizontalAlignment.CENTER);
+            l.setHorizontalAlignment(Legend.LegendHorizontalAlignment.LEFT);
             l.setOrientation(Legend.LegendOrientation.HORIZONTAL);
             l.setDrawInside(false);
             l.setFormSize(14f);
