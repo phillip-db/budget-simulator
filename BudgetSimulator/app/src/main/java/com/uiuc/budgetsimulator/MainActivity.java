@@ -1,5 +1,7 @@
 package com.uiuc.budgetsimulator;
 
+import static android.view.View.VISIBLE;
+
 import android.app.AlertDialog;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -126,15 +128,16 @@ public class MainActivity extends AppCompatActivity implements UpdateValuesListe
             textView.setTextColor(Color.RED);
             textView.setText("" + adjustment);
         }
-        AlphaAnimation fadeIn = new AlphaAnimation(0.0f , 1.0f );
-        AlphaAnimation fadeOut = new AlphaAnimation( 1.0f , 0.0f );
-        textView.startAnimation(fadeIn);
-        textView.startAnimation(fadeOut);
-        fadeIn.setDuration(600);
-        fadeIn.setFillAfter(true);
-        fadeOut.setDuration(600);
-        fadeOut.setFillAfter(true);
-        fadeOut.setStartOffset(2100+fadeIn.getStartOffset());
+        textView.setVisibility(VISIBLE);
+//        AlphaAnimation fadeIn = new AlphaAnimation(0.0f , 1.0f );
+//        AlphaAnimation fadeOut = new AlphaAnimation( 1.0f , 0.0f );
+//        textView.startAnimation(fadeIn);
+//        textView.startAnimation(fadeOut);
+//        fadeIn.setDuration(1000);
+//        fadeIn.setFillAfter(true);
+//        fadeOut.setDuration(1000);
+//        fadeOut.setFillAfter(true);
+//        fadeOut.setStartOffset(3000+fadeIn.getStartOffset());
     }
     public static String adjustFactors(TextView textView, int adjustment) {
         String s = (String) textView.getText();
