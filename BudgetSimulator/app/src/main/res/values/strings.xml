@@ -34,19 +34,25 @@
     <string name="trophy_financial_goal_description">Set your first financial Goal!</string>
 
 
-    <string name="help_0">Welcome to the tutorial!</string>
+    <string name="help_0">Welcome to the ultimate budgeting game! Let\'s show you how this works!</string>
     <string name="help_1">At the top are all your stats.</string>
     <string name="help_2">From left to right, we have day of the week, health, grades, and money.</string>
     <string name="help_3">To start a day and play through scenarios, click the START DAY button!</string>
-    <string name="help_4">The choices you make in scenarios will affect your stats!</string>
-    <string name="help_5">At the bottom, we have the navigation bar.</string>
-    <string name="help_6">See your achievements in the "Trophies" page!</string>
-    <string name="help_7">Go to "My Plan" to set goals and create a financial plan!</string>
-    <string name="help_8">Go to "Home" to start or continue your day!</string>
-    <string name="help_9">"Reports" will show your weekly reports and financial progress!</string>
-    <string name="help_10">And return to "Help" to re-start this tutorial!</string>
-    <string name="help_11">That concludes this tutorial! Please go back to the home page!</string>
+    <string name="help_4">The choices you made here will have affect your stats above!</string>
+
+    <string name="help_5">Here, you can see all your Achievements!</string>
+    <string name="help_6">Gained trophies will appear colored. Click into one to see a description!</string>
+
+    <string name="help_7">Here you can create a financial plan! Greyed values are your default persona settings.</string>
+
+    <string name="help_8">Your weekly reports will show up here!</string>
+    <string name="help_9">At the end of every week, a new report will be generated.</string>
+    <string name="help_10">These reports will show your financial progress and how you\'re doing compared to your plan!</string>
+
+    <string name="help_11">[placeholder]</string>
     <string name="help_tutorial">Help Tutorial</string>
+
+
     <string name="empty_reports">No reports available. Reports are added each time you complete a week of the game.</string>
     <string name="weekly_reports">Weekly Reports</string>
     <string name="back">Back</string>
