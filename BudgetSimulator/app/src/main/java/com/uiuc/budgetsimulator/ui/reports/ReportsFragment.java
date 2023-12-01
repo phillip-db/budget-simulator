@@ -1,10 +1,14 @@
 package com.uiuc.budgetsimulator.ui.reports;
 
 import android.os.Bundle;
+import android.os.Handler;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -32,6 +36,7 @@ public class ReportsFragment extends Fragment {
     private RecyclerView recyclerView;
     private ArrayList<ReportData> reportsList = new ArrayList<>();
     private LinearLayout ll;
+    View root;
 
     private enum GoalSavings {
         FAILED, JUST_UNDER, MET, JUST_OVER, SURPASSED;
@@ -50,7 +55,17 @@ public class ReportsFragment extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_reports, container, false);
+        root = inflater.inflate(R.layout.fragment_reports, container, false);
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                if (MainActivity.tutorial_reports == false)
+                    startTutorial(R.string.help_9);
+            }
+        },100);
+
+        return root;
     }
 
     @Override
@@ -161,6 +176,46 @@ public class ReportsFragment extends Fragment {
             getActivity().getSupportFragmentManager().beginTransaction()
                     .replace(R.id.nav_host_fragment, fullFragment)
                     .addToBackStack("fullReport").commit();
+        });
+    }
+
+
+    public void startTutorial(int string_help) {
+        LayoutInflater inflater = getLayoutInflater();
+        View popUpView = inflater.inflate(R.layout.fragment_help, null);
+
+        int width = ViewGroup.LayoutParams.MATCH_PARENT;
+        int height = ViewGroup.LayoutParams.MATCH_PARENT;
+        boolean focusable = true;
+        PopupWindow popupWindow = new PopupWindow(popUpView, width, height, focusable);
+        popupWindow.showAtLocation(this.getView(), Gravity.CENTER, 0, 0);
+
+        TextView help_text = popUpView.findViewById(R.id.help_text);
+        help_text.setText(string_help);
+        MainActivity.help_page = 9;
+
+        Button next_button = popUpView.findViewById(R.id.help_next_button);
+        next_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (MainActivity.help_page != 11) {
+                    MainActivity.help_page++;
+                    help_text.setText(MainActivity.help_pages[MainActivity.help_page]);
+                } else {
+                    MainActivity.tutorial_reports = true;
+                    popupWindow.dismiss();
+                }
+            }
+        });
+        Button back_button = popUpView.findViewById(R.id.help_back_button);
+        back_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (MainActivity.help_page != 9) {
+                    MainActivity.help_page--;
+                    help_text.setText(MainActivity.help_pages[MainActivity.help_page]);
+                }
+            }
         });
     }
 }

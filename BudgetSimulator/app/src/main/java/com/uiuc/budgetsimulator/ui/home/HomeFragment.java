@@ -2,11 +2,14 @@ package com.uiuc.budgetsimulator.ui.home;
 
 import android.app.AlertDialog;
 import android.os.Bundle;
-import android.util.Log;
+import android.os.Handler;
+import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -15,6 +18,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.uiuc.budgetsimulator.MainActivity;
 import com.uiuc.budgetsimulator.R;
 import com.uiuc.budgetsimulator.Utils;
 
@@ -27,6 +31,7 @@ public class HomeFragment extends Fragment implements ScenarioDialog.ScenarioDia
 
     private HomeViewModel homeViewModel;
     private Button button;
+    View root;
 
     //public Set<Integer> selectedScenarios = new HashSet<>();
 
@@ -34,7 +39,7 @@ public class HomeFragment extends Fragment implements ScenarioDialog.ScenarioDia
                              ViewGroup container, Bundle savedInstanceState) {
         homeViewModel =
                 new ViewModelProvider(this).get(HomeViewModel.class);
-        View root = inflater.inflate(R.layout.fragment_home, container, false);
+        root = inflater.inflate(R.layout.fragment_home, container, false);
         final TextView textView = root.findViewById(R.id.text_home);
 
         button = root.findViewById(R.id.start_day_id);
@@ -52,10 +57,22 @@ public class HomeFragment extends Fragment implements ScenarioDialog.ScenarioDia
                 textView.setText(s);
             }
         });
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                if (MainActivity.tutorial_intro == false)
+                    startTutorial(R.string.help_0);
+            }
+        },100);
+
         return root;
     }
 
     public void startScenarios() {
+        if (MainActivity.tutorial_popup == false)
+            popUpTutorial();
+
         Random random = new Random();
         //do random number of scenarios from 3 to 5
         InputStream inputStream =  getResources().openRawResource(R.raw.scenarios);
@@ -72,7 +89,6 @@ public class HomeFragment extends Fragment implements ScenarioDialog.ScenarioDia
                 //countScenarios++;
             } while (selectedScenarios.contains(randomScenario)/* && countScenarios < numScenarios*/);
             selectedScenarios.add(randomScenario);
-            Log.d("DEBUG", String.valueOf(sunday.scenarios[randomScenario].category));
             if (i == 0) {
                 openDialog(sunday.scenarios[randomScenario], true);
             } else {
@@ -93,4 +109,68 @@ public class HomeFragment extends Fragment implements ScenarioDialog.ScenarioDia
     public void onDialogPositiveClick() {
         button.setVisibility(View.VISIBLE);
     }
+
+    // TUTORIAL DAY:
+    public void startTutorial(int string_help) {
+        LayoutInflater inflater = getLayoutInflater();
+        View popUpView = inflater.inflate(R.layout.fragment_help, null);
+
+        int width = ViewGroup.LayoutParams.MATCH_PARENT;
+        int height = ViewGroup.LayoutParams.MATCH_PARENT;
+        boolean focusable = true;
+        PopupWindow popupWindow = new PopupWindow(popUpView, width, height, focusable);
+        popupWindow.showAtLocation(this.getView(), Gravity.CENTER, 0, 0);
+
+        TextView help_text = popUpView.findViewById(R.id.help_text);
+        help_text.setText(string_help);
+        MainActivity.help_page = 0;
+
+        Button next_button = popUpView.findViewById(R.id.help_next_button);
+        next_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (MainActivity.help_page != 3) {
+                    MainActivity.help_page++;
+                    help_text.setText(MainActivity.help_pages[MainActivity.help_page]);
+                } else {
+                    MainActivity.tutorial_intro = true;
+                    popupWindow.dismiss();
+                }
+            }
+        });
+        Button back_button = popUpView.findViewById(R.id.help_back_button);
+        back_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (MainActivity.help_page != 0) {
+                    MainActivity.help_page--;
+                    help_text.setText(MainActivity.help_pages[MainActivity.help_page]);
+                }
+            }
+        });
+    }
+
+    public void popUpTutorial() {
+        LayoutInflater inflater = getLayoutInflater();
+        View popUpView = inflater.inflate(R.layout.fragment_help, null);
+
+        int width = ViewGroup.LayoutParams.MATCH_PARENT;
+        int height = ViewGroup.LayoutParams.MATCH_PARENT;
+        boolean focusable = true;
+        PopupWindow popupWindow = new PopupWindow(popUpView, width, height, focusable);
+        popupWindow.showAtLocation(this.getView(), Gravity.CENTER, 0, 0);
+
+        TextView help_text = popUpView.findViewById(R.id.help_text);
+        help_text.setText(R.string.help_4);
+
+        Button next_button = popUpView.findViewById(R.id.help_next_button);
+        next_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                MainActivity.tutorial_popup = true;
+                popupWindow.dismiss();
+            }
+        });
+    }
+
 }

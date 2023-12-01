@@ -63,7 +63,7 @@ android:layout_height="match_parent">
         android:layout_weight="1"
         android:drawableLeft="@drawable/ic_status_heart"
         android:drawableTint="@android:color/holo_red_dark"
-        android:text="100%" />
+        android:text="100%"/>
 
     <TextView
         android:id="@+id/grade"

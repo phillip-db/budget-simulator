@@ -3,17 +3,20 @@ package com.uiuc.budgetsimulator.ui.financial_plan;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.widget.TooltipCompat;
 import androidx.fragment.app.Fragment;
 
 import com.uiuc.budgetsimulator.MainActivity;
@@ -33,10 +36,12 @@ public class FinancialPlanFragment extends Fragment {
 
     private static final int defaultGoal = 100;
 
+    View root;
+
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        View root = inflater.inflate(R.layout.fragment_financial_plan, container, false);
+        root = inflater.inflate(R.layout.fragment_financial_plan, container, false);
 
         // Find the views by their IDs
         TextView textFinancialPlan = root.findViewById(R.id.text_financial_plan);
@@ -92,17 +97,15 @@ public class FinancialPlanFragment extends Fragment {
             }
         });
 
-        // Add a tooltip to the "Income" section
-        // Add a long press listener to show the tooltip for "Income" section
-        TextView incomeLabel = root.findViewById(R.id.jobIncomeLabel);
-        TooltipCompat.setTooltipText(incomeLabel, "Temporary text here");
-        incomeLabel.setOnLongClickListener(new View.OnLongClickListener() {
+        new Handler().postDelayed(new Runnable() {
             @Override
-            public boolean onLongClick(View v) {
-                TooltipCompat.setTooltipText(incomeLabel, incomeLabel.getTooltipText());
-                return true;
+            public void run() {
+                if (MainActivity.tutorial_plan == false) {
+                    startTutorial(R.string.help_7);
+                    MainActivity.tutorial_plan = true;
+                }
             }
-        });
+        },100);
 
         return root;
     }
@@ -135,7 +138,46 @@ public class FinancialPlanFragment extends Fragment {
     {
       if (sharedPreferences == null) return defaultGoal;
       String s = sharedPreferences.getString(KEY_GOAL, null);
-      if (s == null || s.isEmpty()) return defaultGoal;
+      if (s == null) return defaultGoal;
       return Integer.parseInt(s);
+    }
+
+    public void startTutorial(int string_help) {
+        LayoutInflater inflater = getLayoutInflater();
+        View popUpView = inflater.inflate(R.layout.fragment_help, null);
+
+        int width = ViewGroup.LayoutParams.MATCH_PARENT;
+        int height = ViewGroup.LayoutParams.MATCH_PARENT;
+        boolean focusable = true;
+        PopupWindow popupWindow = new PopupWindow(popUpView, width, height, focusable);
+        popupWindow.showAtLocation(this.getView(), Gravity.CENTER, 0, 0);
+
+        TextView help_text = popUpView.findViewById(R.id.help_text);
+        help_text.setText(string_help);
+        MainActivity.help_page = 7;
+
+        Button next_button = popUpView.findViewById(R.id.help_next_button);
+        next_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (MainActivity.help_page != 8) {
+                    MainActivity.help_page++;
+                    help_text.setText(MainActivity.help_pages[MainActivity.help_page]);
+                } else {
+                    MainActivity.tutorial_intro = true;
+                    popupWindow.dismiss();
+                }
+            }
+        });
+        Button back_button = popUpView.findViewById(R.id.help_back_button);
+        back_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (MainActivity.help_page != 7) {
+                    MainActivity.help_page--;
+                    help_text.setText(MainActivity.help_pages[MainActivity.help_page]);
+                }
+            }
+        });
     }
 }

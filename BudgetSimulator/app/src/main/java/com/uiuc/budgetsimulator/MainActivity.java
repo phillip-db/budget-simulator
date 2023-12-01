@@ -1,15 +1,24 @@
 package com.uiuc.budgetsimulator;
 
+import android.animation.ArgbEvaluator;
 import android.app.AlertDialog;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.util.Log;
+
+import android.view.Gravity;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.view.animation.AlphaAnimation;
-import android.view.animation.Animation;
-import android.view.animation.TranslateAnimation;
+import android.widget.Button;
+
+import android.util.Log;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.ImageView;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -17,7 +26,11 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.gson.Gson;
 import com.uiuc.budgetsimulator.ui.financial_plan.FinancialPlanFragment;
 import com.uiuc.budgetsimulator.ui.home.Scenarios;
+
+import com.uiuc.budgetsimulator.ui.home.HomeFragment;
+
 import com.uiuc.budgetsimulator.ui.home.Scenarios.Scenario.Category;
+
 import com.uiuc.budgetsimulator.ui.home.UpdateValuesListener;
 import com.uiuc.budgetsimulator.ui.reports.ReportData;
 
@@ -31,6 +44,8 @@ import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.EnumMap;
 import java.util.Map;
+
+import android.animation.ValueAnimator;
 
 public class MainActivity extends AppCompatActivity implements UpdateValuesListener {
     public enum Day {
@@ -74,6 +89,20 @@ public class MainActivity extends AppCompatActivity implements UpdateValuesListe
     public static boolean happy_healthy_achieved = false;
     public static boolean financial_goal_achieved = false;
 
+    // TUTORIAL DAY
+//    public static boolean first_day = true;
+    public static boolean tutorial_intro = false;
+    public static boolean tutorial_popup = false;
+    public static boolean tutorial_trophies = false;
+    public static boolean tutorial_plan = false;
+    public static boolean tutorial_reports = false;
+    public static int help_page;
+    public static int[] help_pages = new int[] {
+            R.string.help_0, R.string.help_1, R.string.help_2, R.string.help_3, R.string.help_4,
+            R.string.help_5, R.string.help_6, R.string.help_7, R.string.help_8, R.string.help_9,
+            R.string.help_10, R.string.help_11 };
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -85,7 +114,7 @@ public class MainActivity extends AppCompatActivity implements UpdateValuesListe
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.navigation_home, R.id.navigation_financial_plans, R.id.navigation_weekly_reports, R.id.navigation_trophies, R.id.navigation_help)
+                R.id.navigation_home, R.id.navigation_financial_plans, R.id.navigation_weekly_reports, R.id.navigation_trophies)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
@@ -117,6 +146,12 @@ public class MainActivity extends AppCompatActivity implements UpdateValuesListe
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+//        createPopUp(R.string.help_0);
+    }
+
+    public static String getGameSimId() {
+        return gameSimId;
     }
 
     public void adjustmentAnimation(TextView textView, int adjustment) {
@@ -131,50 +166,47 @@ public class MainActivity extends AppCompatActivity implements UpdateValuesListe
         AlphaAnimation fadeOut = new AlphaAnimation( 1.0f , 0.0f );
         textView.startAnimation(fadeIn);
         textView.startAnimation(fadeOut);
-        fadeIn.setDuration(1000);
+        fadeIn.setDuration(500);
         fadeIn.setFillAfter(true);
-        fadeOut.setDuration(1000);
+        fadeOut.setDuration(500);
         fadeOut.setFillAfter(true);
-        fadeOut.setStartOffset(3000+fadeIn.getStartOffset());
+        fadeOut.setStartOffset(1500+fadeIn.getStartOffset());
     }
-    public static String adjustFactors(TextView textView, int adjustment) {
-        String s = (String) textView.getText();
+    public static int adjustFactors(TextView textView, int adjustment) {
+        String s = (String)textView.getText();
         if (s.charAt(s.length() - 1) == '%') {
             int newFactor = Math.min(100, adjustment + Utils.parseTextViewInt(textView));
             if (newFactor < 0) {
                 newFactor = 0;
             }
-            return newFactor + "%";
+            //return newFactor + "%";
+            return newFactor;
         } else {
-            return "$" + (adjustment + Utils.parseTextViewInt(textView));
+            //return "$" + (adjustment + Utils.parseTextViewInt(textView));
+            return adjustment + Utils.parseTextViewInt(textView);
         }
     }
 
-    public static String getGameSimId() {
-        return gameSimId;
-    }
 
     @Override
     public void updateHealth(int newValue) {
         TextView healthTextView = findViewById(R.id.health);
-        TextView heatlhAdjustmentView = findViewById(R.id.healthAdjustment);
-        adjustmentAnimation(heatlhAdjustmentView, newValue);
-        healthTextView.setText(adjustFactors(healthTextView, newValue));
+        adjustmentAnimation(findViewById(R.id.healthAdjustment), newValue);
+        newValue = adjustFactors(healthTextView, newValue);
+        updateTopBarTextWithAnimation(newValue, healthTextView);
         health_val = Utils.parseTextViewInt(healthTextView);
-        if (health_val <= 50) {
-            if (scraping_achieved == false)
-                generateToast("Trophy Achieved: Scraping By");
+        if (health_val <= 50 && !scraping_achieved) {
+            generateToast("Trophy Achieved: Scraping By");
             scraping_achieved = true;
         }
     }
 
-
     @Override
     public void updateGrade(int newValue) {
         TextView gradeTextView = findViewById(R.id.grade);
-        TextView gradeAdjustmentView = findViewById(R.id.gradeAdjustment);
-        adjustmentAnimation(gradeAdjustmentView, newValue);
-        gradeTextView.setText(adjustFactors(gradeTextView, newValue));
+        adjustmentAnimation(findViewById(R.id.gradeAdjustment), newValue);
+        newValue = adjustFactors(gradeTextView, newValue);
+        updateTopBarTextWithAnimation(newValue, gradeTextView);
         grade_val = Utils.parseTextViewInt(gradeTextView);
     }
 
@@ -189,11 +221,81 @@ public class MainActivity extends AppCompatActivity implements UpdateValuesListe
             categorySpending.put(category, categorySpending.getOrDefault(category, 0) - newValue);
         }
         TextView moneyTextView = findViewById(R.id.money);
-        TextView moneyAdjustmentView = findViewById(R.id.moneyAdjustment);
-        adjustmentAnimation(moneyAdjustmentView, newValue);
-        moneyTextView.setText(adjustFactors(moneyTextView, newValue));
-
+        adjustmentAnimation(findViewById(R.id.moneyAdjustment), newValue);
+        newValue = adjustFactors(moneyTextView, newValue);
+        updateTopBarTextWithAnimation(newValue, moneyTextView);
     }
+
+    private void updateTopBarTextWithAnimation(int newValue, TextView textView) {
+        int oldValue = Utils.parseTextViewInt(textView);
+        ValueAnimator animator = ValueAnimator.ofInt(Utils.parseTextViewInt(textView), newValue);
+        animator.setDuration(1000); // Set the duration of the animation (in milliseconds)
+
+        animator.addUpdateListener(animation -> {
+            int animatedValue = (int) animation.getAnimatedValue();
+            String text;
+            if (textView.getText().toString().endsWith("%")) {
+                text = animatedValue + "%";
+            } else {
+                text = "$" + animatedValue;
+            }
+            textView.setText(text);
+        });
+
+        animator.start();
+        ValueAnimator colorAnimation = ValueAnimator.ofObject(new ArgbEvaluator(), Color.WHITE, Color.RED);
+        colorAnimation.setDuration(500);
+        colorAnimation.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+
+            @Override
+            public void onAnimationUpdate(ValueAnimator animator) {
+                textView.setTextColor((Integer)animator.getAnimatedValue());
+            }
+
+        });
+        ValueAnimator colorAnimation2= ValueAnimator.ofObject(new ArgbEvaluator(), Color.RED, Color.WHITE);
+        colorAnimation2.setDuration(1000);
+
+        colorAnimation2.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+
+            @Override
+            public void onAnimationUpdate(ValueAnimator animator) {
+                textView.setTextColor((Integer)animator.getAnimatedValue());
+            }
+
+        });
+        ValueAnimator colorAnimation3 = ValueAnimator.ofObject(new ArgbEvaluator(), Color.WHITE, Color.GREEN);
+        colorAnimation3.setDuration(500);
+
+        colorAnimation3.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+
+            @Override
+            public void onAnimationUpdate(ValueAnimator animator) {
+                textView.setTextColor((Integer)animator.getAnimatedValue());
+            }
+
+        });
+        ValueAnimator colorAnimation4= ValueAnimator.ofObject(new ArgbEvaluator(), Color.GREEN, Color.WHITE);
+        colorAnimation4.setDuration(1000);
+
+        colorAnimation4.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+
+            @Override
+            public void onAnimationUpdate(ValueAnimator animator) {
+                textView.setTextColor((Integer)animator.getAnimatedValue());
+            }
+
+        });
+        if (oldValue > newValue) {
+            colorAnimation.start();
+            colorAnimation2.start();
+        } else {
+            colorAnimation3.start();
+            colorAnimation4.start();
+        }
+    }
+
+
 
     @Override
     public void updateDay() {
@@ -289,4 +391,53 @@ public class MainActivity extends AppCompatActivity implements UpdateValuesListe
                 MainActivity.weekly_earnings, MainActivity.categorySpending,
                 MainActivity.categoryEarning);
     }
+
+
+
+//    public void createPopUp(int string_help) {
+//        View root = R.layout.activity_main;
+//        LayoutInflater inflater = getLayoutInflater();
+//        View popUpView = inflater.inflate(R.layout.fragment_help, null);
+//
+//        int width = ViewGroup.LayoutParams.MATCH_PARENT;
+//        int height = ViewGroup.LayoutParams.MATCH_PARENT;
+//        boolean focusable = true;
+//        PopupWindow popupWindow = new PopupWindow(popUpView, width, height, focusable);
+//        popupWindow.showAtLocation(this, Gravity.CENTER, 0, 0);
+//
+//        TextView help_text = popUpView.findViewById(R.id.help_text);
+//        help_text.setText(string_help);
+//        help_page = 0;
+//
+//        Button next_button = popUpView.findViewById(R.id.help_next_button);
+//        next_button.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                if (help_page != 11) {
+//                    help_page++;
+//                    help_text.setText(help_pages[help_page]);
+//                } else {
+//                    Button button = root.findViewById(R.id.start_day_id);
+//                    button.setVisibility(View.GONE);
+//                    popupWindow.dismiss();
+//                }
+//            }
+//        });
+//        Button back_button = popUpView.findViewById(R.id.help_back_button);
+//        back_button.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                if (help_page != 0) {
+//                    help_page--;
+//                    help_text.setText(help_pages[help_page]);
+//                } else {
+//                    Button button = root.findViewById(R.id.start_day_id);
+//                    button.setVisibility(View.GONE);
+//                    popupWindow.dismiss();
+//                }
+//            }
+//        });
+//
+//    }
+
 }
