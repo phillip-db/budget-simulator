@@ -138,7 +138,7 @@ public class FinancialPlanFragment extends Fragment {
     {
       if (sharedPreferences == null) return defaultGoal;
       String s = sharedPreferences.getString(KEY_GOAL, null);
-      if (s == null) return defaultGoal;
+      if (s == null || s.isEmpty()) return defaultGoal;
       return Integer.parseInt(s);
     }
 

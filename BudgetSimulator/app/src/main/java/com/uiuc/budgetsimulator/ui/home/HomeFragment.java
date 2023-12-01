@@ -78,7 +78,6 @@ public class HomeFragment extends Fragment implements ScenarioDialog.ScenarioDia
         InputStream inputStream =  getResources().openRawResource(R.raw.scenarios);
         Scenarios sunday = Utils.fromJSON(Scenarios.class, inputStream);
         int randomNumScenarios = random.nextInt(3) + 3;
-        randomNumScenarios = 1;
         int numScenarios = sunday.scenarios.length;
         int countScenarios = 0;
         for (int i = 0; i < randomNumScenarios; i++) {
