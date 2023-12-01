@@ -2,6 +2,7 @@ package com.uiuc.budgetsimulator.ui.home;
 
 import android.app.AlertDialog;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -60,6 +61,7 @@ public class HomeFragment extends Fragment implements ScenarioDialog.ScenarioDia
         InputStream inputStream =  getResources().openRawResource(R.raw.scenarios);
         Scenarios sunday = Utils.fromJSON(Scenarios.class, inputStream);
         int randomNumScenarios = random.nextInt(3) + 3;
+        randomNumScenarios = 1;
         int numScenarios = sunday.scenarios.length;
         int countScenarios = 0;
         for (int i = 0; i < randomNumScenarios; i++) {
@@ -70,6 +72,7 @@ public class HomeFragment extends Fragment implements ScenarioDialog.ScenarioDia
                 //countScenarios++;
             } while (selectedScenarios.contains(randomScenario)/* && countScenarios < numScenarios*/);
             selectedScenarios.add(randomScenario);
+            Log.d("DEBUG", String.valueOf(sunday.scenarios[randomScenario].category));
             if (i == 0) {
                 openDialog(sunday.scenarios[randomScenario], true);
             } else {

@@ -43,7 +43,9 @@
             android:layout_marginBottom="16dp"
             android:layout_marginLeft="5dp"
             android:layout_marginRight="5dp"
-            android:elevation="4dp">
+            android:elevation="4dp"
+            android:tooltipText="Set a weekly savings goal based off your monthly expenses!">
+
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -109,21 +111,23 @@
             android:layout_marginBottom="16dp"
             android:layout_marginLeft="5dp"
             android:layout_marginRight="5dp"
-            android:elevation="4dp">
+            android:elevation="4dp"
+            android:tooltipText="Income is fixed- this is a set amount that you earn on regular intervals."
+            >
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:layout_marginHorizontal="8dp"
-                android:padding="16dp"> <!-- Added padding here -->
+                android:padding="16dp">
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="left"
                     android:textSize="20sp"
                     android:textColor="@color/black"
-                    android:text="Income"/>
+                    android:text="Income" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -180,14 +184,16 @@
             android:layout_marginBottom="16dp"
             android:layout_marginLeft="5dp"
             android:layout_marginRight="5dp"
-            android:elevation="4dp">
+            android:elevation="4dp"
+            android:tooltipText="Rent is fixed- your landlord sets your rent, not you. ">
+
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:textColor="@color/black"
-                android:padding="16dp"> <!-- Added padding here -->
+                android:padding="16dp">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -209,7 +215,8 @@
                         android:layout_width="125dp"
                         android:layout_height="wrap_content"
                         android:text="Rent"
-                        android:textSize="18sp" />
+                        android:textSize="18sp"
+                        android:tooltipText="Rent is fixed- your landlord sets your rent, not you. "/>
 
                     <EditText
                         android:id="@+id/rentTextBox"
@@ -218,7 +225,8 @@
                         android:layout_weight="1"
                         android:hint="Enter number"
                         android:inputType="number"
-                        android:textSize="18sp" />
+                        android:textSize="18sp"
+                        />
                 </LinearLayout>
 
 
@@ -262,7 +270,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:textColor="@color/black"
-                android:padding="16dp"> <!-- Added padding here -->
+                android:padding="16dp">
 
                 <TextView
                     android:layout_width="wrap_content"

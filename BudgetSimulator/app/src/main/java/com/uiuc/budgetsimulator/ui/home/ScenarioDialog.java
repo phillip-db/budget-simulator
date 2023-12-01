@@ -80,7 +80,7 @@ public class ScenarioDialog extends DialogFragment {
                         }
                         updateValuesListener.updateHealth(scenario.healthOutcome);
                         updateValuesListener.updateGrade(scenario.gradeOutcome);
-                        updateValuesListener.updateMoney(scenario.moneyOutcome);
+                        updateValuesListener.updateMoney(scenario.moneyOutcome, scenario.category);
                         if (lastScenario == true) {
                             updateValuesListener.updateDay();
                             listener.onDialogPositiveClick();
