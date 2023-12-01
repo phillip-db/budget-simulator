@@ -100,7 +100,7 @@ public class FinancialPlanFragment extends Fragment {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                if (MainActivity.tutorial_trophies == false) {
+                if (MainActivity.tutorial_plan == false) {
                     startTutorial(R.string.help_7);
                     MainActivity.tutorial_plan = true;
                 }

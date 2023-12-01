@@ -1,7 +1,9 @@
 package com.uiuc.budgetsimulator;
 
 import android.app.AlertDialog;
+import android.graphics.Color;
 import android.os.Bundle;
+
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,6 +11,13 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+
+import android.util.Log;
+import android.view.Window;
+import android.view.WindowManager;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
+import android.view.animation.TranslateAnimation;
 import android.widget.ImageView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
@@ -17,7 +26,11 @@ import android.widget.Toast;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.gson.Gson;
 import com.uiuc.budgetsimulator.ui.financial_plan.FinancialPlanFragment;
+
 import com.uiuc.budgetsimulator.ui.home.HomeFragment;
+
+import com.uiuc.budgetsimulator.ui.home.Scenarios.Scenario.Category;
+
 import com.uiuc.budgetsimulator.ui.home.UpdateValuesListener;
 import com.uiuc.budgetsimulator.ui.reports.ReportData;
 
@@ -29,6 +42,8 @@ import androidx.navigation.ui.NavigationUI;
 
 import java.io.FileOutputStream;
 import java.util.ArrayList;
+import java.util.EnumMap;
+import java.util.Map;
 
 public class MainActivity extends AppCompatActivity implements UpdateValuesListener {
     public enum Day {
@@ -40,11 +55,11 @@ public class MainActivity extends AppCompatActivity implements UpdateValuesListe
             return vals[(this.ordinal() + 1) % vals.length];
         }
 
-        public String getDayString()
-        {
+        public String getDayString() {
             return days[this.ordinal()];
         }
     }
+
     private Day day_id = Day.SUNDAY;
 
     private static String gameSimId;
@@ -58,6 +73,9 @@ public class MainActivity extends AppCompatActivity implements UpdateValuesListe
     public static int grade_val = 100;
     public static int weekly_earnings = 0;
     public static int weekly_spending = 0;
+
+    public static Map<Category, Integer> categorySpending = new EnumMap<>(Category.class);
+    public static Map<Category, Integer> categoryEarning = new EnumMap<>(Category.class);
 
     public static int userGoalValue;
 
@@ -105,7 +123,10 @@ public class MainActivity extends AppCompatActivity implements UpdateValuesListe
 
 
         // Create initial week 0 for comparisons
-        ReportData test_week = new ReportData(0, Utils.parseTextViewInt(findViewById(R.id.money)), health_val, grade_val, 0, 0);
+        ReportData test_week = new ReportData(0, Utils.parseTextViewInt(findViewById(R.id.money)),
+                health_val, grade_val, 0, 0,
+                new EnumMap<>(Category.class),
+                new EnumMap<>(Category.class));
         ArrayList<ReportData> reports = new ArrayList<ReportData>();
         reports.add(test_week);
         Simulation testSim = new Simulation(gameSimId, reports);
@@ -127,8 +148,26 @@ public class MainActivity extends AppCompatActivity implements UpdateValuesListe
 //        createPopUp(R.string.help_0);
     }
 
+    public void adjustmentAnimation(TextView textView, int adjustment) {
+        if (adjustment >= 0) {
+            textView.setTextColor(Color.GREEN);
+            textView.setText("+" + adjustment);
+        } else {
+            textView.setTextColor(Color.RED);
+            textView.setText("" + adjustment);
+        }
+        AlphaAnimation fadeIn = new AlphaAnimation(0.0f , 1.0f );
+        AlphaAnimation fadeOut = new AlphaAnimation( 1.0f , 0.0f );
+        textView.startAnimation(fadeIn);
+        textView.startAnimation(fadeOut);
+        fadeIn.setDuration(1000);
+        fadeIn.setFillAfter(true);
+        fadeOut.setDuration(1000);
+        fadeOut.setFillAfter(true);
+        fadeOut.setStartOffset(3000+fadeIn.getStartOffset());
+    }
     public static String adjustFactors(TextView textView, int adjustment) {
-        String s = (String)textView.getText();
+        String s = (String) textView.getText();
         if (s.charAt(s.length() - 1) == '%') {
             int newFactor = Math.min(100, adjustment + Utils.parseTextViewInt(textView));
             if (newFactor < 0) {
@@ -141,12 +180,14 @@ public class MainActivity extends AppCompatActivity implements UpdateValuesListe
     }
 
     public static String getGameSimId() {
-      return gameSimId;
+        return gameSimId;
     }
 
     @Override
     public void updateHealth(int newValue) {
         TextView healthTextView = findViewById(R.id.health);
+        TextView heatlhAdjustmentView = findViewById(R.id.healthAdjustment);
+        adjustmentAnimation(heatlhAdjustmentView, newValue);
         healthTextView.setText(adjustFactors(healthTextView, newValue));
         health_val = Utils.parseTextViewInt(healthTextView);
         if (health_val <= 50) {
@@ -160,18 +201,27 @@ public class MainActivity extends AppCompatActivity implements UpdateValuesListe
     @Override
     public void updateGrade(int newValue) {
         TextView gradeTextView = findViewById(R.id.grade);
+        TextView gradeAdjustmentView = findViewById(R.id.gradeAdjustment);
+        adjustmentAnimation(gradeAdjustmentView, newValue);
         gradeTextView.setText(adjustFactors(gradeTextView, newValue));
         grade_val = Utils.parseTextViewInt(gradeTextView);
     }
 
     @Override
-    public void updateMoney(int newValue) {
-        if (newValue > 0)
+    public void updateMoney(int newValue, Category category) {
+        Log.d("DEBUG", String.valueOf(category));
+        if (newValue > 0) {
             weekly_earnings += newValue;
-        else
+            categoryEarning.put(category, categoryEarning.getOrDefault(category, 0) + newValue);
+        } else {
             weekly_spending -= newValue;
+            categorySpending.put(category, categorySpending.getOrDefault(category, 0) + newValue);
+        }
         TextView moneyTextView = findViewById(R.id.money);
+        TextView moneyAdjustmentView = findViewById(R.id.moneyAdjustment);
+        adjustmentAnimation(moneyAdjustmentView, newValue);
         moneyTextView.setText(adjustFactors(moneyTextView, newValue));
+
     }
 
     @Override
@@ -189,14 +239,15 @@ public class MainActivity extends AppCompatActivity implements UpdateValuesListe
     public void updatePerson() {
         TextView healthView = findViewById(R.id.health);
         TextView gradeView = findViewById(R.id.grade);
-        if (Utils.parseTextViewInt(healthView) <= 60 || Utils.parseTextViewInt(gradeView) <= 60 ) {
+        if (Utils.parseTextViewInt(healthView) <= 60 || Utils.parseTextViewInt(gradeView) <= 60) {
             ImageView persona = findViewById(R.id.persona);
             persona.setImageResource(R.drawable.persona_really_sad);
-        } else if (Utils.parseTextViewInt(healthView) <= 80 || Utils.parseTextViewInt(gradeView) <= 80 ) {
+        } else if (Utils.parseTextViewInt(healthView) <= 80 || Utils.parseTextViewInt(gradeView) <= 80) {
             ImageView persona = findViewById(R.id.persona);
             persona.setImageResource(R.drawable.persona_sad);
         }
     }
+
     @Override
     public void endGame() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -250,11 +301,13 @@ public class MainActivity extends AppCompatActivity implements UpdateValuesListe
     }
 
     private ReportData generateReport(int weekNumber) {
-      int health = Utils.parseTextViewInt(findViewById(R.id.health));
-      int grade = Utils.parseTextViewInt(findViewById(R.id.grade));
-      int money = Utils.parseTextViewInt(findViewById(R.id.money));
+        int health = Utils.parseTextViewInt(findViewById(R.id.health));
+        int grade = Utils.parseTextViewInt(findViewById(R.id.grade));
+        int money = Utils.parseTextViewInt(findViewById(R.id.money));
 
-      return new ReportData(weekNumber, money, health, grade, MainActivity.weekly_spending, MainActivity.weekly_earnings);
+        return new ReportData(weekNumber, money, health, grade, MainActivity.weekly_spending,
+                MainActivity.weekly_earnings, MainActivity.categorySpending,
+                MainActivity.categoryEarning);
     }
 
 

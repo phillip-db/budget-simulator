@@ -2,6 +2,7 @@
   "scenarios": [
     {
       "event": "Your friends invite you to a road trip but exam is in 3 days.",
+      "category": "ENTERTAINMENT",
       "choices": [
         {
           "choice": "Join the road trip",
@@ -22,6 +23,7 @@
     },
     {
       "event": "Your favorite band is playing a concert on a weekday.",
+      "category": "ENTERTAINMENT",
       "choices": [
         {
           "choice": "Attend the concert",
@@ -42,6 +44,7 @@
     },
     {
       "event": "You are offered a catering job for this weekend.",
+      "category": "WORK",
       "choices": [
         {
           "choice": "Take the job",
@@ -102,6 +105,7 @@
     },
     {
       "event": "You're offered a freelance gig but requires overnight working for a week.",
+      "category": "WORK",
       "choices": [
         {
           "choice": "Accept the gig",
@@ -122,6 +126,7 @@
     },
     {
       "event": "Professor invites you to participate in a research project.",
+      "category": "WORK",
       "choices": [
         {
           "choice": "Join the project",
