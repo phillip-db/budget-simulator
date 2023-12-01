@@ -1,6 +1,7 @@
 package com.uiuc.budgetsimulator;
 
 import android.app.AlertDialog;
+import android.graphics.Color;
 import android.os.Bundle;
 
 import android.view.Gravity;
@@ -9,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
+import android.view.animation.AlphaAnimation;
 import android.widget.Button;
 
 import android.util.Log;
@@ -150,6 +152,24 @@ public class MainActivity extends AppCompatActivity implements UpdateValuesListe
         return gameSimId;
     }
 
+    public void adjustmentAnimation(TextView textView, int adjustment) {
+        if (adjustment >= 0) {
+            textView.setTextColor(Color.GREEN);
+            textView.setText("+" + adjustment);
+        } else {
+            textView.setTextColor(Color.RED);
+            textView.setText("" + adjustment);
+        }
+        AlphaAnimation fadeIn = new AlphaAnimation(0.0f , 1.0f );
+        AlphaAnimation fadeOut = new AlphaAnimation( 1.0f , 0.0f );
+        textView.startAnimation(fadeIn);
+        textView.startAnimation(fadeOut);
+        fadeIn.setDuration(500);
+        fadeIn.setFillAfter(true);
+        fadeOut.setDuration(500);
+        fadeOut.setFillAfter(true);
+        fadeOut.setStartOffset(1500+fadeIn.getStartOffset());
+    }
     public static int adjustFactors(TextView textView, int adjustment) {
         String s = (String)textView.getText();
         if (s.charAt(s.length() - 1) == '%') {
@@ -169,6 +189,7 @@ public class MainActivity extends AppCompatActivity implements UpdateValuesListe
     @Override
     public void updateHealth(int newValue) {
         TextView healthTextView = findViewById(R.id.health);
+        adjustmentAnimation(findViewById(R.id.healthAdjustment), newValue);
         newValue = adjustFactors(healthTextView, newValue);
         updateTopBarTextWithAnimation(newValue, healthTextView);
         health_val = Utils.parseTextViewInt(healthTextView);
@@ -181,6 +202,7 @@ public class MainActivity extends AppCompatActivity implements UpdateValuesListe
     @Override
     public void updateGrade(int newValue) {
         TextView gradeTextView = findViewById(R.id.grade);
+        adjustmentAnimation(findViewById(R.id.gradeAdjustment), newValue);
         newValue = adjustFactors(gradeTextView, newValue);
         updateTopBarTextWithAnimation(newValue, gradeTextView);
         grade_val = Utils.parseTextViewInt(gradeTextView);
@@ -197,6 +219,7 @@ public class MainActivity extends AppCompatActivity implements UpdateValuesListe
             categorySpending.put(category, categorySpending.getOrDefault(category, 0) + newValue);
         }
         TextView moneyTextView = findViewById(R.id.money);
+        adjustmentAnimation(findViewById(R.id.moneyAdjustment), newValue);
         newValue = adjustFactors(moneyTextView, newValue);
         updateTopBarTextWithAnimation(newValue, moneyTextView);
     }
