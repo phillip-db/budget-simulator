@@ -85,36 +85,12 @@ public class ScenarioDialog extends DialogFragment {
                             updateValuesListener.updateDay();
                             listener.onDialogPositiveClick();
                         }
-                        message = "Health: ";
-                        if (scenario.healthOutcome >= 0) {
-                            message = message + "+" + scenario.healthOutcome + " ";
-                        } else {
-                            message = message + scenario.healthOutcome + " ";
-                        }
-                        message = message + "Grade: ";
-                        if (scenario.gradeOutcome >= 0) {
-                            message = message + "+" + scenario.gradeOutcome + " ";
-                        } else {
-                            message = message + scenario.gradeOutcome + " ";
-                        }
-                        message = message + "Money: ";
-                        if (scenario.moneyOutcome > 0) {
-                            message = message + "+" + scenario.moneyOutcome;
-                        } else {
-                            message = message + scenario.moneyOutcome;
-                        }
-                        showChange(message);
                     }
                 } );
         AlertDialog toReturn = builder.create();
         toReturn.getWindow().setDimAmount(0);
         return toReturn;
     }
-    private void showChange(String message) {
-        if (getContext() != null) {
-            Toast toast = Toast.makeText(getContext(), message, Toast.LENGTH_SHORT);
-            toast.show();
-        }
-    }
+
     public static String TAG = "scenario_dialog";
 }
