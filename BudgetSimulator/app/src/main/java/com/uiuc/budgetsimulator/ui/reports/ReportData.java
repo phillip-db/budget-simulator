@@ -1,5 +1,6 @@
 package com.uiuc.budgetsimulator.ui.reports;
 
+import com.uiuc.budgetsimulator.MainActivity;
 import com.uiuc.budgetsimulator.ui.home.Scenarios.Scenario.Category;
 
 import java.io.Serializable;
@@ -13,6 +14,8 @@ public class ReportData implements Serializable {
     private final int grade;
     private final int weeklySpending;
     private final int weeklyEarning;
+
+    private int weeklyGoal = 100;
 
     private final Map<Category, Integer> categoryEarning;
     private final Map<Category, Integer> categorySpending;
@@ -61,4 +64,8 @@ public class ReportData implements Serializable {
     public Map<Category, Integer> getCategorySpending() {
         return categorySpending;
     }
+
+    public int getWeeklyGoal(){ return weeklyGoal; }
+
+    public void setWeeklyGoal(int weeklyGoal) { this.weeklyGoal = weeklyGoal; }
 }

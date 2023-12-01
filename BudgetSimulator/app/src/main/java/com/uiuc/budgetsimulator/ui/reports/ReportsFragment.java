@@ -155,7 +155,7 @@ public class ReportsFragment extends Fragment {
         }
         Utils.setTextViewText(view, R.id.summary_tips, tipsString);
 
-        Utils.setTextViewText(view, R.id.summary_feedback, String.format(Locale.ENGLISH, "$%d/$%d Saved", netSavings, FinancialPlanFragment.getGoal()));
+        Utils.setTextViewText(view, R.id.summary_feedback, String.format(Locale.ENGLISH, "$%d/$%d Saved", netSavings, report.getWeeklyGoal()));
 
         Utils.setTextViewText(view, R.id.money_spent, String.format(Locale.ENGLISH, "$%d\nSpent", report.getWeeklySpending()));
         Utils.setTextViewText(view, R.id.money_earned, String.format(Locale.ENGLISH, "$%d\nEarned", report.getWeeklyEarning()));
@@ -172,7 +172,7 @@ public class ReportsFragment extends Fragment {
                 prevReport.getHealth(), report.getHealth()));
 
         ProgressBar progressBar = view.findViewById(R.id.progress_savings_goal);
-        progressBar.setMax(FinancialPlanFragment.getGoal());
+        progressBar.setMax(report.getWeeklyGoal());
         progressBar.setProgress(netSavings);
 
         MaterialButton fullReport = view.findViewById(R.id.full_report);

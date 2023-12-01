@@ -387,9 +387,13 @@ public class MainActivity extends AppCompatActivity implements UpdateValuesListe
             MainActivity.categoryEarning.putIfAbsent(c, 0);
         }
 
-        return new ReportData(weekNumber, money, health, grade, MainActivity.weekly_spending,
-                MainActivity.weekly_earnings, MainActivity.categorySpending,
-                MainActivity.categoryEarning);
+        ReportData reportData = new ReportData(weekNumber, money, health, grade, MainActivity.weekly_spending,
+            MainActivity.weekly_earnings, MainActivity.categorySpending,
+            MainActivity.categoryEarning);
+
+        reportData.setWeeklyGoal(FinancialPlanFragment.getGoal());
+
+        return reportData;
     }
 
 
