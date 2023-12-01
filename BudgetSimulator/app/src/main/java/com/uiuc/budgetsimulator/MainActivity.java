@@ -145,10 +145,10 @@ public class MainActivity extends AppCompatActivity implements UpdateValuesListe
 
     public void adjustmentAnimation(TextView textView, int adjustment) {
         if (adjustment >= 0) {
-            textView.setTextColor(Color.GREEN);
+            textView.setTextColor(0xff669900);
             textView.setText("+" + adjustment);
         } else {
-            textView.setTextColor(Color.RED);
+            textView.setTextColor(0xffcc0000);
             textView.setText("" + adjustment);
         }
         AlphaAnimation fadeIn = new AlphaAnimation(0.0f , 1.0f );
@@ -232,7 +232,7 @@ public class MainActivity extends AppCompatActivity implements UpdateValuesListe
         });
 
         animator.start();
-        ValueAnimator colorAnimation = ValueAnimator.ofObject(new ArgbEvaluator(), Color.WHITE, Color.RED);
+        ValueAnimator colorAnimation = ValueAnimator.ofObject(new ArgbEvaluator(), Color.WHITE, 0xffcc0000);
         colorAnimation.setDuration(500);
         colorAnimation.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
 
@@ -242,7 +242,7 @@ public class MainActivity extends AppCompatActivity implements UpdateValuesListe
             }
 
         });
-        ValueAnimator colorAnimation2= ValueAnimator.ofObject(new ArgbEvaluator(), Color.RED, Color.WHITE);
+        ValueAnimator colorAnimation2= ValueAnimator.ofObject(new ArgbEvaluator(), 0xffcc0000, Color.WHITE);
         colorAnimation2.setDuration(2500);
 
         colorAnimation2.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
@@ -253,7 +253,7 @@ public class MainActivity extends AppCompatActivity implements UpdateValuesListe
             }
 
         });
-        ValueAnimator colorAnimation3 = ValueAnimator.ofObject(new ArgbEvaluator(), Color.WHITE, Color.GREEN);
+        ValueAnimator colorAnimation3 = ValueAnimator.ofObject(new ArgbEvaluator(), Color.WHITE, 0xff669900);
         colorAnimation3.setDuration(500);
 
         colorAnimation3.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
@@ -264,7 +264,7 @@ public class MainActivity extends AppCompatActivity implements UpdateValuesListe
             }
 
         });
-        ValueAnimator colorAnimation4= ValueAnimator.ofObject(new ArgbEvaluator(), Color.GREEN, Color.WHITE);
+        ValueAnimator colorAnimation4= ValueAnimator.ofObject(new ArgbEvaluator(), 0xff669900, Color.WHITE);
         colorAnimation4.setDuration(2500);
 
         colorAnimation4.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
