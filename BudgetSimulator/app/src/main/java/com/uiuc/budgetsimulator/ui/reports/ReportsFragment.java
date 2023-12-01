@@ -96,14 +96,6 @@ public class ReportsFragment extends Fragment {
             recyclerView.setVisibility(View.VISIBLE);
         });
 
-        MaterialButton fullReport = view.findViewById(R.id.full_report);
-        fullReport.setOnClickListener(v -> {
-            Fragment fullFragment = new ReportSummaryFragment();
-            getActivity().getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.nav_host_fragment, fullFragment)
-                    .addToBackStack("fullReport").commit();
-        });
-
         if (reportsList.size() <= 1) {
             recyclerView.setVisibility(View.GONE);
             emptyView.setVisibility(View.VISIBLE);
@@ -162,5 +154,13 @@ public class ReportsFragment extends Fragment {
         Utils.setTextViewText(view, R.id.health_change, String.format(Locale.ENGLISH,
                 "Health: %d->%d",
                 prevReport.getHealth(), report.getHealth()));
+
+        MaterialButton fullReport = view.findViewById(R.id.full_report);
+        fullReport.setOnClickListener(v -> {
+            Fragment fullFragment = new ReportSummaryFragment(report);
+            getActivity().getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.nav_host_fragment, fullFragment)
+                    .addToBackStack("fullReport").commit();
+        });
     }
 }

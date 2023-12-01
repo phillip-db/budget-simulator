@@ -10,11 +10,16 @@ public class MyValueFormatter extends com.github.mikephil.charting.formatter.Val
     private final DecimalFormat mFormat;
 
     public MyValueFormatter() {
-        mFormat = new DecimalFormat("###,###,###,##0.0");
+        mFormat = new DecimalFormat("#");
+    }
+
+    @Override
+    public String getFormattedValue(float value) {
+        return "$" + mFormat.format(value);
     }
 
     @Override
     public String getFormattedValue(float value, Entry entry, int dataSetIndex, ViewPortHandler viewPortHandler) {
-        return mFormat.format(value) + " $";
+        return "$" + mFormat.format(value);
     }
 }

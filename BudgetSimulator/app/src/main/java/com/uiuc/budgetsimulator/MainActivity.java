@@ -16,6 +16,7 @@ import android.widget.Toast;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.gson.Gson;
 import com.uiuc.budgetsimulator.ui.financial_plan.FinancialPlanFragment;
+import com.uiuc.budgetsimulator.ui.home.Scenarios;
 import com.uiuc.budgetsimulator.ui.home.Scenarios.Scenario.Category;
 import com.uiuc.budgetsimulator.ui.home.UpdateValuesListener;
 import com.uiuc.budgetsimulator.ui.reports.ReportData;
@@ -183,9 +184,9 @@ public class MainActivity extends AppCompatActivity implements UpdateValuesListe
         if (newValue > 0) {
             weekly_earnings += newValue;
             categoryEarning.put(category, categoryEarning.getOrDefault(category, 0) + newValue);
-        } else {
+        } else if (newValue < 0) {
             weekly_spending -= newValue;
-            categorySpending.put(category, categorySpending.getOrDefault(category, 0) + newValue);
+            categorySpending.put(category, categorySpending.getOrDefault(category, 0) - newValue);
         }
         TextView moneyTextView = findViewById(R.id.money);
         TextView moneyAdjustmentView = findViewById(R.id.moneyAdjustment);
@@ -252,6 +253,8 @@ public class MainActivity extends AppCompatActivity implements UpdateValuesListe
             TextView textview = findViewById(R.id.week);
             week_id += 1;
             textview.setText(weeks[week_id]);
+            Log.d("CAT TEST", String.valueOf(categoryEarning.get(Category.ALLOWANCE)));
+
             Utils.appendReport(gameSimId, generateReport(week_id), getApplicationContext());
 
             weekly_earnings = 0;
@@ -274,6 +277,13 @@ public class MainActivity extends AppCompatActivity implements UpdateValuesListe
         int health = Utils.parseTextViewInt(findViewById(R.id.health));
         int grade = Utils.parseTextViewInt(findViewById(R.id.grade));
         int money = Utils.parseTextViewInt(findViewById(R.id.money));
+
+        for (Category c : Category.values())
+        {
+            Log.d("CATEGORY", c.toString());
+            MainActivity.categorySpending.putIfAbsent(c, 0);
+            MainActivity.categoryEarning.putIfAbsent(c, 0);
+        }
 
         return new ReportData(weekNumber, money, health, grade, MainActivity.weekly_spending,
                 MainActivity.weekly_earnings, MainActivity.categorySpending,

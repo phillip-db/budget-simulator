@@ -1,5 +1,6 @@
 package com.uiuc.budgetsimulator.ui.home;
 
+import android.graphics.Color;
 import android.os.Parcel;
 import android.os.Parcelable;
 
@@ -48,7 +49,10 @@ public class Scenarios implements Parcelable {
 
         public enum Category
         {
-            NONE, ENTERTAINMENT, FOOD, WORK, ALLOWANCE, EMERGENCY
+            NONE, ENTERTAINMENT, FOOD, WORK, ALLOWANCE, EMERGENCY;
+
+
+            public static final int[] categoryColors = new int[]{Color.LTGRAY, Color.BLUE, Color.GREEN, Color.YELLOW, Color.MAGENTA, Color.RED};
         }
         public String event;
 
