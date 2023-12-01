@@ -154,12 +154,29 @@ public class FinancialPlanFragment extends Fragment {
 
         TextView help_text = popUpView.findViewById(R.id.help_text);
         help_text.setText(string_help);
+        MainActivity.help_page = 7;
 
         Button next_button = popUpView.findViewById(R.id.help_next_button);
         next_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                popupWindow.dismiss();
+                if (MainActivity.help_page != 8) {
+                    MainActivity.help_page++;
+                    help_text.setText(MainActivity.help_pages[MainActivity.help_page]);
+                } else {
+                    MainActivity.tutorial_intro = true;
+                    popupWindow.dismiss();
+                }
+            }
+        });
+        Button back_button = popUpView.findViewById(R.id.help_back_button);
+        back_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (MainActivity.help_page != 7) {
+                    MainActivity.help_page--;
+                    help_text.setText(MainActivity.help_pages[MainActivity.help_page]);
+                }
             }
         });
     }

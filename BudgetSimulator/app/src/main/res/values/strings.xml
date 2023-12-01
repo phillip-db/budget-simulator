@@ -44,12 +44,13 @@
     <string name="help_6">Gained trophies will appear colored. Click into one to see a description!</string>
 
     <string name="help_7">Here you can create a financial plan! Greyed values are your default persona settings.</string>
+    <string name="help_8">Click or hold on a field for a short description!</string>
 
-    <string name="help_8">Your weekly reports will show up here!</string>
-    <string name="help_9">At the end of every week, a new report will be generated.</string>
-    <string name="help_10">These reports will show your financial progress and how you\'re doing compared to your plan!</string>
+    <string name="help_9">Your weekly reports will show up here!</string>
+    <string name="help_10">At the end of every week, a new report will be generated.</string>
+    <string name="help_11">These reports will show your financial progress and how you\'re doing compared to your plan!</string>
 
-    <string name="help_11">[placeholder]</string>
+
     <string name="help_tutorial">Help Tutorial</string>
 
 
